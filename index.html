@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Silent People — Hassan Jatoi</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+:root {
+    --primary: #1e1b4b;
+    --accent: #7c3aed;
+    --soft: #f5f3ff;
+    --text: #1f2937;
+    --glass: rgba(255,255,255,0.65);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg,#faf7ff,#eef2ff);
+    color: var(--text);
+    scroll-behavior: smooth;
+}
+
+/* Hero */
+.hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3.5rem, 10vw, 9rem);
+    text-align: center;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    background: linear-gradient(90deg,#4f46e5,#9333ea,#ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Glass card */
+.glass {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,.4);
+    box-shadow: 0 30px 80px rgba(0,0,0,.08);
+}
+
+/* Story text */
+.story-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    line-height: 2.1;
+    color: #111827;
+}
+
+/* Section title */
+.section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Divider */
+.divider {
+    width: 60px;
+    height: 4px;
+    border-radius: 999px;
+    margin: 0 auto 3rem;
+    background: linear-gradient(to right,#6366f1,#ec4899);
+}
+
+/* Image frame */
+.art-frame {
+    border-radius: 26px;
+    overflow: hidden;
+    margin: 4rem auto;
+    background: linear-gradient(135deg,#ede9fe,#fdf2f8);
+    box-shadow: 0 25px 60px rgba(0,0,0,.12);
+}
+
+.image-container {
+    aspect-ratio: 16 / 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.08);
+    transition: 1.4s ease;
+}
+
+.image-container img.loaded {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Buttons */
+.btn {
+    padding: 16px 34px;
+    border-radius: 999px;
+    font-weight: 600;
+    display: inline-flex;
+    gap: 12px;
+    align-items: center;
+    transition: .3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg,#4f46e5,#9333ea);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(79,70,229,.35);
+}
+
+.btn-outline {
+    border: 2px solid #22c55e;
+    color: #16a34a;
+}
+
+.btn-outline:hover {
+    background: #22c55e;
+    color: white;
+}
+
+/* Progress bar */
+#progress-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 5px;
+    width: 100%;
+    background: #e5e7eb;
+    z-index: 100;
+}
+#progress-bar {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg,#6366f1,#ec4899);
+}
+
+/* Floating button */
+.fab {
+    position: fixed;
+    right: 28px;
+    bottom: 28px;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#6366f1,#ec4899);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 15px 40px rgba(0,0,0,.25);
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+}
+
+.fab.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+footer {
+    background: linear-gradient(180deg,#faf5ff,#fdf2f8);
+}
+</style>
+</head>
+
+<body>
+
+<div id="progress-wrap"><div id="progress-bar"></div></div>
+
+<div class="fab" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i data-lucide="arrow-up"></i>
+</div>
+
+<header class="pt-32 pb-24 text-center max-w-7xl mx-auto px-6">
+    <p class="tracking-[0.4em] text-sm text-purple-400 uppercase mb-6">Featured Literary Work</p>
+    <h1 class="hero-title">Silent People</h1>
+
+    <div class="mt-6 flex justify-center gap-4 text-xs uppercase tracking-widest text-gray-400">
+        <span>By Hassan Jatoi</span>
+        <span>•</span>
+        <span>2025</span>
+        <span>•</span>
+        <span>Literary Fiction</span>
+    </div>
+
+    <div class="art-frame mt-20">
+        <div class="image-container" id="cover-img">
+            <span class="text-gray-400 text-sm">Loading cover…</span>
+        </div>
+    </div>
+</header>
+
+<main class="px-6">
+
+<section class="glass max-w-4xl mx-auto p-12 mb-28">
+    <h2 class="section-title">01 · The First Evening</h2>
+    <div class="divider"></div>
+
+    <div class="story-text">
+        <p>
+            The city stood wrapped in silence, as if even time had forgotten its duty.
+            Lamps glowed without warmth, streets breathed without footsteps,
+            and every window carried a story too heavy to speak aloud.
+        </p>
+
+        <div class="art-frame">
+            <div class="image-container" id="ch1-img"></div>
+        </div>
+
+        <p>
+            Hassan watched the world from behind the glass.
+            Faces passed like unfinished sentences.
+            Everyone carried something invisible,
+            something heavier than memory,
+            something only silence could understand.
+        </p>
+    </div>
+</section>
+
+<section class="glass max-w-4xl mx-auto p-12 mb-28">
+    <h2 class="section-title">02 · The Weight of Quiet</h2>
+    <div class="divider"></div>
+
+    <div class="story-text">
+        <p>
+            Evening arrived gently, not as night but as confession.
+            Doors closed softly, yet hearts remained open and wounded.
+            Words gathered courage — and failed.
+        </p>
+
+        <div class="art-frame">
+            <div class="image-container" id="ch2-img"></div>
+        </div>
+
+        <p>
+            Silence became a language of its own.
+            It spoke through pauses, through lowered eyes,
+            through the ache that never learned how to scream.
+        </p>
+    </div>
+</section>
+
+<footer class="py-28 text-center">
+    <h3 class="text-4xl font-bold mb-3">Silent People</h3>
+    <p class="uppercase tracking-widest text-gray-400 mb-12 text-sm">
+        Creative Works of Hassan Jatoi
+    </p>
+
+    <div class="flex flex-wrap justify-center gap-6 mb-16">
+        <a href="https://hassanaliuk11-oss.github.io/The-grief-of-2025/" target="_blank" class="btn btn-primary">
+            <i data-lucide="book-open"></i> More Writings
+        </a>
+
+        <a href="https://wa.me/923083500829" target="_blank" class="btn btn-outline">
+            <i data-lucide="message-circle"></i> WhatsApp Me
+        </a>
+    </div>
+
+    <div class="flex justify-center gap-8 text-gray-400">
+        <i data-lucide="instagram"></i>
+        <i data-lucide="twitter"></i>
+        <i data-lucide="mail"></i>
+    </div>
+
+    <p class="mt-12 text-[11px] tracking-[0.4em] text-gray-300 uppercase">
+        © 2025 Hassan Jatoi — Literary Design Edition
+    </p>
+</footer>
+
+<script>
+lucide.createIcons();
+
+window.onscroll = () => {
+    let h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    let scrolled = (document.documentElement.scrollTop / h) * 100;
+    document.getElementById("progress-bar").style.width = scrolled + "%";
+
+    const fab = document.getElementById("backToTop");
+    if (window.scrollY > 400) fab.classList.add("visible");
+    else fab.classList.remove("visible");
+};
+
+function loadImage(prompt, id) {
+    const el = document.getElementById(id);
+    el.innerHTML = `<span class="text-gray-400 text-sm">AI artwork loading…</span>`;
+}
+</script>
+
+</body>
+</html>
