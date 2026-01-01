@@ -1,355 +1,411 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Silent People — Hassan Jatoi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poetry - Silent Words Speaking</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
+        /* High-end decorative and serif fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@300;400;500;600&family=Playfair+Display:wght@400;700&display=swap');
+        
         :root {
-            --primary: #1e1b4b;
-            --accent: #7c3aed;
-            --text: #1f2937;
-            --glass: rgba(255, 255, 255, 0.8);
+            --bg-obsidian: #050508;
+            --accent-gold: #c5a059;
+            --accent-indigo: #4f46e5;
+            --text-silk: #e2e8f0;
+            --font-header: 'Cinzel', serif;
+            --font-book: 'Cormorant Garamond', serif;
         }
 
         body {
+            background-color: var(--bg-obsidian);
+            color: var(--text-silk);
+            margin: 0;
+            overflow-x: hidden;
             font-family: 'Inter', sans-serif;
-            background: #ffffff;
-            color: var(--text);
-            scroll-behavior: smooth;
-            text-align: center; /* Global centering */
+            background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+            text-align: center; 
         }
 
-        /* Number One Stylish Title */
-        .hero-title {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(3.5rem, 12vw, 10rem);
-            line-height: 0.9;
+        /* Ambient Glow Orbs */
+        .glow-orb {
+            position: fixed;
+            width: 50vw;
+            height: 50vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.08) 0%, transparent 70%);
+            z-index: -1;
+            filter: blur(80px);
+        }
+
+        /* --- CINEMATIC INTRO --- */
+        #intro-overlay {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #cover-image {
+            max-width: 300px;
+            width: 65vw;
+            border: 2px solid var(--accent-gold);
+            box-shadow: 0 0 50px rgba(197, 160, 89, 0.2);
+            opacity: 0;
+            transform: scale(0.85);
+            transition: all 2.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .welcome-msg {
+            margin-top: 40px;
+            font-family: var(--font-header);
+            font-size: 1rem;
+            letter-spacing: 0.8em;
+            color: var(--accent-gold);
+            opacity: 0;
+            transition: opacity 2s ease;
+            text-align: center;
+        }
+
+        /* --- MAIN GALLERY --- */
+        .app-container {
+            max-width: 1300px;
             margin: 0 auto;
-            background: linear-gradient(180deg, #111, #666);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: normal;
+            padding: 100px 24px;
+            opacity: 0;
+            transition: opacity 2.5s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* Normal Beautiful Story Text */
-        .story-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.7rem;
-            line-height: 2.2;
-            color: #111827;
-            font-style: normal;
-            max-width: 750px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-family: 'DM Serif Display', serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            letter-spacing: -0.02em;
-        }
-
-        /* Elegant Art Frames */
-        .art-frame {
-            margin: 5rem auto;
-            border-radius: 30px;
-            overflow: hidden;
-            background: #fdfdfd;
-            border: 1px solid rgba(0, 0, 0, 0.04);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            max-width: 1000px;
-        }
-
-        .art-frame:hover {
-            transform: scale(1.02);
-            box-shadow: 0 40px 80px rgba(0,0,0,0.1);
-        }
-
-        .image-container {
-            aspect-ratio: 16/9;
+        .gallery-title-wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            gap: 20px;
+            width: 100%;
         }
 
-        .image-container img {
+        .gallery-title {
+            font-family: var(--font-header);
+            font-size: clamp(2rem, 8vw, 4rem);
+            background: linear-gradient(to bottom, #fff, var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .title-underline {
+            width: 250px;
+            height: 3px;
+            margin: 15px auto 40px;
+            background: linear-gradient(90deg, #ff0055, #ffcc00, #00ffcc, #0066ff, #ff0055);
+            background-size: 400% 100%;
+            border-radius: 50px;
+            animation: flowColors 5s linear infinite, neonPulse 2s ease-in-out infinite alternate;
+            box-shadow: 0 0 10px rgba(197, 160, 89, 0.5);
+        }
+
+        @keyframes flowColors {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 0%; }
+        }
+
+        @keyframes neonPulse {
+            from { opacity: 0.6; transform: scaleX(0.95); filter: blur(1px); }
+            to { opacity: 1; transform: scaleX(1); filter: blur(3px); }
+        }
+
+        .icon-svg {
+            width: 40px;
+            height: 40px;
+            fill: var(--accent-gold);
+            opacity: 0.8;
+        }
+
+        /* --- LUXE BUTTONS --- */
+        .btn-custom {
+            font-family: var(--font-header);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            padding: 18px 40px;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            color: var(--accent-gold);
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(197, 160, 89, 0.05) 100%);
+            backdrop-filter: blur(10px);
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+            min-width: 240px;
+        }
+
+        .btn-custom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1.5s ease, transform 2s ease;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: 0.5s;
         }
 
-        .image-container img.loaded {
-            opacity: 1;
+        .btn-custom:hover::before {
+            left: 100%;
         }
 
-        /* Pull Quote Interest */
-        .pull-quote {
-            font-family: 'DM Serif Display', serif;
-            font-size: 2.5rem;
-            color: #000;
-            line-height: 1.2;
-            margin: 6rem auto;
-            max-width: 800px;
+        .btn-custom:hover {
+            background: var(--accent-gold);
+            color: #050508;
+            border-color: var(--accent-gold);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(197, 160, 89, 0.2);
+        }
+
+        .btn-custom svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-custom:hover svg {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* --- GRID CARDS --- */
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 50px;
+            margin: 50px 0 100px 0;
+            width: 100%;
+        }
+
+        .archive-card {
+            background: rgba(15, 15, 20, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(197, 160, 89, 0.1);
+            padding: 50px 40px;
             position: relative;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            text-align: center;
         }
 
-        /* Modern Buttons */
-        .btn {
-            padding: 18px 40px;
-            border-radius: 20px;
-            font-weight: 600;
-            display: inline-flex;
-            gap: 12px;
+        .archive-card:hover {
+            border-color: var(--accent-gold);
+            background: rgba(20, 20, 30, 0.8);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .card-date {
+            font-family: var(--font-header);
+            font-size: 10px;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
+            margin-bottom: 25px;
+            display: flex;
             align-items: center;
-            transition: all 0.3s ease;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .btn-primary { background: #000; color: white; }
-        .btn-primary:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 15px;
+            font-style: normal; 
+            text-align: center;
+        }
 
-        .btn-whatsapp { border: 1.5px solid #22c55e; color: #16a34a; background: #fff; }
-        .btn-whatsapp:hover { background: #22c55e; color: #fff; }
+        /* --- READER MODE --- */
+        #reader-mode {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, #10101a 0%, #050508 100%);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+            padding: 80px 24px;
+            text-align: center;
+        }
 
-        /* Reading Progress Circle */
-        .scroll-progress-container {
+        .poetry-body {
+            font-family: var(--font-book);
+            font-size: clamp(1.8rem, 5vw, 2.6rem);
+            line-height: 1.7;
+            color: var(--text-silk);
+            white-space: pre-wrap;
+            text-align: center; 
+            margin: 60px 0;
+            opacity: 0;
+            font-style: normal;
+            transform: translateY(30px);
+            transition: all 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            width: 100%;
+        }
+
+        .poetry-body.reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .close-btn {
             position: fixed;
             top: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            z-index: 1000;
-        }
-
-        svg.progress-ring {
-            transform: rotate(-90deg);
-        }
-
-        .progress-ring__circle {
-            transition: stroke-dashoffset 0.1s;
-            stroke-dasharray: 157.08; /* 2 * PI * 25 */
-            stroke-dashoffset: 157.08;
-        }
-
-        /* Nav Dock */
-        .nav-dock {
-            position: fixed;
-            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 10px 25px;
-            border-radius: 100px;
-            border: 1px solid rgba(0,0,0,0.05);
-            display: flex;
-            gap: 20px;
-            z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
-
-        .nav-link {
+            font-family: var(--font-header);
             font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #888;
-            transition: color 0.3s;
+            letter-spacing: 4px;
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            padding: 10px 30px;
+            background: transparent;
+            transition: 0.4s;
+            cursor: pointer;
+            z-index: 1100;
         }
-        .nav-link:hover { color: #000; }
-
-        footer { background: #fff; }
     </style>
 </head>
-
 <body>
 
-<div class="scroll-progress-container">
-    <svg class="progress-ring" width="60" height="60">
-        <circle class="progress-ring__circle-bg" stroke="#f0f0f0" stroke-width="2" fill="transparent" r="25" cx="30" cy="30"/>
-        <circle id="progress-circle" class="progress-ring__circle" stroke="#000" stroke-width="2" fill="transparent" r="25" cx="30" cy="30"/>
-    </svg>
-</div>
-
-<div class="nav-dock">
-    <a href="#intro" class="nav-link">Home</a>
-    <a href="#ch1" class="nav-link">Chapter 1</a>
-    <a href="#ch2" class="nav-link">Chapter 2</a>
-    <a href="#contact" class="nav-link">Contact</a>
-</div>
-
-<header id="intro" class="pt-48 pb-32 px-6 max-w-7xl mx-auto">
-    <p class="tracking-[0.8em] text-[10px] font-bold text-gray-300 uppercase mb-8">Creative Selection • 2025</p>
-    <h1 class="hero-title">Silent People</h1>
-
-    <div class="mt-12 flex justify-center items-center gap-6 text-[12px] uppercase tracking-[0.4em] text-gray-400 font-medium">
-        <span>Hassan Jatoi Edition</span>
-    </div>
-
-    <div class="art-frame mt-24">
-        <div class="image-container" id="cover-img">
-            <div class="animate-pulse text-gray-200 text-xs">Developing Visual Narrative...</div>
-        </div>
-    </div>
-</header>
-
-<main class="px-6 pb-60">
-
-<section id="ch1" class="max-w-5xl mx-auto mb-52">
-    <div class="mb-20">
-        <h2 class="section-title">01 · The First Evening</h2>
-        <div class="w-10 h-[2px] bg-black/10 mx-auto mt-6"></div>
-    </div>
-
-    <div class="story-text">
-        <p>
-            The city stood wrapped in silence, as if even time had forgotten its duty.
-            Lamps glowed without warmth, streets breathed without footsteps,
-            and every window carried a story too heavy to speak aloud.
-        </p>
-
-        <div class="art-frame">
-            <div class="image-container" id="ch1-img"></div>
-        </div>
-
-        <p>
-            Hassan watched the world from behind the glass.
-            Faces passed like unfinished sentences.
-            Everyone carried something invisible,
-            something heavier than memory,
-            something only silence could understand.
-        </p>
-    </div>
-</section>
-
-<div class="pull-quote">
-    “Silence is not the absence of sound, but the presence of everything unsaid.”
-</div>
-
-<section id="ch2" class="max-w-5xl mx-auto mb-52">
-    <div class="mb-20">
-        <h2 class="section-title text-4xl">02 · The Weight of Quiet</h2>
-        <div class="w-10 h-[2px] bg-black/10 mx-auto mt-6"></div>
-    </div>
-
-    <div class="story-text">
-        <p>
-            Evening arrived gently, not as night but as confession.
-            Doors closed softly, yet hearts remained open and wounded.
-            Words gathered courage — and failed.
-        </p>
-
-        <div class="art-frame">
-            <div class="image-container" id="ch2-img"></div>
-        </div>
-
-        <p>
-            Silence became a language of its own.
-            It spoke through pauses, through lowered eyes,
-            through the ache that never learned how to scream.
-        </p>
-    </div>
-</section>
-
-<footer id="contact" class="py-40 border-t border-gray-50">
-    <h3 class="text-6xl font-bold mb-8 tracking-tighter">Silent People</h3>
-    <p class="uppercase tracking-[0.5em] text-gray-300 mb-20 text-[10px] font-bold">
-        Written & Curated by Hassan Jatoi
-    </p>
-
-    <div class="flex flex-col sm:flex-row justify-center items-center gap-10 mb-28">
-        <a href="https://hassanaliuk11-oss.github.io/The-grief-of-2025/" target="_blank" class="btn btn-primary">
-            <i data-lucide="compass"></i> Explore More
-        </a>
-
-        <a href="https://wa.me/923083500829" target="_blank" class="btn btn-whatsapp">
-            <i data-lucide="phone"></i> WhatsApp Me
-        </a>
-    </div>
-
-    <div class="flex justify-center gap-12 text-gray-200 mb-24">
-        <i data-lucide="instagram" class="w-6 h-6 cursor-pointer hover:text-black transition-all"></i>
-        <i data-lucide="twitter" class="w-6 h-6 cursor-pointer hover:text-black transition-all"></i>
-        <i data-lucide="mail" class="w-6 h-6 cursor-pointer hover:text-black transition-all"></i>
-    </div>
-
-    <p class="text-[10px] tracking-[0.8em] text-gray-200 uppercase">
-        © MMXXV — Limited Digital Edition
-    </p>
-</footer>
-
-</main>
-
-<script>
-lucide.createIcons();
-
-const circle = document.getElementById('progress-circle');
-const radius = circle.r.baseVal.value;
-const circumference = radius * 2 * Math.PI;
-
-circle.style.strokeDasharray = `${circumference} ${circumference}`;
-circle.style.strokeDashoffset = circumference;
-
-function setProgress(percent) {
-    const offset = circumference - (percent / 100 * circumference);
-    circle.style.strokeDashoffset = offset;
-}
-
-window.onscroll = () => {
-    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (document.documentElement.scrollTop / h) * 100;
-    setProgress(scrolled);
-};
-
-function smartImageLoader(containerId, images) {
-    const container = document.getElementById(containerId);
-    let index = 0;
+    <div class="glow-orb" style="top: -10%; left: -10%;"></div>
     
-    function load() {
-        if (index >= images.length) {
-            container.innerHTML = `<span class="text-xs text-gray-100 uppercase tracking-[0.5em]">Frame Empty</span>`;
-            return;
+    <!-- Intro Sequence -->
+    <div id="intro-overlay">
+        <img src="https://i.ibb.co/7JSrD999/OCE-UPON.jpg" alt="Cover" id="cover-image">
+        <div class="welcome-msg" id="welcome">Illuminating the Archive</div>
+    </div>
+
+    <!-- Main Site -->
+    <div class="app-container" id="main-app">
+        <header class="w-full flex flex-col items-center">
+            <div id="live-time" class="card-date mb-4"></div>
+            <div class="gallery-title-wrapper">
+                <svg viewBox="0 0 24 24" class="icon-svg"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.1-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-3.45.3-5 1V7c1.55-.7 3.3-.9 5-.9 1.2 0 2.4.15 3.5.5v11.9z"/></svg>
+                <h1 class="gallery-title">The Death of Spirits</h1>
+                <svg viewBox="0 0 24 24" class="icon-svg"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.1-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-3.45.3-5 1V7c1.55-.7 3.3-.9 5-.9 1.2 0 2.4.15 3.5.5v11.9z"/></svg>
+            </div>
+            
+            <div class="title-underline"></div>
+            <div class="text-[10px] tracking-[0.6em] text-center uppercase text-white/40 mt-4">Curated by Hassan Jatoi</div>
+        </header>
+
+        <div class="archive-grid" id="card-grid"></div>
+
+        <!-- External Links Section -->
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-8 mb-28 w-full">
+            <a href="https://hassanaliuk11-oss.github.io/The-grief-of-2025/" target="_blank" class="btn-custom">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/><path d="M12 2a14.5 14.5 0 0 1 0 20 14.5 14.5 0 0 1 0-20"/></svg>
+                Explore More
+            </a>
+
+            <a href="https://wa.me/923083500829" target="_blank" class="btn-custom">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                WhatsApp Me
+            </a>
+        </div>
+
+        <footer class="pb-16 text-center text-[10px] tracking-[0.4em] text-white/20 uppercase font-serif w-full">
+            Finis — The Eternal Archive
+        </footer>
+    </div>
+
+    <!-- Reading Mode -->
+    <div id="reader-mode">
+        <button class="close-btn" onclick="closeReader()">Return to Archive</button>
+        <div class="mt-24 flex flex-col items-center max-w-4xl w-full">
+            <h2 class="reader-title" id="reader-title"></h2>
+            <div class="card-date" id="reader-date"></div>
+            <div class="poetry-body" id="reader-text"></div>
+        </div>
+    </div>
+
+    <script>
+        const icons = {
+            heart: '<svg viewBox="0 0 24 24" class="w-4 h-4 fill-current"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>',
+            rose: '<svg viewBox="0 0 24 24" class="w-4 h-4 fill-current"><path d="M12,2C11.5,2,11,2.1,10.5,2.2C10.5,2.2,10.5,2.2,10.5,2.2C10.5,2.2,10.5,2.2,10.5,2.2C10.4,2.2,10.4,2.2,10.3,2.2C10,2.3,9.7,2.4,9.5,2.5c0,0-0.1,0-0.1,0.1C8.3,3,7.5,4,7.1,5.2C6.9,5.7,6.8,6.1,6.8,6.6c0,1,0.3,2,0.8,2.8c0.1,0.1,0.2,0.3,0.3,0.4c0.5,0.7,1.2,1.3,2,1.8c0,0.2,0,0.4,0,0.7c0,2.1,1.1,4,2.8,5.1c-0.2,0.5-0.4,1-0.6,1.4c-0.5,1.1-1.2,2.2-2.1,3.1l1.4,1.4c1-1,1.8-2.2,2.4-3.5c0.2-0.4,0.4-0.8,0.5-1.2c1.4-0.6,2.6-1.7,3.3-3c0.4-0.7,0.7-1.5,0.8-2.3c0.1-0.3,0.1-0.6,0.1-0.9c0-1.1-0.3-2.2-1-3.1c0,0,0-0.1,0-0.1c0-0.3-0.1-0.6-0.2-0.9c-0.4-1.2-1.2-2.2-2.3-2.9c-0.2-0.1-0.4-0.2-0.6-0.3C13.8,2.1,12.9,2,12,2z"/></svg>',
+            bird: '<svg viewBox="0 0 24 24" class="w-4 h-4 fill-current"><path d="M21 5l-1.4 1.4L18.2 5l-1.4 1.4 1.4 1.4-1.4 1.4L18.2 12l1.4-1.4L21 12l1.4-1.4-1.4-1.4 1.4-1.4L21 5zM3 13.5c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5-2 4.5-4.5 4.5S3 16 3 13.5zm11-4c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5-2 4.5-4.5 4.5-4.5-2-4.5-4.5z"/></svg>'
+        };
+
+        const poetryData = [
+            { id: 1, title: "Loss of Inner Light", date: "JAN XII MMXXVI", icon: 'rose', preview: "The light inside me did not vanish loudly...", text: "Andar ki roshni tab nahi jati jab charagh bujhta hai\nBalki tab jab aankhein umeed dekhna chodh deti hain\n\nMaine har raat apne dil ko chookar dekha\nKe shayad koi chingari baaki ho\nPar afsos wahan sirf thandi raakh thi\nJo purani yaadon ka kafan odhe so rahi thi" },
+            { id: 2, title: "The Funeral of Hope", date: "JAN X MMXXVI", icon: 'heart', preview: "Hope was not buried in the ground...", text: "Umeed ka janaza dhoom dhaam se nahi nikalta\nYe toh khamoshi se saanson ke beech dum todti hai\n\nKoi rone wala nahi tha us din\nSirf waqt khada tha mere sirhane\nEk purana chehra liye\nMaine kal se alvida kaha\nAur kal ne palat kar bhi nahi dekha" },
+            { id: 3, title: "Sacred Emptiness", date: "JAN VIII MMXXVI", icon: 'bird', preview: "There is a holiness in being empty...", text: "Khali hone mein ek ajeeb sa sukoon hai\nJab khone ko kuch na bache\nToh darr bhi khatam ho jata hai\n\nRooh nangi khadi hoti hai wajood ke samne\nBina kisi naqaab ke\nBina kisi zid ke\nDard aur karam ke beech ek khamosh samjhauta" },
+            { id: 4, title: "The Silence That Screams", date: "JAN V MMXXVI", icon: 'rose', preview: "There is a silence louder than storms...", text: "Ek khamoshi hoti hai jo toofanon se zyada shore karti hai\nYe pasliyon ke peeche rehti hai\nYe un sab yaadon ko janti hai jo main bhool chuka hoon\n\nRaat ko ye mere dil par kaan dharti hai\nKe shayad kuch zinda mil jaye\nPar ise sirf wahi purani goonj milti hai" }
+        ];
+
+        function runIntro() {
+            const overlay = document.getElementById('intro-overlay');
+            const img = document.getElementById('cover-image');
+            const welcome = document.getElementById('welcome');
+            const app = document.getElementById('main-app');
+            setTimeout(() => { img.style.opacity = '1'; img.style.transform = 'scale(1)'; }, 600);
+            setTimeout(() => welcome.style.opacity = '1', 2000);
+            setTimeout(() => {
+                overlay.style.opacity = '0';
+                app.style.opacity = '1';
+                setTimeout(() => overlay.style.display = 'none', 1800);
+            }, 4500);
         }
 
-        const img = new Image();
-        img.src = images[index];
-        img.className = "loaded";
-        
-        img.onload = () => {
-            container.innerHTML = "";
-            container.appendChild(img);
-        };
+        function createGrid() {
+            const grid = document.getElementById('card-grid');
+            poetryData.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'archive-card';
+                card.onclick = () => openReader(p);
+                card.innerHTML = `
+                    <div class="card-date">${icons[p.icon]} ${p.date}</div>
+                    <h3 class="card-title">${p.title}</h3>
+                    <p class="font-light text-white/40 leading-relaxed font-book text-center">${p.preview}</p>
+                `;
+                grid.appendChild(card);
+            });
+        }
 
-        img.onerror = () => {
-            index++;
-            load();
-        };
-    }
-    load();
-}
+        function openReader(p) {
+            const reader = document.getElementById('reader-mode');
+            const text = document.getElementById('reader-text');
+            document.getElementById('reader-title').innerText = p.title;
+            document.getElementById('reader-date').innerHTML = `${icons[p.icon]} ${p.date}`;
+            text.innerText = p.text;
+            reader.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => text.classList.add('reveal'), 200);
+        }
 
-document.addEventListener("DOMContentLoaded", () => {
-    smartImageLoader("cover-img", [
-        "https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=2000&q=90",
-        "https://picsum.photos/1600/900?random=1"
-    ]);
+        function closeReader() {
+            const reader = document.getElementById('reader-mode');
+            const text = document.getElementById('reader-text');
+            text.classList.remove('reveal');
+            setTimeout(() => { reader.style.display = 'none'; document.body.style.overflow = 'auto'; }, 400);
+        }
 
-    smartImageLoader("ch1-img", [
-        "https://images.unsplash.com/photo-1449156001437-3a1621dfbe2b?auto=format&fit=crop&w=1600&q=80",
-        "https://picsum.photos/1600/900?random=2"
-    ]);
-
-    smartImageLoader("ch2-img", [
-        "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1600&q=80",
-        "https://picsum.photos/1600/900?random=3"
-    ]);
-});
-</script>
-
+        window.onload = () => { createGrid(); runIntro(); };
+    </script>
 </body>
 </html>
