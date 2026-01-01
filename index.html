@@ -352,10 +352,105 @@
         };
 
         const poetryData = [
-            { id: 1, title: "Loss of Inner Light", date: "JAN XII MMXXVI", icon: 'rose', preview: "The light inside me did not vanish loudly...", text: "Andar ki roshni tab nahi jati jab charagh bujhta hai\nBalki tab jab aankhein umeed dekhna chodh deti hain\n\nMaine har raat apne dil ko chookar dekha\nKe shayad koi chingari baaki ho\nPar afsos wahan sirf thandi raakh thi\nJo purani yaadon ka kafan odhe so rahi thi" },
-            { id: 2, title: "The Funeral of Hope", date: "JAN X MMXXVI", icon: 'heart', preview: "Hope was not buried in the ground...", text: "Umeed ka janaza dhoom dhaam se nahi nikalta\nYe toh khamoshi se saanson ke beech dum todti hai\n\nKoi rone wala nahi tha us din\nSirf waqt khada tha mere sirhane\nEk purana chehra liye\nMaine kal se alvida kaha\nAur kal ne palat kar bhi nahi dekha" },
-            { id: 3, title: "Sacred Emptiness", date: "JAN VIII MMXXVI", icon: 'bird', preview: "There is a holiness in being empty...", text: "Khali hone mein ek ajeeb sa sukoon hai\nJab khone ko kuch na bache\nToh darr bhi khatam ho jata hai\n\nRooh nangi khadi hoti hai wajood ke samne\nBina kisi naqaab ke\nBina kisi zid ke\nDard aur karam ke beech ek khamosh samjhauta" },
-            { id: 4, title: "The Silence That Screams", date: "JAN V MMXXVI", icon: 'rose', preview: "There is a silence louder than storms...", text: "Ek khamoshi hoti hai jo toofanon se zyada shore karti hai\nYe pasliyon ke peeche rehti hai\nYe un sab yaadon ko janti hai jo main bhool chuka hoon\n\nRaat ko ye mere dil par kaan dharti hai\nKe shayad kuch zinda mil jaye\nPar ise sirf wahi purani goonj milti hai" }
+             { title: "Broken Echoes", icon: 'rose', preview: "Some sounds never leave...", text: "Some words are never forgotten\nTheir echoes just grow faint with time\nScreaming forever in a corner of the heart" }
+
+ { title: "Faded Portraits", icon: 'heart', preview: "Time erases faces...", text: "Time may erase the features of a face\nBut it cannot rub away the scars\nLeft by someone upon the very soul" }
+
+ { title: "The Weight of Dust", icon: 'bird', preview: "Memories are just dust...", text: "Memories are like fine dust particles\nThe more you try to sweep them away\nThe more they sting and burn the eyes" }
+
+ { title: "Midnight Whispers", icon: 'rose', preview: "Night speaks in secrets...", text: "There is a strange noise in the midnight silence\nOnly those who have nothing left to say\nCan truly hear what the darkness whispers" }
+
+ { title: "Cold Hearth", icon: 'heart', preview: "The fire went out long ago...", text: "There is no warmth left in this place now\nWhere once a festival of emotions lived\nOnly cold stones remain where fire used to be" }
+
+ { title: "Unspoken Goodbyes", icon: 'bird', preview: "Not every exit needs a door...", text: "The most painful goodbye of all\nIs the one that was never actually spoken\nA departure without a single word" }
+
+ { title: "The Moons Scar", icon: 'rose', preview: "Even light has wounds...", text: "The moon is lonely and covered in scars\nIf even the heavens carry such marks\nThen what hope is there for a simple human" }
+
+ { title: "Paper Boats", icon: 'heart', preview: "Drowning in shallow water...", text: "The paper boats of a distant childhood\nHave finally sunk beneath the waves\nOf a deep and dark ocean of memories" }
+
+ { title: "Frozen Tears", icon: 'bird', preview: "Pain that doesn't flow...", text: "The heaviest tears are the ones\nThat refuse to fall from the eyes\nStaying inside to turn the heart into ice" }
+
+ { title: "Shadow Play", icon: 'rose', preview: "The sun left me behind...", text: "The darkness is not my enemy at all\nIt is simply the only home\nWhere my shadow feels safe enough to rest" }
+
+ { title: "Shattered Compass", icon: 'heart', preview: "Lost in my own heart...", text: "Every path and road has been found\nYet the desire to actually go anywhere\nHas vanished like mist in the morning" }
+
+ { title: "The Last Leaf", icon: 'bird', preview: "Autumn in the soul...", text: "My existence is like that final leaf\nWho made peace with the wind\nLong before it actually touched the ground" }
+
+ { title: "Bitter Honey", icon: 'rose', preview: "Love that turned sour...", text: "When love transforms into a poison\nEven the thought of death\nBegins to look like a beautiful escape" }
+
+ { title: "Hollow Ribs", icon: 'heart', preview: "An empty cage...", text: "This chest is now nothing but a cage\nWhere the bird known as a heartbeat\nHas forgotten how to sing or fly" }
+
+ { title: "Invisible Ink", icon: 'bird', preview: "Letters never read...", text: "I wrote my pain upon the passing winds\nKnowing well that the ink is invisible\nAnd the message will never reach your hands" }
+
+ { title: "Silent Thunder", icon: 'rose', preview: "A storm inside...", text: "There is a hurricane trapped inside me\nYet on the outside I remain as still\nAs a graveyard in the middle of the night" }
+
+ { title: "Withered Petals", icon: 'heart', preview: "Beauty in decay...", text: "Even withered flowers hold a secret story\nThey too once bloomed for someone\nThey too once knew what it meant to be loved" }
+
+ { title: "Forgotten Keys", icon: 'bird', preview: "Doors that won't open...", text: "What is the point of unlocking doors\nWhen there is no one left behind them\nWaiting to welcome you home" }
+
+ { title: "Stolen Sunlight", icon: 'rose', preview: "Living in the eclipse...", text: "The sun that was written in my fate\nDecided to set before it could even rise\nLeaving me in a permanent twilight" }
+
+ { title: "The Void Within", icon: 'heart', preview: "Nothingness is heavy...", text: "Carrying the weight of absolute emptiness\nIs the most difficult task in this world\nA burden that no one else can see" }
+
+ { title: "Salt and Wounds", icon: 'bird', preview: "Reminders of life...", text: "Stop insisting that every wound must heal\nScars are the only proof we have left\nThat we actually survived the battle" }
+
+ { title: "Dusty Mirrors", icon: 'rose', preview: "Stranger in the glass...", text: "The person staring back from the mirror\nIs someone I no longer recognize\nA stranger wearing my own tired skin" }
+
+ { title: "Crumpled Dreams", icon: 'heart', preview: "Discarded hopes...", text: "I dreamt a thousand different lives\nBut sleep betrayed me halfway through\nLeaving me awake in a world I did not choose" }
+
+ { title: "The Oceans Sigh", icon: 'bird', preview: "Tides of sorrow...", text: "My sobs are hidden in the crashing waves\nTraveling miles across the dark water\nOnly to die silently upon the shore" }
+
+ { title: "Buried Voices", icon: 'rose', preview: "The soil of silence...", text: "I have buried all my complaints deep\nNow only trees of silence grow there\nWith roots wrapped around my bones" }
+
+ { title: "Ghost Limbs", icon: 'heart', preview: "Feeling what is gone...", text: "Long after you have walked away\nMy soul still feels the phantom pain\nOf your hand resting in mine" }
+
+ { title: "The Alchemist", icon: 'bird', preview: "Turning pain to poetry...", text: "I turned my tears into ink\nAnd my deepest sorrows into lines of verse\nMaking art out of everything that broke me" }
+
+ { title: "Lonely Stars", icon: 'rose', preview: "Lights in the abyss...", text: "Why are the stars so far away\nPerhaps because they cannot bear\nTo look closely at the grief of the world" }
+
+ { title: "Waiting Room", icon: 'heart', preview: "Life on hold...", text: "I am standing at that specific corner\nFrom which no traveler ever returns\nWaiting for a sign that will never come" }
+
+ { title: "The Glass Heart", icon: 'bird', preview: "Transparent and fragile...", text: "My heart was made of transparent glass\nBut the world mistook it for a stone\nAnd decided to test its strength with fire" }
+
+ { title: "Flickering Lamp", icon: 'rose', preview: "The end of hope...", text: "The flame of hope is finally dying out\nThe darkness is no longer a stranger\nIt is becoming a part of who I am" }
+
+ { title: "Stained Glass", icon: 'heart', preview: "Broken colors...", text: "The colors of my life have bled together\nLeaving behind only shades of grey\nAnd the memory of what it felt like to glow" }
+
+ { title: "The Weaver", icon: 'bird', preview: "Threads of fate...", text: "I tried so hard to weave us together\nBut the threads of destiny were too thin\nAnd snapped under the weight of reality" }
+
+ { title: "Desert Rain", icon: 'rose', preview: "Thirst of the soul...", text: "My soul is a vast and empty desert\nWhere the rain of your memory\nHas forgotten how to fall" }
+
+ { title: "Iron Chains", icon: 'heart', preview: "Bound by the past...", text: "The chains are invisible to the eye\nBut their weight is so heavy\nThat I have forgotten how to walk freely" }
+
+ { title: "The Last Breath", icon: 'bird', preview: "Leaving the world...", text: "In my final breath I spoke your name\nBut the room was empty and cold\nAnd you were not there to hear it" }
+
+ { title: "Borrowed Time", icon: 'rose', preview: "Living on credit...", text: "Life is nothing but a borrowed breath\nA debt that must be paid back daily\nUntil there is nothing left to give" }
+
+ { title: "Wounded Skies", icon: 'heart', preview: "Bleeding sunsets...", text: "The red hue of the setting sun\nIs nothing but a reflection\nOf the wounds bleeding in my chest" }
+
+ { title: "Old Shoes", icon: 'bird', preview: "Tired of walking...", text: "The roads never truly come to an end\nIt is the traveler who loses the strength\nAnd decides to lie down in the dust" }
+
+ { title: "The Unwritten", icon: 'rose', preview: "Stories left untold...", text: "The most beautiful story I ever knew\nWas the one that never got started\nThe one that stayed forever in the ink" }
+
+ { title: "Drowning Fire", icon: 'heart', preview: "Extinguishing passion...", text: "Fire does not fear the water\nIt fears the silence that comes after\nWhen the light has been swallowed whole" }
+
+ { title: "Broken Strings", icon: 'bird', preview: "No more music...", text: "The instrument remains the same\nBut the music has turned into a lament\nThat no one wants to listen to" }
+
+ { title: "The Lighthouse", icon: 'rose', preview: "Guiding nobody...", text: "I am like a lighthouse on a dead coast\nBurning myself away to show the path\nTo ships that will never arrive" }
+
+ { title: "Ashes of Love", icon: 'heart', preview: "What remains...", text: "The love has turned into cold ash\nNow only the memories remain\nFloating aimlessly in the winter wind" }
+
+ { title: "The Empty Chair", icon: 'bird', preview: "Absence is heavy...", text: "Everything in the room is in its place\nExcept for your presence\nWhich was the only thing that mattered" }
+
+ { title: "Wandering Soul", icon: 'rose', preview: "No home to find...", text: "I am a stranger in my own house\nEvery wall feels like a prison\nAnd every door leads back to the start" }
+
+ { title: "The Scarred Sun", icon: 'heart', preview: "Morning without warmth...", text: "The sun rises every single day\nBut the internal cold I carry\nRefuses to melt under its light" }
+
+ { title: "Quiet Surrender", icon: 'bird', preview: "Giving up the fight...", text: "I have made peace with my life\nWhatever happens now happens\nI have lost the will to complain" }
+
+ { title: "Echoing Halls", icon: 'rose', preview: "Loneliness in space...", text: "The heart is a vast and empty palace\nWhere silence is the only king\nAnd loneliness is the only guest" }
+
+ { title: "Final Chapter", icon: 'heart', preview: "Closing the book...", text: "The story has finally reached its end\nThere are no more words to write\nJust blank pages and a dry pen" }
         ];
 
         function runIntro() {
