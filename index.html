@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Silent Hopes — Bold Inside Collection</title>
+    <title>Silent Hopes — Digital Manuscript</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -15,25 +15,12 @@
             --font-body: 'Inter', sans-serif;
         }
 
-        /* Base Setup */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             text-align: center;
             -webkit-font-smoothing: antialiased;
-        }
-
-        /* Outside font weight rule */
-        .outside-text {
-            font-weight: 400 !important;
-            font-style: normal !important;
-        }
-
-        /* Inside font weight rule */
-        .inside-text {
-            font-weight: 600 !important;
-            font-style: normal !important;
         }
 
         body {
@@ -48,22 +35,31 @@
         .container-main {
             width: 100%;
             max-width: 600px;
-            padding: 40px 20px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
+        /* Rose Header */
+        .header-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 24px;
+            margin-bottom: 30px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        }
+
         .live-metadata {
             font-size: 11px;
             color: var(--text-grey);
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             letter-spacing: 0.05em;
-            font-weight: 400;
         }
 
         header {
-            margin-bottom: 60px;
+            margin-bottom: 50px;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -72,18 +68,17 @@
 
         .brand-title {
             font-family: var(--font-ui);
-            font-size: 44px;
+            font-size: 46px;
             letter-spacing: -0.02em;
             line-height: 1.1;
-            margin-bottom: 12px;
-            font-weight: 400;
+            margin-bottom: 15px;
             animation: colorAnimation 8s infinite alternate;
         }
 
-        /* Colorful Moti Patti */
-        .accent-bar {
-            width: 70px;
-            height: 6px;
+        /* Thick Colorful Line */
+        .thick-accent {
+            width: 80px;
+            height: 8px;
             border-radius: 20px;
             background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853);
             background-size: 200% 200%;
@@ -104,20 +99,32 @@
             100% { background-position: 0% 50%; }
         }
 
-        .scrollable-list {
+        .curator-info {
+            font-size: 11px;
+            color: var(--text-grey);
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+        }
+
+        /* List Styling */
+        .list-wrap {
             width: 100%;
-            max-width: 450px;
+            max-width: 480px;
             margin-bottom: 60px;
         }
 
-        .list-entry {
+        .entry-item {
             padding: 24px 0;
-            border-bottom: 1px solid #f5f5f5;
+            border-bottom: 1px solid #f2f2f2;
             cursor: pointer;
-            font-weight: 400;
+            transition: opacity 0.2s;
         }
 
-        .entry-title {
+        .entry-item:hover {
+            opacity: 0.5;
+        }
+
+        .entry-name {
             font-family: var(--font-ui);
             font-size: 16px;
             display: block;
@@ -125,8 +132,15 @@
             animation: colorAnimation 12s infinite alternate;
         }
 
-        /* Reader View */
-        #poetry-reader {
+        .entry-meta {
+            font-size: 10px;
+            color: #d1d1d1;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Reader Overlay */
+        #poem-viewer {
             position: fixed;
             inset: 0;
             background: #ffffff;
@@ -134,91 +148,103 @@
             display: none;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
             padding: 60px 25px;
             overflow-y: auto;
         }
 
-        .reader-header {
+        .viewer-header {
             font-family: var(--font-ui);
-            font-size: 28px;
-            margin-bottom: 10px;
+            font-size: 32px;
+            margin-bottom: 15px;
             font-weight: 600 !important;
             animation: colorAnimation 6s infinite alternate;
         }
 
-        .reader-content {
+        .viewer-body {
             font-size: 18px;
             line-height: 1.8;
             color: #1a1a1b;
             white-space: pre-wrap;
-            max-width: 500px;
+            max-width: 550px;
             font-weight: 600 !important; /* Bold inside */
         }
 
-        .close-trigger {
+        .btn-back {
             margin-top: 50px;
-            padding-bottom: 40px;
-            font-size: 11px;
-            color: var(--text-grey);
+            margin-bottom: 50px;
+            font-size: 13px;
+            color: #1a73e8;
             cursor: pointer;
-            text-decoration: underline;
+            border: 1px solid #e8f0fe;
+            background: #f8fbff;
+            padding: 12px 40px;
+            border-radius: 100px;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-weight: 400 !important;
+            letter-spacing: 0.1em;
+            transition: 0.3s;
         }
 
-        /* Mobile Adjustments */
-        @media (max-width: 640px) {
-            .brand-title { font-size: 32px; }
-            .entry-title { font-size: 12px; } 
-            
-            /* Requirements: Inside sizes 12px and Bold */
-            .reader-header { font-size: 16px; }
-            .reader-content { font-size: 12px !important; } 
-            
-            .list-entry, .live-metadata, .close-trigger { font-size: 10px; }
+        .btn-back:hover {
+            background: #eef4ff;
+            transform: translateY(-2px);
+        }
 
-            .accent-bar { width: 50px; height: 5px; }
-            .container-main { padding: 30px 15px; }
+        /* Mobile Adjustments (Title 12px, Body 10px base) */
+        @media (max-width: 640px) {
+            .brand-title { font-size: 34px; }
+            .entry-name { font-size: 12px; } 
+            
+            .viewer-header { font-size: 16px; }
+            .viewer-body { font-size: 12px !important; } /* Internal size 12px */
+            
+            .entry-meta, .curator-info, .live-metadata, .btn-back { font-size: 10px; }
+            .thick-accent { width: 60px; height: 6px; }
+            .header-image { height: 160px; }
         }
     </style>
 </head>
-<body class="outside-text">
+<body>
 
     <div class="container-main">
+        <!-- Roses Header -->
+        <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop" 
+             alt="Rose Header" class="header-image">
+
         <div class="live-metadata">
-            <span id="js-date"></span> &nbsp; | &nbsp; <span id="js-time"></span>
+            <span id="date-el"></span> &bull; <span id="time-el"></span>
         </div>
 
         <header>
             <h1 class="brand-title">Silent Hopes</h1>
-            <div class="accent-bar"></div>
-            <p style="font-size: 10px; letter-spacing: 0.3em; color: var(--text-grey);">BY HASSAN JATOI</p>
+            <div class="thick-accent"></div>
+            <p class="curator-info">Curated by Hassan Jatoi</p>
         </header>
 
-        <div class="scrollable-list" id="poetry-list">
-            <!-- List Injected -->
+        <div class="list-wrap" id="poetry-list">
+            <!-- Items injected via JS -->
         </div>
 
-        <div style="margin-top: auto; padding-bottom: 40px;">
+        <footer style="margin-top: auto; padding-bottom: 40px;">
             <a href="https://hassanalipoetry.vercel.app/" style="font-size: 12px; color: #1a73e8; text-decoration: none; padding: 12px 30px; border-radius: 50px; border: 1px solid #e8f0fe; background: #f8fbff; display: inline-block;">
-                More Poetry
+                Full Archive
             </a>
-        </div>
+        </footer>
     </div>
 
-    <!-- Reader Mode Overlay -->
-    <div id="poetry-reader" class="inside-text">
-        <h2 id="view-title" class="reader-header"></h2>
-        <!-- Colorful Patti Inside -->
-        <div class="accent-bar"></div>
-        <div id="view-body" class="reader-content"></div>
-        <div class="close-trigger" onclick="closeReader()">Wapis Chalein</div>
+    <!-- Poetry Reader Overlay -->
+    <div id="poem-viewer">
+        <h2 id="view-title" class="viewer-header"></h2>
+        <div class="thick-accent"></div>
+        <div id="view-body" class="viewer-body"></div>
+        <button class="btn-back" onclick="closeViewer()">Back</button>
     </div>
 
     <script>
-        const collection = [
+        const library = [
+            { 
+                title: "The Evening Departure", 
+                text: "Evening slowly descended.\nThe sky withdrew the breath of daylight\nand light surrendered itself to shadow.\nTrees stood in silence.\nBranches remained empty.\nThe wind kept turning back\nas if hoping to witness a return.\nThe birds\nwho once came home every day\nflew somewhere unknown.\nOr perhaps\nthey forgot the way back.\nI placed a lamp in the courtyard.\nI called out to memories.\nI whispered softly\nthat whoever was tired\nshould come home.\nBut the evening answered\nonly with darkness.\nThe doors of the heart stayed open.\nWaiting clawed at the face of time.\nAnd hope\nsat at the threshold\nuntil its final breath.\nEvening arrived.\nThe birds did not come home.\nPerhaps\nsome departures do not ask to return.\nAnd some waiting\nis meant to last a lifetime"
+            },
             { 
                 title: "The Paper Boat", 
                 text: "The paper boat, crafted with love so pure,\nFloated on waves where dreams endure.\n\nSoft whispers of the wind held it tight,\nTears of the eyes hid secrets from sight.\n\nEvery ripple told tales of the past,\nEvery shadow embraced sorrows that last.\n\nUnder moonlit nights, this tiny craft swayed,\nMemories gleamed like stars where it laid.\n\nAlone it drifted through the river of time,\nAdorned with leaves of love, so sublime.\n\nThe paper boat lives on in echoes of the heart,\nMoments, scents, and the bonds of love, never to part." 
@@ -227,56 +253,95 @@
                 title: "The Journey of Solitude", 
                 text: "Memories scatter in the lonely moonlit night,\nSilent cries of the heart take their flight.\n\nThose moments of love once shared so true,\nNow wander in dreams, fading from view.\n\nFaces linger upon the walls of my mind,\nYet the traces of laughter are nowhere to find.\n\nEvery tear held the heart in its sway,\nBut no soul appeared to light the way.\n\nShadows of memories stretch far and wide,\nEmpty are the pages where my hopes used to hide.\n\nIn the darkness of parting, a glimmer remains,\nYet solitude steals all the warmth, leaving pains.\n\nThe voice of this heart is lost in the hush,\nAnd love’s world now lingers only in dreams’ blush." 
             },
+             {
+        "title": "Evening Without Return",
+        "text": "Evening fell like a wound that never learned to heal\nThe sky dimmed without farewell\nLight left quietly as if it was tired of watching me wait\nThe trees did not speak\nTheir branches carried absence instead of wings\nThe wind returned again and again\nEach time more hopeless than before\nThe birds\nThey used to know the way home\nThey used to trust the dusk\nTonight they chose distance\nOr distance chose them\nI lit a lamp with trembling hands\nNot for light\nFor memory\nFor proof that something once belonged here\nThe courtyard listened\nThe walls remembered\nBut nothing moved toward me\nDarkness did not arrive\nIt was already living inside the chest\nWaiting sat beside me\nPatient and cruel\nThe door of the heart remained open\nNot because I believed\nBut because closing it would mean acceptance\nEvening passed\nNight settled\nThe birds did not return\nSome souls are not lost\nThey are simply done with coming back\nAnd some waiting\nIs not hope\nIt is a quiet sentence that lasts a lifetime"
+             },
+             {
+        "title": "Buried in Love Memories",
+        "text": "I walk through the corridors of yesterday\nEach step stirring dust of moments we shared\nLaughter lingers like a ghost on the walls\nAnd your voice hides in the corners of my mind\nI touch the shadows where your hands once held mine\nThe warmth is gone yet the ache remains\nPhotographs lie like silent witnesses\nTheir eyes follow me through empty rooms\nTime cannot bury the weight of love\nIt lingers in the quiet before dawn\nIn dreams I see your face\nAnd wake with my heart trapped in yesterday\nEvery street echoes our footsteps\nEvery song carries your smile\nI am buried in love memories\nAnd they rise like tides I cannot resist\nEven in the crowd I feel your absence\nEvery whisper of wind speaks your name\nAnd I carry this treasure and this curse\nA life entwined with what once was"
+        },
          {
-    title: "Whispers of the Forgotten",
-    text: "The wind carries whispers of a love long gone,\nEchoes of laughter now fade with the dawn.\n\nShadows of the past haunt the empty street,\nEvery corner holds memories bittersweet.\n\nEyes search the horizon for a familiar face,\nBut all that's left is a void in this space.\n\nTears fall silently like rain on cold stone,\nHeartbeats tremble, aching alone.\n\nPromises once made drift like fragile leaves,\nLost in the currents, no one believes.\n\nTime heals nothing, yet it moves on so fast,\nLeaving remnants of joy buried in the past.\n\nThe soul whispers secrets the world cannot hear,\nAnd love’s gentle flame flickers in fear."
-  }،
+        "title": "Unspoken Words",
+        "text": "The air holds what my lips cannot say\nSilent echoes drift between us\nEyes meet and quickly look away\nHearts speak in language unheard\nMoments pass like fragile glass\nEach one carrying the weight of unspoken thoughts\nI reach for you and find only shadows\nYour hand almost touches mine but does not\nWords linger in the quiet of night\nThey hide in sighs and trembling breaths\nI speak to the walls to keep from breaking\nThe truth lives in spaces we cannot cross\nEvery smile hides a question\nEvery silence a confession\nIf only we could speak without fear\nThe world would hold less of this ache\nBut we carry our unspoken words like stones\nHeavy in our chests and light in our dreams\nAnd still we meet every day\nAnd say nothing at all"
+        },
+         {
+        "title": "Whispers of Lost Love",
+        "text": "Shadows fall on empty streets\nMemories linger in quiet hearts\nFootsteps echo where laughter once lived\nTears speak what lips cannot\nThe night carries secrets of yesterday\nStars remember what we forgot\nHands reach for ghosts of warmth\nAnd silence answers with hollow sighs\nLove once bright now drifts away\nLike petals scattered by the wind\nEvery heartbeat whispers your name\nAnd the world remains still without you"
+        },
+         {
+        "title": "Inherited Solitude",
+        "text": "Solitude came to me as a silent gift\nA quiet heirloom from shadows I never asked for\nIt sits heavy in the corners of my heart\nAnd whispers stories I cannot share\nRooms are filled with echoes of loneliness\nEven laughter feels like a stranger passing by\nThe world moves fast but I remain still\nCarrying the weight of inherited silence\nMemories of joy fade like smoke\nAnd every familiar face feels distant\nI walk through life with invisible chains\nAnd the solitude that was given becomes mine\nYet in this quiet I find a strange companion\nA voice within that knows my pain\nI speak to it in moments of despair\nAnd it listens without judgment or reply\nI am alone yet never empty\nFor solitude has become a legacy\nAnd in its silent embrace I live\nBuried yet breathing in the gift I did not choose"
+        },
+         {
+        "title": "I Accept My Share of Sorrows",
+        "text": "I carry the weight of my share of sorrows\nThey are mine to bear alone\nNo hand reaches to ease the burden\nNo voice speaks comfort to my heart\nTears flow silently like rivers in the night\nPain sits beside me like a faithful guest\nThe world moves on unaware of my grief\nYet I do not complain or ask for less\nEvery shadow reminds me of what I lost\nEvery silence echoes my acceptance\nI do not curse fate nor blame the winds\nFor my sorrows are threads of my own story\nIn the quiet I find strength and strange peace\nThe grief I hold shapes who I am\nI accept my share without regret\nFor it is mine and mine alone"
+    },
     {
-    title: "Light of the Lamp",
-    text: "The lamp, once lit with care,\nBurned bright for loyalty rare.\n\nIts flame endured the darkest night,\nA silent guardian of love and light.\n\nThough it consumed itself in endless glow,\nThe warmth of devotion it continued to show.\n\nEach flicker whispered a tale untold,\nOf steadfast hearts, brave and bold.\n\nEven as shadows crept all around,\nThe lamp of faith never bowed.\n\nIn its burning, a message clear,\nTrue love and loyalty conquer fear."
-}،
-{
-title: "The Last Letter",
- text: "A broken heart hides in lonely nights,\nEchoes of love lost from familiar sights.\n\nBetrayal struck from someone once near,\nLeaving only shadows and memories unclear.\n\nThe last letter trembles in my hand,\nEach word a wound, each line unmanned.\n\nSilent tears fall where laughter once stayed,\nDreams of devotion now slowly fade.\n\nEvery promise drifts like fragile leaves,\nCarried away by the wind that deceives.\n\nA lonely heart, a love torn apart,\nThe last letter whispers the cry of the heart."
- }
- ];
+        "title": "There Must Be a Reason for This Sadness",
+        "text": "I am not sad without a reason\nThe heart does not carry emptiness for no cause\nShadows linger where light once touched\nAnd silence whispers secrets I cannot name\nEvery sigh holds a story\nEvery tear hides a question\nThe world smiles around me yet I feel apart\nAs if a storm passes through my chest unseen\nThere must be a reason for this sadness\nA thread that ties my heart to sorrow\nI search in memories and in fleeting moments\nFor the spark that dimmed and left me here\nYet even in this quiet ache\nThere is a strange comfort in knowing\nThat sadness is not random or cruel\nIt is a path carved only for me to walk"
+        },
+        {
+        "title": "Separation Feels Like Death",
+        "text": "Separation comes like a silent shadow\nIt steals the warmth from the heart\nDays move slowly and nights stretch endlessly\nAnd every breath reminds me of what is lost\nThe world continues yet I remain still\nEach memory a knife hidden in tenderness\nVoices fade into echoes that do not return\nAnd the eyes weep for what can never be\nSeparation is a quiet death\nIt does not end life but empties it\nThe heart beats yet feels hollow\nAnd love becomes a ghost walking beside me\nIn this pain I learn the weight of absence\nThe soul remembers what the body cannot hold\nAnd every heartbeat whispers your name\nWhile I live in a world where part of me has died"
+    },
+      {
+        "title": "Alive Against All Odds",
+        "text": "After losing you I was meant to die\nYet here I stand breathing in disbelief\nMy heart forgot how to live\nBut my body betrayed the ending\nEvery day feels like borrowed time\nEvery night questions my survival\nLife continues without your presence\nAnd that itself feels unreal\nI should have faded with your absence\nI should have vanished into silence\nThat I am still alive\nIs the greatest mystery of my existence"
+    },
+     {
+        "title": "Honor the Name of Love",
+        "text": "Protect the dignity of love\nFor love is a name so vast\nIt is called life\nAnd it is called death\nIt breathes in the heartbeat\nAnd fades in the final silence\nIt builds worlds within the soul\nAnd shatters them without mercy\nLove is not a word to misuse\nNor a promise to betray\nIt carries the weight of eternity\nAnd demands reverence in return\nHonor the name of love\nFor in its truth we live\nAnd in its loss\nWe learn how to die"
+        },
+         {
+        "title": "Even Flowers Cry",
+        "text": "Even flowers cry\nThey wither under the weight of sorrow\nHearts cry in silence\nAnd all lamps go out\nNight falls and the world becomes still\nEvery shadow deepens the emptiness\nWhispers are swallowed by the dark\nAnd silence wraps everything in its arms\nTears flow unseen\nMemories flicker and fade\nLoneliness sits like a heavy guest\nAnd even hope trembles in the quiet\nEven flowers cry\nAnd so do hearts\nYet life moves silently\nWhile darkness listens patiently"
+    },
+    {
+        "title": "Pray for Me",
+        "text": "Pray for me\nIf I love let me die\nIf I meet you\nAnd then must part let me die\nI hid petals inside my books\nLike prayers pressed between pages\nThey waited quietly with time\nHolding the color of forgotten days\nIf I gather those dried petals again\nIf they fall lifeless into my hands\nLet my breath leave me there\nFor love should not survive its own ruin\nPray for me\nFor my heart knows only extremes\nLove or death\nMeeting or ending\nIf love blooms let it take my life\nIf it fades let it take my life\nFor I was never made\nTo live without the truth of love"
+    },
+        ];
 
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('js-date').innerText = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-            document.getElementById('js-time').innerText = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+        function startClock() {
+            const update = () => {
+                const now = new Date();
+                document.getElementById('date-el').innerText = now.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+                document.getElementById('time-el').innerText = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+            };
+            setInterval(update, 1000);
+            update();
         }
 
-        function populate() {
+        function render() {
             const list = document.getElementById('poetry-list');
-            collection.forEach((p, i) => {
-                const el = document.createElement('div');
-                el.className = 'list-entry';
-                el.innerHTML = `
-                    <span class="entry-title">${p.title}</span>
-                    <span style="font-size: 10px; color: #ccc;">POEM ${i+1}</span>
+            library.forEach((item, i) => {
+                const div = document.createElement('div');
+                div.className = 'entry-item';
+                div.innerHTML = `
+                    <span class="entry-name">${item.title}</span>
+                    <span class="entry-meta">Digital Page ${i+1}</span>
                 `;
-                el.onclick = () => openReader(p);
-                list.appendChild(el);
+                div.onclick = () => openViewer(item);
+                list.appendChild(div);
             });
         }
 
-        function openReader(p) {
-            document.getElementById('view-title').innerText = p.title;
-            document.getElementById('view-body').innerText = p.text;
-            document.getElementById('poetry-reader').style.display = 'flex';
+        function openViewer(item) {
+            document.getElementById('view-title').innerText = item.title;
+            document.getElementById('view-body').innerText = item.text;
+            document.getElementById('poem-viewer').style.display = 'flex';
             document.body.style.overflow = 'hidden';
-            document.getElementById('poetry-reader').scrollTop = 0;
+            document.getElementById('poem-viewer').scrollTop = 0;
         }
 
-        function closeReader() {
-            document.getElementById('poetry-reader').style.display = 'none';
+        function closeViewer() {
+            document.getElementById('poem-viewer').style.display = 'none';
             document.body.style.overflow = 'auto';
         }
 
-        setInterval(updateClock, 1000);
-        updateClock();
-        populate();
+        startClock();
+        render();
     </script>
 </body>
-        </html>
+</html>
