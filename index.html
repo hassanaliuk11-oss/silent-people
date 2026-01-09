@@ -1,33 +1,43 @@
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Silent Hopes — Modern Centered Archive</title>
+    <title>Silent Hopes — Bold Inside Collection</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Plus+Jakarta+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #ffffff;
             --text-main: #1a1a1b;
             --text-grey: #70757a;
-            --accent-blue: #1a73e8;
             --font-ui: 'Plus Jakarta Sans', sans-serif;
             --font-body: 'Inter', sans-serif;
         }
 
+        /* Base Setup */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-weight: 400 !important;
-            font-style: normal !important;
-            text-align: center; /* Force everything to center */
+            text-align: center;
             -webkit-font-smoothing: antialiased;
         }
 
+        /* Outside font weight rule */
+        .outside-text {
+            font-weight: 400 !important;
+            font-style: normal !important;
+        }
+
+        /* Inside font weight rule */
+        .inside-text {
+            font-weight: 600 !important;
+            font-style: normal !important;
+        }
+
         body {
-            background-color: #fcfcfc;
+            background-color: #ffffff;
             color: var(--text-main);
             font-family: var(--font-body);
             display: flex;
@@ -35,275 +45,230 @@
             min-height: 100vh;
         }
 
-        .main-container {
-            background: var(--bg);
+        .container-main {
             width: 100%;
             max-width: 600px;
-            margin: 0 auto;
             padding: 40px 20px;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Center items in flex column */
+            align-items: center;
         }
 
-        /* Top Bar */
-        .status-header {
-            width: 100%;
-            font-size: 14px;
+        .live-metadata {
+            font-size: 11px;
             color: var(--text-grey);
-            margin-bottom: 50px;
+            margin-bottom: 40px;
+            letter-spacing: 0.05em;
+            font-weight: 400;
+        }
+
+        header {
+            margin-bottom: 60px;
+            width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            align-items: center;
         }
 
-        /* Animated Title */
-        .dynamic-title {
+        .brand-title {
             font-family: var(--font-ui);
-            font-size: 26px;
-            letter-spacing: -0.01em;
-            margin-bottom: 10px;
-            animation: colorFlow 8s infinite alternate;
+            font-size: 44px;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 12px;
+            font-weight: 400;
+            animation: colorAnimation 8s infinite alternate;
         }
 
-        @keyframes colorFlow {
+        /* Colorful Moti Patti */
+        .accent-bar {
+            width: 70px;
+            height: 6px;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853);
+            background-size: 200% 200%;
+            animation: moveGradient 4s ease infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes colorAnimation {
             0% { color: #4285F4; }
             33% { color: #EA4335; }
             66% { color: #FBBC05; }
             100% { color: #34A853; }
         }
 
-        .author-line {
-            font-size: 14px;
-            color: var(--text-grey);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 60px;
+        @keyframes moveGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* Centered List */
-        .list-wrap {
+        .scrollable-list {
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
             margin-bottom: 60px;
         }
 
-        .entry-item {
-            padding: 18px 0;
-            border-bottom: 1px solid #f1f3f4;
+        .list-entry {
+            padding: 24px 0;
+            border-bottom: 1px solid #f5f5f5;
             cursor: pointer;
-            display: block;
-            transition: opacity 0.2s;
-        }
-
-        .entry-item:hover {
-            opacity: 0.5;
+            font-weight: 400;
         }
 
         .entry-title {
             font-family: var(--font-ui);
-            font-size: 18px;
+            font-size: 16px;
             display: block;
-            margin-bottom: 4px;
-            animation: colorFlow 10s infinite alternate;
-        }
-
-        .entry-sub {
-            font-size: 14px;
-            color: #bdc1c6;
-            display: block;
-        }
-
-        /* Footer Link */
-        .external-link {
-            font-size: 13px;
-            color: var(--accent-blue);
-            text-decoration: none;
-            padding: 12px 25px;
-            border-radius: 50px;
-            border: 1px solid #e8f0fe;
-            background: #f8fbff;
-            display: inline-block;
-            transition: 0.3s;
-        }
-
-        .external-link:hover {
-            background: #e8f0fe;
-            transform: translateY(-2px);
+            margin-bottom: 6px;
+            animation: colorAnimation 12s infinite alternate;
         }
 
         /* Reader View */
-        #reader-overlay {
+        #poetry-reader {
             position: fixed;
             inset: 0;
-            background: var(--bg);
+            background: #ffffff;
             z-index: 1000;
             display: none;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
+            justify-content: flex-start;
+            padding: 60px 25px;
+            overflow-y: auto;
         }
 
-        .reader-title {
+        .reader-header {
             font-family: var(--font-ui);
-            font-size: 20px;
-            margin-bottom: 30px;
-            animation: colorFlow 5s infinite alternate;
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 600 !important;
+            animation: colorAnimation 6s infinite alternate;
         }
 
-        .reader-text {
+        .reader-content {
             font-size: 18px;
             line-height: 1.8;
-            color: #3c4043;
+            color: #1a1a1b;
             white-space: pre-wrap;
             max-width: 500px;
+            font-weight: 600 !important; /* Bold inside */
         }
 
-        .close-action {
+        .close-trigger {
             margin-top: 50px;
-            font-size: 12px;
+            padding-bottom: 40px;
+            font-size: 11px;
             color: var(--text-grey);
             cursor: pointer;
             text-decoration: underline;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 400 !important;
         }
 
-        /* Mobile Scale (Title 12px, Body 10px) */
+        /* Mobile Adjustments */
         @media (max-width: 640px) {
-            .dynamic-title { font-size: 14px; }
-            .entry-title { font-size: 12px; }
-            .entry-sub, .author-line, .status-header, .external-link, .close-action { font-size: 10px; }
+            .brand-title { font-size: 32px; }
+            .entry-title { font-size: 12px; } 
             
-            .reader-title { font-size: 12px; }
-            .reader-text { font-size: 10px; }
+            /* Requirements: Inside sizes 12px and Bold */
+            .reader-header { font-size: 16px; }
+            .reader-content { font-size: 12px !important; } 
+            
+            .list-entry, .live-metadata, .close-trigger { font-size: 10px; }
 
-            .main-container { padding: 40px 15px; }
+            .accent-bar { width: 50px; height: 5px; }
+            .container-main { padding: 30px 15px; }
         }
     </style>
 </head>
-<body>
+<body class="outside-text">
 
-    <div class="main-container">
-        <div class="status-header">
-            <div id="live-date"></div>
-            <div id="live-time"></div>
+    <div class="container-main">
+        <div class="live-metadata">
+            <span id="js-date"></span> &nbsp; | &nbsp; <span id="js-time"></span>
         </div>
 
         <header>
-            <h1 class="dynamic-title">Silent Hopes</h1>
-            <p class="author-line">Archive by Hassan Jatoi</p>
+            <h1 class="brand-title">Silent Hopes</h1>
+            <div class="accent-bar"></div>
+            <p style="font-size: 10px; letter-spacing: 0.3em; color: var(--text-grey);">BY HASSAN JATOI</p>
         </header>
 
-        <div class="list-wrap" id="items-grid">
-            <!-- Poems here -->
+        <div class="scrollable-list" id="poetry-list">
+            <!-- List Injected -->
         </div>
 
-        <div style="margin-top: auto; padding-top: 40px;">
-            <a href="https://hassanalipoetry.vercel.app/" class="external-link" target="_blank">
-                Explore Full Collection
+        <div style="margin-top: auto; padding-bottom: 40px;">
+            <a href="https://hassanalipoetry.vercel.app/" style="font-size: 12px; color: #1a73e8; text-decoration: none; padding: 12px 30px; border-radius: 50px; border: 1px solid #e8f0fe; background: #f8fbff; display: inline-block;">
+                More Poetry
             </a>
-            <p style="font-size: 9px; color: #bdc1c6; margin-top: 30px; letter-spacing: 0.2em;">
-                MMXXVI &bull; DIGITAL EDITION
-            </p>
         </div>
     </div>
 
-    <!-- Page Viewer -->
-    <div id="reader-overlay">
-        <h2 id="r-title" class="reader-title"></h2>
-        <div id="r-text" class="reader-text"></div>
-        <div class="close-action" onclick="closeReader()">Wapis Chalein</div>
+    <!-- Reader Mode Overlay -->
+    <div id="poetry-reader" class="inside-text">
+        <h2 id="view-title" class="reader-header"></h2>
+        <!-- Colorful Patti Inside -->
+        <div class="accent-bar"></div>
+        <div id="view-body" class="reader-content"></div>
+        <div class="close-trigger" onclick="closeReader()">Wapis Chalein</div>
     </div>
 
-    <script> 
-        const poetryData = [
-            { title: "Broken Echoes", icon: 'rose', preview: "Some sounds never leave...", text: "Some words are never forgotten\nTheir echoes just grow faint with time\nScreaming forever in a corner of the heart" },
-            { title: "Faded Portraits", icon: 'heart', preview: "Time erases faces...", text: "Time may erase the features of a face\nBut it cannot rub away the scars\nLeft by someone upon the very soul" },
-            { title: "The Weight of Dust", icon: 'bird', preview: "Memories are just dust...", text: "Memories are like fine dust particles\nThe more you try to sweep them away\nThe more they sting and burn the eyes" },
-            { title: "Midnight Whispers", icon: 'rose', preview: "Night speaks in secrets...", text: "There is a strange noise in the midnight silence\nOnly those who have nothing left to say\nCan truly hear what the darkness whispers" },
-            { title: "Cold Hearth", icon: 'heart', preview: "The fire went out long ago...", text: "There is no warmth left in this place now\nWhere once a festival of emotions lived\nOnly cold stones remain where fire used to be" },
-            { title: "Unspoken Goodbyes", icon: 'bird', preview: "Not every exit needs a door...", text: "The most painful goodbye of all\nIs the one that was never actually spoken\nA departure without a single word" },
-            { title: "The Moons Scar", icon: 'rose', preview: "Even light has wounds...", text: "The moon is lonely and covered in scars\nIf even the heavens carry such marks\nThen what hope is there for a simple human" },
-            { title: "Paper Boats", icon: 'heart', preview: "Drowning in shallow water...", text: "The paper boats of a distant childhood\nHave finally sunk beneath the waves\nOf a deep and dark ocean of memories" },
-            { title: "Frozen Tears", icon: 'bird', preview: "Pain that doesn't flow...", text: "The heaviest tears are the ones\nThat refuse to fall from the eyes\nStaying inside to turn the heart into ice" },
-            { title: "Shadow Play", icon: 'rose', preview: "The sun left me behind...", text: "The darkness is not my enemy at all\nIt is simply the only home\nWhere my shadow feels safe enough to rest" },
-            { title: "Shattered Compass", icon: 'heart', preview: "Lost in my own heart...", text: "Every path and road has been found\nYet the desire to actually go anywhere\nHas vanished like mist in the morning" },
-            { title: "The Last Leaf", icon: 'bird', preview: "Autumn in the soul...", text: "My existence is like that final leaf\nWho made peace with the wind\nLong before it actually touched the ground" },
-            { title: "Bitter Honey", icon: 'rose', preview: "Love that turned sour...", text: "When love transforms into a poison\nEven the thought of death\nBegins to look like a beautiful escape" },
-            { title: "Hollow Ribs", icon: 'heart', preview: "An empty cage...", text: "This chest is now nothing but a cage\nWhere the bird known as a heartbeat\nHas forgotten how to sing or fly" },
-            { title: "Invisible Ink", icon: 'bird', preview: "Letters never read...", text: "I wrote my pain upon the passing winds\nKnowing well that the ink is invisible\nAnd the message will never reach your hands" },
-            { title: "Silent Thunder", icon: 'rose', preview: "A storm inside...", text: "There is a hurricane trapped inside me\nYet on the outside I remain as still\nAs a graveyard in the middle of the night" },
-            { title: "Withered Petals", icon: 'heart', preview: "Beauty in decay...", text: "Even withered flowers hold a secret story\nThey too once bloomed for someone\nThey too once knew what it meant to be loved" },
-            { title: "Forgotten Keys", icon: 'bird', preview: "Doors that won't open...", text: "What is the point of unlocking doors\nWhen there is no one left behind them\nWaiting to welcome you home" },
-            { title: "Stolen Sunlight", icon: 'rose', preview: "Living in the eclipse...", text: "The sun that was written in my fate\nDecided to set before it could even rise\nLeaving me in a permanent twilight" },
-            { title: "The Void Within", icon: 'heart', preview: "Nothingness is heavy...", text: "Carrying the weight of absolute emptiness\nIs the most difficult task in this world\nA burden that no one else can see" },
-            { title: "Salt and Wounds", icon: 'bird', preview: "Reminders of life...", text: "Stop insisting that every wound must heal\nScars are the only proof we have left\nThat we actually survived the battle" },
-            { title: "Dusty Mirrors", icon: 'rose', preview: "Stranger in the glass...", text: "The person staring back from the mirror\nIs someone I no longer recognize\nA stranger wearing my own tired skin" },
-            { title: "Crumpled Dreams", icon: 'heart', preview: "Discarded hopes...", text: "I dreamt a thousand different lives\nBut sleep betrayed me halfway through\nLeaving me awake in a world I did not choose" },
-            { title: "The Oceans Sigh", icon: 'bird', preview: "Tides of sorrow...", text: "My sobs are hidden in the crashing waves\nTraveling miles across the dark water\nOnly to die silently upon the shore" },
-            { title: "Buried Voices", icon: 'rose', preview: "The soil of silence...", text: "I have buried all my complaints deep\nNow only trees of silence grow there\nWith roots wrapped around my bones" },
-            { title: "Ghost Limbs", icon: 'heart', preview: "Feeling what is gone...", tt: "Long after you have walked away\nMy soul still feels the phantom pain\nOf your hand resting in mine" },
-            { title: "The Alchemist", icon: 'bird', preview: "Turning pain to poetry...", text: "I turned my tears into ink\nAnd my deepest sorrows into lines of verse\nMaking art out of everything that broke me" },
-            { title: "Lonely Stars", icon: 'rose', preview: "Lights in the abyss...", text: "Why are the stars so far away\nPerhaps because they cannot bear\nTo look closely at the grief of the world" },
-            { title: "Waiting Room", icon: 'heart', preview: "Life on hold...", text: "I am standing at that specific corner\nFrom which no traveler ever returns\nWaiting for a sign that will never come" },
-            { title: "The Glass Heart", icon: 'bird', preview: "Transparent and fragile...", text: "My heart was made of transparent glass\nBut the world mistook it for a stone\nAnd decided to test its strength with fire" },
-            { title: "Flickering Lamp", icon: 'rose', preview: "The end of hope...", text: "The flame of hope is finally dying out\nThe darkness is no longer a stranger\nIt is becoming a part of who I am" },
-            { title: "Stained Glass", icon: 'heart', preview: "Broken colors...", text: "The colors of my life have bled together\nLeaving behind only shades of grey\nAnd the memory of what it felt like to glow" },
-            { title: "The Weaver", icon: 'bird', preview: "Threads of fate...", text: "I tried so hard to weave us together\nBut the threads of destiny were too thin\nAnd snapped under the weight of reality" },
-            { title: "Desert Rain", icon: 'rose', preview: "Thirst of the soul...", text: "My soul is a vast and empty desert\nWhere the rain of your memory\nHas forgotten how to fall" },
-            { title: "Iron Chains", icon: 'heart', preview: "Bound by the past...", text: "The chains are invisible to the eye\nBut their weight is so heavy\nThat I have forgotten how to walk freely" },
-            { title: "The Last Breath", icon: 'bird', preview: "Leaving the world...", text: "In my final breath I spoke your name\nBut the room was empty and cold\nAnd you were not there to hear it" },
-            { title: "Borrowed Time", icon: 'rose', preview: "Living on credit...", text: "Life is nothing but a borrowed breath\nA debt that must be paid back daily\nUntil there is nothing left to give" },
-            { title: "Wounded Skies", icon: 'heart', preview: "Bleeding sunsets...", text: "The red hue of the setting sun\nIs nothing but a reflection\nOf the wounds bleeding in my chest" },
-            { title: "Old Shoes", icon: 'bird', preview: "Tired of walking...", text: "The roads never truly come to an end\nIt is the traveler who loses the strength\nAnd decides to lie down in the dust" },
-            { title: "The Unwritten", icon: 'rose', preview: "Stories left untold...", text: "The most beautiful story I ever knew\nWas the one that never got started\nThe one that stayed forever in the ink" },
-            { title: "Drowning Fire", icon: 'heart', preview: "Extinguishing passion...", text: "Fire does not fear the water\nIt fears the silence that comes after\nWhen the light has been swallowed whole" },
-            { title: "Broken Strings", icon: 'bird', preview: "No more music...", text: "The instrument remains the same\nBut the music has turned into a lament\nThat no one wants to listen to" },
-            { title: "The Lighthouse", icon: 'rose', preview: "Guiding nobody...", text: "I am like a lighthouse on a dead coast\nBurning myself away to show the path\nTo ships that will never arrive" },
-            { title: "Ashes of Love", icon: 'heart', preview: "What remains...", text: "The love has turned into cold ash\nNow only the memories remain\nFloating aimlessly in the winter wind" },
-            { title: "The Empty Chair", icon: 'bird', preview: "Absence is heavy...", text: "Everything in the room is in its place\nExcept for your presence\nWhich was the only thing that mattered" },
-            { title: "Wandering Soul", icon: 'rose', preview: "No home to find...", text: "I am a stranger in my own house\nEvery wall feels like a prison\nAnd every door leads back to the start" },
-            { title: "The Scarred Sun", icon: 'heart', preview: "Morning without warmth...", text: "The sun rises every single day\nBut the internal cold I carry\nRefuses to melt under its light" },
-            { title: "Quiet Surrender", icon: 'bird', preview: "Giving up the fight...", text: "I have made peace with my life\nWhatever happens now happens\nI have lost the will to complain" },
-            { title: "Echoing Halls", icon: 'rose', preview: "Loneliness in space...", text: "The heart is a vast and empty palace\nWhere silence is the only king\nAnd loneliness is the only guest" },
-            { title: "Final Chapter", icon: 'heart', preview: "Closing the book...", text: "The story has finally reached its end\nThere are no more words to write\nJust blank pages and a dry pen" }
-        ];
+    <script>
+        const collection = [
+            { 
+                title: "The Paper Boat", 
+                text: "The paper boat, crafted with love so pure,\nFloated on waves where dreams endure.\n\nSoft whispers of the wind held it tight,\nTears of the eyes hid secrets from sight.\n\nEvery ripple told tales of the past,\nEvery shadow embraced sorrows that last.\n\nUnder moonlit nights, this tiny craft swayed,\nMemories gleamed like stars where it laid.\n\nAlone it drifted through the river of time,\nAdorned with leaves of love, so sublime.\n\nThe paper boat lives on in echoes of the heart,\nMoments, scents, and the bonds of love, never to part." 
+            },
+            { 
+                title: "The Journey of Solitude", 
+                text: "Memories scatter in the lonely moonlit night,\nSilent cries of the heart take their flight.\n\nThose moments of love once shared so true,\nNow wander in dreams, fading from view.\n\nFaces linger upon the walls of my mind,\nYet the traces of laughter are nowhere to find.\n\nEvery tear held the heart in its sway,\nBut no soul appeared to light the way.\n\nShadows of memories stretch far and wide,\nEmpty are the pages where my hopes used to hide.\n\nIn the darkness of parting, a glimmer remains,\nYet solitude steals all the warmth, leaving pains.\n\nThe voice of this heart is lost in the hush,\nAnd love’s world now lingers only in dreams’ blush." 
+            },
+         {
+    title: "Whispers of the Forgotten",
+    text: "The wind carries whispers of a love long gone,\nEchoes of laughter now fade with the dawn.\n\nShadows of the past haunt the empty street,\nEvery corner holds memories bittersweet.\n\nEyes search the horizon for a familiar face,\nBut all that's left is a void in this space.\n\nTears fall silently like rain on cold stone,\nHeartbeats tremble, aching alone.\n\nPromises once made drift like fragile leaves,\nLost in the currents, no one believes.\n\nTime heals nothing, yet it moves on so fast,\nLeaving remnants of joy buried in the past.\n\nThe soul whispers secrets the world cannot hear,\nAnd love’s gentle flame flickers in fear."
+  }
+ ];
 
-        function clock() {
-    const now = new Date();
-            document.getElementById('live-date').innerText = now.toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'long' });
-            document.getElementById('live-time').innerText = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('js-date').innerText = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+            document.getElementById('js-time').innerText = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
         }
 
-        function build() {
-            const grid = document.getElementById('items-grid');
-            data.forEach((item, i) => {
+        function populate() {
+            const list = document.getElementById('poetry-list');
+            collection.forEach((p, i) => {
                 const el = document.createElement('div');
-                el.className = 'entry-item';
+                el.className = 'list-entry';
                 el.innerHTML = `
-                    <span class="entry-title">${item.title}</span>
-                    <span class="entry-sub">Volume I — Entry 0${i+1}</span>
+                    <span class="entry-title">${p.title}</span>
+                    <span style="font-size: 10px; color: #ccc;">POEM ${i+1}</span>
                 `;
-                el.onclick = () => openReader(item);
-                grid.appendChild(el);
+                el.onclick = () => openReader(p);
+                list.appendChild(el);
             });
         }
 
-        function openReader(item) {
-            document.getElementById('r-title').innerText = item.title;
-            document.getElementById('r-text').innerText = item.text;
-            document.getElementById('reader-overlay').style.display = 'flex';
+        function openReader(p) {
+            document.getElementById('view-title').innerText = p.title;
+            document.getElementById('view-body').innerText = p.text;
+            document.getElementById('poetry-reader').style.display = 'flex';
             document.body.style.overflow = 'hidden';
+            document.getElementById('poetry-reader').scrollTop = 0;
         }
 
         function closeReader() {
-            document.getElementById('reader-overlay').style.display = 'none';
+            document.getElementById('poetry-reader').style.display = 'none';
             document.body.style.overflow = 'auto';
         }
 
-        setInterval(clock, 1000);
-        clock();
-        build();
+        setInterval(updateClock, 1000);
+        updateClock();
+        populate();
     </script>
 </body>
-    </html>    
+        </html>
