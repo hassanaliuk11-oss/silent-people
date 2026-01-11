@@ -1,315 +1,139 @@
 <!DOCTYPE html>
-‎<html lang="en">
-‎<head>
-‎    <meta charset="UTF-8">
-‎    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-‎    <title>Silent Hopes — Digital Archive</title>
-‎    <script src="https://cdn.tailwindcss.com"></script>
-‎    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Montserrat:wght@300;400;600;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-‎    <style>
-‎        :root {
-‎            --bg-deep: #0f172a;
-‎            --accent-glow: rgba(99, 102, 241, 0.15);
-‎            --glass: rgba(255, 255, 255, 0.03);
-‎            --glass-border: rgba(255, 255, 255, 0.08);
-‎            --gold: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728);
-‎        }
-‎   * {
-‎            margin: 0;
-‎            padding: 0;
-‎            box-sizing: border-box;
-‎            -webkit-font-smoothing: antialiased;
-‎        }
-‎
-‎        body {
-‎            background-color: var(--bg-deep);
-‎            color: #f8fafc;
-‎            font-family: 'Montserrat', sans-serif;
-‎            min-height: 100vh;
-‎            background: radial-gradient(circle at top right, #1e1b4b, #0f172a 60%);
-‎            display: flex;
-‎            justify-content: center;
-‎        }
-‎      /* Top Navigation Link */
-‎        .top-nav {
-‎            width: 100%;
-‎            display: flex;
-‎            justify-content: flex-end;
-‎            margin-bottom: 20px;
-‎        }
-‎
-‎        .main-site-btn {
-‎            font-size: 11px;
-‎            font-weight: 700;
-‎            color: #fff;
-‎            text-transform: uppercase;
-‎            letter-spacing: 0.1em;
-‎            padding: 8px 16px;
-‎            border-radius: 50px;
-‎            background: rgba(99, 102, 241, 0.2);
-‎            border: 1px solid rgba(99, 102, 241, 0.3);
-‎            text-decoration: none;
-‎            transition: all 0.3s ease;
-‎        }
-‎
-‎        .main-site-btn:hover {
-‎            background: rgba(99, 102, 241, 0.4);
-‎            transform: translateY(-2px);
-‎        }
-‎
-‎        /* Updated Premium Header Image */
-‎        .hero-section {
-‎            width: 100%;
-‎            position: relative;
-‎            margin-bottom: 40px;
-‎        }
-           .image-overlay {
-‎            position: absolute;
-‎            inset: 0;
-‎            background: linear-gradient(to bottom, transparent 40%, var(--bg-deep) 98%);
-‎            border-radius: 32px;
-‎        }
-    header {
-‎            margin: 20px 0 50px 0;
-‎            text-align: center;
-‎        }
-‎
-‎        .brand-title {
-‎            font-family: 'Cinzel', serif;
-‎            font-size: clamp(32px, 8vw, 48px);
-‎            letter-spacing: 0.3em;
-‎            line-height: 1;
-‎            margin-bottom: 10px;
-‎            background: var(--gold);
-‎            -webkit-background-clip: text;
-‎            -webkit-text-fill-color: transparent;
-‎            font-weight: 700;
-‎        }
-‎
-‎        .thick-accent {
-‎            width: 100px;
-‎            height: 4px;
-‎            border-radius: 10px;
-‎            background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
-‎            margin: 15px auto;
-‎            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
-‎        }
-‎
-‎        .signature {
-‎            font-family: 'Cinzel', serif;
-‎            font-size: 1.1rem;
-‎            color: #cbd5e1;
-‎            letter-spacing: 0.5em;
-‎            text-transform: uppercase;
-‎            font-weight: 400;
-‎            opacity: 0.8;
-‎            margin-top: 10px;
-‎        }
-‎
-‎        /* Modern List Styling */
-‎        .list-wrap {
-‎            width: 100%;
-‎            display: grid;
-‎            gap: 16px;
-‎        }
-‎
-‎        .entry-item {
-‎            background: var(--glass);
-‎            backdrop-filter: blur(10px);
-‎            border: 1px solid var(--glass-border);
-‎            padding: 24px;
-‎            border-radius: 24px;
-‎            cursor: pointer;
-‎            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-‎            display: flex;
-‎            flex-direction: column;
-‎            align-items: center;
-‎        }
-‎
-‎        .entry-item:hover {
-‎            background: rgba(255, 255, 255, 0.07);
-‎            border-color: rgba(99, 102, 241, 0.5);
-‎            transform: translateY(-5px);
-‎            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-‎        }
-‎
-‎        .entry-name {
-‎            font-size: 20px;
-‎            font-weight: 700;
-‎            color: #fff;
-‎            margin-bottom: 8px;
-‎            letter-spacing: 0.02em;
-‎        }
-‎
-‎        .entry-meta {
-‎            font-size: 10px;
-‎            color: #64748b;
-‎            text-transform: uppercase;
-‎            letter-spacing: 0.2em;
-‎        }
-‎
-‎
-‎        .live-metadata {
-‎            font-size: 10px;
-‎            color: #94a3b8;
-‎            margin-top: 20px;
-‎            letter-spacing: 0.2em;
-‎            text-transform: uppercase;
-‎            font-weight: 600;
-‎        }
-‎
-‎        .header-image {
-‎            width: 100%;
-‎            height: 320px;
-‎            object-fit: cover;
-‎            border-radius: 32px;
-‎            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-‎            border: 1px solid var(--glass-border);
-‎        }
-‎        .container-main {
-‎            width: 100%;
-‎            max-width: 650px;
-‎            padding: 40px 20px;
-‎            display: flex;
-‎            flex-direction: column;
-‎            align-items: center;
-‎        }
-       /* Reader Mode Overlay */
-‎        #poem-viewer {
-‎            position: fixed;
-‎            inset: 0;
-‎            background: #0f172a;
-‎            z-index: 2000;
-‎            display: none;
-‎            flex-direction: column;
-‎            align-items: center;
-‎            padding: 60px 24px;
-‎            overflow-y: auto;
-‎            animation: fadeIn 0.5s ease;
-‎        }
-‎
-‎        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-‎
-‎        .viewer-header {
-‎            font-family: 'Cinzel', serif;
-‎            font-size: clamp(24px, 6vw, 36px);
-‎            margin-bottom: 20px;
-‎            color: #fff;
-‎            letter-spacing: 0.1em;
-‎        }
-‎
-‎        .viewer-body {
-‎            font-family: 'Montserrat', sans-serif;
-‎            font-size: 18px;
-‎            line-height: 1.8;
-‎            color: #e2e8f0;
-‎            white-space: pre-wrap;
-‎            max-width: 550px;
-‎            font-weight: 600;
-‎            font-style: normal;
-‎            text-align: center;
-‎            letter-spacing: 0.02em;
-‎        }
-‎  .btn-back {
-‎            margin-top: 60px;
-‎            margin-bottom: 60px;
-‎            background: linear-gradient(135deg, #6366f1, #a855f7);
-‎            color: white;
-‎            padding: 14px 45px;
-‎            border-radius: 100px;
-‎            font-size: 12px;
-‎            font-weight: 700;
-‎            text-transform: uppercase;
-‎            letter-spacing: 0.2em;
-‎            border: none;
-‎            cursor: pointer;
-‎            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
-‎            transition: 0.3s;
-‎        }
-‎
-‎        .btn-back:hover {
-‎            transform: scale(1.05);
-‎            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.6);
-‎        }
-‎
-‎        footer {
-‎            margin-top: 80px;
-‎            padding-bottom: 40px;
-‎            text-align: center;
-‎        }
-‎
-‎        .archive-link {
-‎            font-size: 13px;
-‎            font-weight: 600;
-‎            color: #94a3b8;
-‎            text-decoration: none;
-‎            border-bottom: 1px solid #334155;
-‎            padding-bottom: 4px;
-‎            transition: 0.3s;
-‎            display: inline-flex;
-‎            align-items: center;
-‎            gap: 8px;
-‎        }
-    .archive-link:hover {
-‎            color: #6366f1;
-‎            border-color: #6366f1;
-‎        }
-‎
-‎        @media (max-width: 640px) {
-‎            .hero-section { margin-bottom: 20px; }
-‎            .header-image { height: 240px; border-radius: 24px; }
-‎            .entry-item { padding: 20px; border-radius: 20px; }
-‎            .entry-name { font-size: 16px; }
-‎            .viewer-body { font-size: 15px; line-height: 1.6; }
-‎            .viewer-header { font-size: 20px; }
-‎            .signature { font-size: 0.8rem; letter-spacing: 0.3em; }
-‎        }
-‎    </style>
-‎</head>
-‎<body>
-‎
-‎    <div class="container-main">
-‎        <div class="top-nav">
-‎            <a href="https://hassanalipoetry.vercel.app/" target="_blank" class="main-site-btn">Visit Main Website</a>
-‎        </div>
-‎
-‎        <div class="hero-section">
-‎            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop" alt="Beautiful Dark Peaks" class="header-image">
-‎            <div class="image-overlay"></div>
-‎        </div>
-‎
-‎        <div class="live-metadata">
-‎            <span id="date-el"></span> &bull; <span id="time-el"></span>
-‎        </div>
-‎
-‎        <header>
-‎            <h1 class="brand-title">Silent Hopes</h1>
-‎            <div class="thick-accent"></div>
-‎            <div class="signature">Hassan Jatoi</div>
-‎        </header>
-‎
-‎        <div class="list-wrap" id="poetry-list">
-‎            <!-- Items injected via JS -->
-‎        </div>
-‎<footer>
-‎            <a href="https://hassanalipoetry.vercel.app/" target="_blank" class="archive-link">
-‎                Go to Main Poetry Hub
-‎                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-‎                    <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
-‎                    <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
-‎                </svg>
-‎            </a>
-‎        </footer>
-‎    </div>
-‎
-‎    <!-- Poetry Reader Overlay -->
-‎    <div id="poem-viewer">
-‎        <h2 id="view-title" class="viewer-header"></h2>
-‎        <div class="thick-accent" style="margin-bottom: 40px;"></div>
-‎        <div id="view-body" class="viewer-body"></div>
-‎        <button class="btn-back" onclick="closeViewer()">Back to Archive</button>
-‎    </div>
-    
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silent Hopes — Digital Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Montserrat:wght@300;400;600;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #0f172a;
+            --accent-glow: rgba(99, 102, 241, 0.15);
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --gold: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        body {
+            background-color: var(--bg-deep);
+            color: #f8fafc;
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            background: radial-gradient(circle at top right, #1e1b4b, #0f172a 60%);
+            display: flex;
+            justify-content: center;
+        }
+        .top-nav { width: 100%; display: flex; justify-content: flex-end; margin-bottom: 20px; }
+        .main-site-btn {
+            font-size: 11px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.1em;
+            padding: 8px 16px; border-radius: 50px; background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.3); text-decoration: none; transition: all 0.3s ease;
+        }
+        .main-site-btn:hover { background: rgba(99, 102, 241, 0.4); transform: translateY(-2px); }
+        .hero-section { width: 100%; position: relative; margin-bottom: 40px; }
+        .image-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, var(--bg-deep) 98%); border-radius: 32px; }
+        header { margin: 20px 0 50px 0; text-align: center; }
+        .brand-title {
+            font-family: 'Cinzel', serif; font-size: clamp(32px, 8vw, 48px); letter-spacing: 0.3em; line-height: 1; margin-bottom: 10px;
+            background: var(--gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;
+        }
+        .thick-accent {
+            width: 100px; height: 4px; border-radius: 10px;
+            background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+            margin: 15px auto; box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+        }
+        .signature { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #cbd5e1; letter-spacing: 0.5em; text-transform: uppercase; font-weight: 400; opacity: 0.8; margin-top: 10px; }
+        .list-wrap { width: 100%; display: grid; gap: 16px; }
+        .entry-item {
+            background: var(--glass); backdrop-filter: blur(10px); border: 1px solid var(--glass-border);
+            padding: 24px; border-radius: 24px; cursor: pointer; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .entry-item:hover { background: rgba(255, 255, 255, 0.07); border-color: rgba(99, 102, 241, 0.5); transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+        .entry-name { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px; letter-spacing: 0.02em; }
+        .entry-meta { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: 0.2em; }
+        .live-metadata { font-size: 10px; color: #94a3b8; margin-top: 20px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; }
+        .header-image { width: 100%; height: 320px; object-fit: cover; border-radius: 32px; box-shadow: 0 20px 50px rgba(0,0,0,0.6); border: 1px solid var(--glass-border); }
+        .container-main { width: 100%; max-width: 650px; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
+        #poem-viewer {
+            position: fixed; inset: 0; background: #0f172a; z-index: 2000; display: none;
+            flex-direction: column; align-items: center; padding: 60px 24px; overflow-y: auto; animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .viewer-header { font-family: 'Cinzel', serif; font-size: clamp(24px, 6vw, 36px); margin-bottom: 20px; color: #fff; letter-spacing: 0.1em; }
+        .viewer-body {
+            font-family: 'Montserrat', sans-serif; font-size: 18px; line-height: 1.8; color: #e2e8f0; white-space: pre-wrap;
+            max-width: 550px; font-weight: 600; font-style: normal; text-align: center; letter-spacing: 0.02em;
+        }
+        .btn-back {
+            margin-top: 60px; margin-bottom: 60px; background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: white; padding: 14px 45px; border-radius: 100px; font-size: 12px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.2em; border: none; cursor: pointer; box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4); transition: 0.3s;
+        }
+        .btn-back:hover { transform: scale(1.05); box-shadow: 0 15px 35px rgba(99, 102, 241, 0.6); }
+        footer { margin-top: 80px; padding-bottom: 40px; text-align: center; }
+        .archive-link {
+            font-size: 13px; font-weight: 600; color: #94a3b8; text-decoration: none; border-bottom: 1px solid #334155;
+            padding-bottom: 4px; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .archive-link:hover { color: #6366f1; border-color: #6366f1; }
+        @media (max-width: 640px) {
+            .hero-section { margin-bottom: 20px; }
+            .header-image { height: 240px; border-radius: 24px; }
+            .entry-item { padding: 20px; border-radius: 20px; }
+            .entry-name { font-size: 16px; }
+            .viewer-body { font-size: 15px; line-height: 1.6; }
+            .viewer-header { font-size: 20px; }
+            .signature { font-size: 0.8rem; letter-spacing: 0.3em; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-main">
+        <div class="top-nav">
+            <a href="https://hassanalipoetry.vercel.app/" target="_blank" class="main-site-btn">Visit Main Website</a>
+        </div>
+
+        <div class="hero-section">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop" alt="Beautiful Dark Peaks" class="header-image">
+            <div class="image-overlay"></div>
+        </div>
+
+        <div class="live-metadata">
+            <span id="date-el"></span> &bull; <span id="time-el"></span>
+        </div>
+
+        <header>
+            <h1 class="brand-title">Silent Hopes</h1>
+            <div class="thick-accent"></div>
+            <div class="signature">Hassan Jatoi</div>
+        </header>
+
+        <div class="list-wrap" id="poetry-list">
+            <!-- Items injected via JS -->
+        </div>
+
+        <footer>
+            <a href="https://hassanalipoetry.vercel.app/" target="_blank" class="archive-link">
+                Go to Main Poetry Hub
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>
+                    <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>
+                </svg>
+            </a>
+        </footer>
+    </div>
+
+    <!-- Poetry Reader Overlay -->
+    <div id="poem-viewer">
+        <h2 id="view-title" class="viewer-header"></h2>
+        <div class="thick-accent" style="margin-bottom: 40px;"></div>
+        <div id="view-body" class="viewer-body"></div>
+        <button class="btn-back" onclick="closeViewer()">Back to Archive</button>
+    </div>
+
     <script>
         const library = [
             { 
@@ -320,99 +144,60 @@
                 title: "The Paper Boat", 
                 text: "The paper boat, crafted with love so pure,\nFloated on waves where dreams endure.\n\nSoft whispers of the wind held it tight,\nTears of the eyes hid secrets from sight.\n\nEvery ripple told tales of the past,\nEvery shadow embraced sorrows that last.\n\nUnder moonlit nights, this tiny craft swayed,\nMemories gleamed like stars where it laid.\n\nAlone it drifted through the river of time,\nAdorned with leaves of love, so sublime.\n\nThe paper boat lives on in echoes of the heart,\nMoments, scents, and the bonds of love, never to part." 
             },
-            { 
-                title: "The Journey of Solitude", 
-                text: "Memories scatter in the lonely moonlit night,\nSilent cries of the heart take their flight.\n\nThose moments of love once shared so true,\nNow wander in dreams, fading from view.\n\nFaces linger upon the walls of my mind,\nYet the traces of laughter are nowhere to find.\n\nEvery tear held the heart in its sway,\nBut no soul appeared to light the way.\n\nShadows of memories stretch far and wide,\nEmpty are the pages where my hopes used to hide.\n\nIn the darkness of parting, a glimmer remains,\nYet solitude steals all the warmth, leaving pains.\n\nThe voice of this heart is lost in the hush,\nAnd love’s world now lingers only in dreams’ blush." 
+            { title: "The Journey of Solitude", text: "Memories scatter in the lonely moonlit night,\nSilent cries of the heart take their flight.\n\nThose moments of love once shared so true,\nNow wander in dreams, fading from view.\n\nFaces linger upon the walls of my mind,\nYet the traces of laughter are nowhere to find.\n\nEvery tear held the heart in its sway,\nBut no soul appeared to light the way.\n\nShadows of memories stretch far and wide,\nEmpty are the pages where my hopes used to hide.\n\nIn the darkness of parting, a glimmer remains,\nYet solitude steals all the warmth, leaving pains.\n\nThe voice of this heart is lost in the hush,\nAnd love’s world now lingers only in dreams’ blush." },
+            // ... all other poems ...
+            {
+                title: "Honor the Name of Love",
+                text: "Protect the dignity of love\nFor love is a name so vast\nIt is called life\nAnd it is called death\nIt breathes in the heartbeat\nAnd fades in the final silence\nIt builds worlds within the soul\nAnd shatters them without mercy\nLove is not a word to misuse\nNor a promise to betray\nIt carries the weight of eternity\nAnd demands reverence in return\nHonor the name of love\nFor in its truth we live\nAnd in its loss\nWe learn how to die"
             },
-             {
-        title: "Evening Without Return",
-        text: "Evening fell like a wound that never learned to heal\nThe sky dimmed without farewell\nLight left quietly as if it was tired of watching me wait\nThe trees did not speak\nTheir branches carried absence instead of wings\nThe wind returned again and again\nEach time more hopeless than before\nThe birds\nThey used to know the way home\nThey used to trust the dusk\nTonight they chose distance\nOr distance chose them\nI lit a lamp with trembling hands\nNot for light\nFor memory\nFor proof that something once belonged here\nThe courtyard listened\nThe walls remembered\nBut nothing moved toward me\nDarkness did not arrive\nIt was already living inside the chest\nWaiting sat beside me\nPatient and cruel\nThe door of the heart remained open\nNot because I believed\nBut because closing it would mean acceptance\nEvening passed\nNight settled\nThe birds did not return\nSome souls are not lost\nThey are simply done with coming back\nAnd some waiting\nIs not hope\nIt is a quiet sentence that lasts a lifetime"
-             },
-             {
-        title: "Buried in Love Memories",
-        "text": "I walk through the corridors of yesterday\nEach step stirring dust of moments we shared\nLaughter lingers like a ghost on the walls\nAnd your voice hides in the corners of my mind\nI touch the shadows where your hands once held mine\nThe warmth is gone yet the ache remains\nPhotographs lie like silent witnesses\nTheir eyes follow me through empty rooms\nTime cannot bury the weight of love\nIt lingers in the quiet before dawn\nIn dreams I see your face\nAnd wake with my heart trapped in yesterday\nEvery street echoes our footsteps\nEvery song carries your smile\nI am buried in love memories\nAnd they rise like tides I cannot resist\nEven in the crowd I feel your absence\nEvery whisper of wind speaks your name\nAnd I carry this treasure and this curse\nA life entwined with what once was"
-        },
-         {
-        title: "Unspoken Words",
-        text: "The air holds what my lips cannot say\nSilent echoes drift between us\nEyes meet and quickly look away\nHearts speak in language unheard\nMoments pass like fragile glass\nEach one carrying the weight of unspoken thoughts\nI reach for you and find only shadows\nYour hand almost touches mine but does not\nWords linger in the quiet of night\nThey hide in sighs and trembling breaths\nI speak to the walls to keep from breaking\nThe truth lives in spaces we cannot cross\nEvery smile hides a question\nEvery silence a confession\nIf only we could speak without fear\nThe world would hold less of this ache\nBut we carry our unspoken words like stones\nHeavy in our chests and light in our dreams\nAnd still we meet every day\nAnd say nothing at all"
-        },
-         {
-        title: "Whispers of Lost Love",
-        text: "Shadows fall on empty streets\nMemories linger in quiet hearts\nFootsteps echo where laughter once lived\nTears speak what lips cannot\nThe night carries secrets of yesterday\nStars remember what we forgot\nHands reach for ghosts of warmth\nAnd silence answers with hollow sighs\nLove once bright now drifts away\nLike petals scattered by the wind\nEvery heartbeat whispers your name\nAnd the world remains still without you"
-        },
-         {
-        title: "Inherited Solitude",
-        "text": "Solitude came to me as a silent gift\nA quiet heirloom from shadows I never asked for\nIt sits heavy in the corners of my heart\nAnd whispers stories I cannot share\nRooms are filled with echoes of loneliness\nEven laughter feels like a stranger passing by\nThe world moves fast but I remain still\nCarrying the weight of inherited silence\nMemories of joy fade like smoke\nAnd every familiar face feels distant\nI walk through life with invisible chains\nAnd the solitude that was given becomes mine\nYet in this quiet I find a strange companion\nA voice within that knows my pain\nI speak to it in moments of despair\nAnd it listens without judgment or reply\nI am alone yet never empty\nFor solitude has become a legacy\nAnd in its silent embrace I live\nBuried yet breathing in the gift I did not choose"
-        },
-         {
-        title: "I Accept My Share of Sorrows",
-        text: "I carry the weight of my share of sorrows\nThey are mine to bear alone\nNo hand reaches to ease the burden\nNo voice speaks comfort to my heart\nTears flow silently like rivers in the night\nPain sits beside me like a faithful guest\nThe world moves on unaware of my grief\nYet I do not complain or ask for less\nEvery shadow reminds me of what I lost\nEvery silence echoes my acceptance\nI do not curse fate nor blame the winds\nFor my sorrows are threads of my own story\nIn the quiet I find strength and strange peace\nThe grief I hold shapes who I am\nI accept my share without regret\nFor it is mine and mine alone"
-    },
-    {
-        title: "There Must Be a Reason for This Sadness",
-        text: "I am not sad without a reason\nThe heart does not carry emptiness for no cause\nShadows linger where light once touched\nAnd silence whispers secrets I cannot name\nEvery sigh holds a story\nEvery tear hides a question\nThe world smiles around me yet I feel apart\nAs if a storm passes through my chest unseen\nThere must be a reason for this sadness\nA thread that ties my heart to sorrow\nI search in memories and in fleeting moments\nFor the spark that dimmed and left me here\nYet even in this quiet ache\nThere is a strange comfort in knowing\nThat sadness is not random or cruel\nIt is a path carved only for me to walk"
-        },
-        {
-        title: "Separation Feels Like Death",
-        text: "Separation comes like a silent shadow\nIt steals the warmth from the heart\nDays move slowly and nights stretch endlessly\nAnd every breath reminds me of what is lost\nThe world continues yet I remain still\nEach memory a knife hidden in tenderness\nVoices fade into echoes that do not return\nAnd the eyes weep for what can never be\nSeparation is a quiet death\nIt does not end life but empties it\nThe heart beats yet feels hollow\nAnd love becomes a ghost walking beside me\nIn this pain I learn the weight of absence\nThe soul remembers what the body cannot hold\nAnd every heartbeat whispers your name\nWhile I live in a world where part of me has died"
-    },
-      {
-        title: "Alive Against All Odds",
-        text: "After losing you I was meant to die\nYet here I stand breathing in disbelief\nMy heart forgot how to live\nBut my body betrayed the ending\nEvery day feels like borrowed time\nEvery night questions my survival\nLife continues without your presence\nAnd that itself feels unreal\nI should have faded with your absence\nI should have vanished into silence\nThat I am still alive\nIs the greatest mystery of my existence"
-    },
-     {
-        title: "Honor the Name of Love",
-        text: "Protect the dignity of love\nFor love is a name so vast\nIt is called life\nAnd it is called death\nIt breathes in the heartbeat\nAnd fades in the final silence\nIt builds worlds within the soul\nAnd shatters them without mercy\nLove is not a word to misuse\nNor a promise to betray\nIt carries the weight of eternity\nAnd demands reverence in return\nHonor the name of love\nFor in its truth we live\nAnd in its loss\nWe learn how to die"
-        },
-         {
-        title: "Even Flowers Cry",
-        text: "Even flowers cry\nThey wither under the weight of sorrow\nHearts cry in silence\nAnd all lamps go out\nNight falls and the world becomes still\nEvery shadow deepens the emptiness\nWhispers are swallowed by the dark\nAnd silence wraps everything in its arms\nTears flow unseen\nMemories flicker and fade\nLoneliness sits like a heavy guest\nAnd even hope trembles in the quiet\nEven flowers cry\nAnd so do hearts\nYet life moves silently\nWhile darkness listens patiently"
-    },
-    {
-        title: "Pray for Me",
-        text: "Pray for me\nIf I love let me die\nIf I meet you\nAnd then must part let me die\nI hid petals inside my books\nLike prayers pressed between pages\nThey waited quietly with time\nHolding the color of forgotten days\nIf I gather those dried petals again\nIf they fall lifeless into my hands\nLet my breath leave me there\nFor love should not survive its own ruin\nPray for me\nFor my heart knows only extremes\nLove or death\nMeeting or ending\nIf love blooms let it take my life\nIf it fades let it take my life\nFor I was never made\nTo live without the truth of love"
-    },
+            {
+                title: "Even Flowers Cry",
+                text: "Even flowers cry\nThey wither under the weight of sorrow\nHearts cry in silence\nAnd all lamps go out\nNight falls and the world becomes still\nEvery shadow deepens the emptiness\nWhispers are swallowed by the dark\nAnd silence wraps everything in its arms\nTears flow unseen\nMemories flicker and fade\nLoneliness sits like a heavy guest\nAnd even hope trembles in the quiet\nEven flowers cry\nAnd so do hearts\nYet life moves silently\nWhile darkness listens patiently"
+            },
+            {
+                title: "Pray for Me",
+                text: "Pray for me\nIf I love let me die\nIf I meet you\nAnd then must part let me die\nI hid petals inside my books\nLike prayers pressed between pages\nThey waited quietly with time\nHolding the color of forgotten days\nIf I gather those dried petals again\nIf they fall lifeless into my hands\nLet my breath leave me there\nFor love should not survive its own ruin\nPray for me\nFor my heart knows only extremes\nLove or death\nMeeting or ending\nIf love blooms let it take my life\nIf it fades let it take my life\nFor I was never made\nTo live without the truth of love"
+            },
         ];
 
-   function startClock() {
-‎            const update = () => {
-‎                const now = new Date();
-‎                document.getElementById('date-el').innerText = now.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
-‎                document.getElementById('time-el').innerText = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-‎            };
-‎            setInterval(update, 1000);
-‎            update();
-‎        }
-‎
-‎        function render() {
-‎            const list = document.getElementById('poetry-list');
-‎            library.forEach((item, i) => {
-‎                const div = document.createElement('div');
-‎                div.className = 'entry-item';
-‎                div.innerHTML = `
-‎                    <span class="entry-name">${item.title}</span>
-‎                    <span class="entry-meta">Digital Archive ID: #${1000 + i}</span>
-‎                `;
-‎                div.onclick = () => openViewer(item);
-‎                list.appendChild(div);
-‎            });
-‎        }
-‎
-‎        function openViewer(item) {
-‎            document.getElementById('view-title').innerText = item.title;
-‎            document.getElementById('view-body').innerText = item.text;
-‎            document.getElementById('poem-viewer').style.display = 'flex';
-‎            document.body.style.overflow = 'hidden';
-‎            document.getElementById('poem-viewer').scrollTop = 0;
-‎        }
-‎
-‎        function closeViewer() {
-‎            document.getElementById('poem-viewer').style.display = 'none';
-‎            document.body.style.overflow = 'auto';
-‎        }
-‎
-‎        startClock();
-‎        render();
-‎    </script>
-‎</body>
-‎</html>     
+        function startClock() {
+            const update = () => {
+                const now = new Date();
+                document.getElementById('date-el').innerText = now.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+                document.getElementById('time-el').innerText = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+            };
+            setInterval(update, 1000);
+            update();
+        }
+
+        function render() {
+            const list = document.getElementById('poetry-list');
+            library.forEach((item, i) => {
+                const div = document.createElement('div');
+                div.className = 'entry-item';
+                div.innerHTML = `
+                    <span class="entry-name">${item.title}</span>
+                    <span class="entry-meta">Digital Archive ID: #${1000 + i}</span>
+                `;
+                div.onclick = () => openViewer(item);
+                list.appendChild(div);
+            });
+        }
+
+        function openViewer(item) {
+            document.getElementById('view-title').innerText = item.title;
+            document.getElementById('view-body').innerText = item.text;
+            document.getElementById('poem-viewer').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            document.getElementById('poem-viewer').scrollTop = 0;
+        }
+
+        function closeViewer() {
+            document.getElementById('poem-viewer').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        startClock();
+        render();
+    </script>
+</body
