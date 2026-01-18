@@ -2,372 +2,360 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silent Peoples - Hassan Jatoi</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,600&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body {
-            margin: 0;
-            background-color: #fdfbf7;
-            background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
-            font-family: 'Libre Baskerville', serif;
-            min-height: 100vh;
-            color: #1a1a1a;
-            overflow-x: hidden;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Lora:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap');
+
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #1a1a1a;
+            --sidebar-bg: #0f172a;
+            --gold-primary: #d4af37;
+            --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
         }
 
-        .brush-title {
-            font-family: 'Playfair Display', serif;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            background: linear-gradient(
-                to bottom, 
-                #8b0000, 
-                #ce1212, 
-                #4a0e0e, 
-                #1a1a1a
-            );
+        body {
+            transition: background-color 0.3s, color 0.3s;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body.dark-mode {
+            --bg-color: #0a0a0a;
+            --text-color: #e2e8f0;
+        }
+
+        body.sepia-mode {
+            --bg-color: #fbf0d9;
+            --text-color: #433422;
+        }
+
+        article {
+            font-family: 'Lora', serif;
+        }
+
+        /* Gold Text Utility */
+        .gold-text {
+            background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            position: relative;
             display: inline-block;
-            font-weight: 900;
-            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
-            line-height: 1.1;
         }
 
-        .author-text {
+        /* Drop Cap Styling */
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4.5rem;
+            line-height: 0.8;
+            padding-top: 4px;
+            padding-right: 12px;
+            font-weight: 700;
             font-family: 'Playfair Display', serif;
-            font-style: italic;
-            color: #4a0e0e; 
-            letter-spacing: 0.08em;
-            font-size: 1.25rem;
-            margin-top: 0.25rem;
-            font-weight: 400;
-            opacity: 0.9;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        @media (min-width: 768px) {
-            .author-text {
-                font-size: 1.8rem;
-                margin-top: -0.5rem;
-            }
+        .sidebar {
+            height: 100vh;
+            width: 280px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: var(--sidebar-bg);
+            transition: transform 0.3s ease-in-out;
+            z-index: 50;
+            border-right: 1px solid rgba(212, 175, 55, 0.3);
         }
 
-        .main-visual {
-            max-width: 260px;
-            width: 85%;
-            height: auto;
-            margin: 20px 0;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
-            border-radius: 8px;
-            transition: transform 0.4s ease;
-        }
-        
-        @media (min-width: 768px) {
-            .main-visual {
-                max-width: 320px;
-                margin: 25px 0;
-            }
+        .content-area {
+            margin-left: 280px;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .brush-stroke-line {
-            height: 12px; 
+        .reading-container {
             width: 100%;
-            background: linear-gradient(90deg, #4a0e0e, #ce1212, #1a1a1a);
-            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg preserveAspectRatio="none" viewBox="0 0 100 10" xmlns="http://www.w3.org/2000/svg"><path d="M0 2 C 10 8, 20 0, 30 5 C 40 10, 50 2, 60 7 C 70 2, 80 8, 95 4 L 100 10 L 0 10 Z" fill="black"/></svg>');
-            mask-size: 100% 100%;
-            -webkit-mask-size: 100% 100%;
-            margin-top: 20px;
+            max-width: 760px;
+            padding: 0 1.5rem;
         }
 
-        .separator-line {
-            height: 8px;
-            width: 60%;
-            max-width: 200px;
-            margin: 3rem auto;
-            background: linear-gradient(90deg, transparent, #8b0000, #ce1212, #4a0e0e, transparent);
-            border-radius: 50%;
-            opacity: 0.6;
-            filter: blur(1px);
-        }
-
-        .nav-font {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800; 
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-        }
-
-        .btn-brush {
-            font-family: 'Montserrat', sans-serif;
-            background: #000;
-            color: #fff;
-            padding: 10px 24px;
-            border-radius: 50px; 
-            font-weight: 800;
-            display: inline-block;
-        }
-
-        #mobile-menu {
-            max-height: 0;
+        /* Premium Book Cover Styling */
+        .book-cover-img {
+            width: 100%;
+            height: 550px;
+            background: radial-gradient(circle at center, #1e293b 0%, #020617 100%);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            margin-bottom: 3rem;
+            position: relative;
             overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            background: #fff;
+            border: 2px solid #d4af37;
         }
 
-        #mobile-menu.active {
-            max-height: 500px;
-            border-bottom: 4px solid #000;
+        .book-cover-img::before {
+            content: "";
+            position: absolute;
+            inset: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            pointer-events: none;
         }
 
-        .poetry-container {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: left;
+        .book-cover-img h1 {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: -0.02em;
         }
 
-        .poetry-line {
-            margin-bottom: 0.5rem;
+        @media (max-width: 1024px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.active { transform: translateX(0); }
+            .content-area { margin-left: 0; }
+            .book-cover-img { height: 450px; }
+        }
+
+        .chapter-link {
+            padding: 12px 16px;
             display: block;
+            color: #94a3b8;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            transition: all 0.2s;
         }
 
-        .poetry-stanza {
-            margin-bottom: 2.5rem;
+        .chapter-link:hover, .chapter-link.active {
+            background-color: rgba(212, 175, 55, 0.1);
+            color: #d4af37;
+        }
+
+        .controls-bar {
+            position: sticky;
+            top: 0;
+            background: var(--bg-color);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            width: 100%;
+            z-index: 40;
+        }
+
+        .chapter-divider {
+            height: 1px;
+            background: var(--gold-gradient);
+            width: 60%;
+            margin: 4rem auto;
+            opacity: 0.3;
         }
     </style>
 </head>
 <body>
 
-    <header class="bg-white/95 backdrop-blur-md relative z-50 pt-6 md:pt-10 border-b border-gray-100 md:border-none">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
-            
-            <div class="text-center flex flex-col items-center">
-                <h1 class="brush-title text-3xl sm:text-5xl md:text-7xl">
-                    THE FACE OF DEATH
-                </h1>
-                <p class="author-text">
-                    By Hassan Jatoi
-                </p>
-            </div>
+    <!-- Sidebar -->
+    <nav class="sidebar p-6 text-white overflow-y-auto" id="sidebar">
+        <div class="flex flex-col mb-8">
+            <h2 class="text-2xl font-bold tracking-tight gold-text">Silent Peoples</h2>
+            <p class="text-gray-400 text-sm font-medium mt-1">by Hassan Jatoi</p>
+            <button onclick="toggleSidebar()" class="lg:hidden absolute top-6 right-6 text-gray-400">✕</button>
+        </div>
 
-            <img src="https://i.ibb.co/BKGKSCJJ/unnamed.png" alt="Visual Art" class="main-visual">
+        <div class="space-y-1">
+            <p class="text-xs uppercase text-gray-500 font-bold mb-4 tracking-widest">Master Edition</p>
+            <a href="#cover" class="chapter-link active">Gold Edition Cover</a>
+            <a href="#prologue" class="chapter-link">Prologue</a>
+            <a href="#ch1" class="chapter-link">Chapter 1: Voices in Shadow</a>
+            <a href="#ch2" class="chapter-link">Chapter 2: The Unspoken Word</a>
+            <a href="#epilogue" class="chapter-link">Epilogue</a>
+        </div>
+        
+        <div class="mt-20 pt-6 border-t border-slate-700">
+            <p class="text-xs text-slate-400 italic font-medium">Published 2026</p>
+        </div>
+    </nav>
+    <div class="mobile-overlay" onclick="toggleSidebar()"></div>
 
-            <nav class="hidden md:flex items-center space-x-8 lg:space-x-12 nav-font text-[11px] mb-10">
-                <a href="#" class="hover:text-red-700 transition-colors">The Abyss</a>
-                <a href="#" class="hover:text-red-700 transition-colors">Chronicles</a>
-                <a href="#" class="btn-brush mx-4">ENTER VOID</a>
-                <a href="#" class="hover:text-red-700 transition-colors">The Gallery</a>
-                <a href="#" class="hover:text-red-700 transition-colors">Summon</a>
-            </nav>
-
-            <div class="md:hidden pb-6">
-                <button id="menu-btn" class="flex items-center space-x-2 text-black px-4 py-2 bg-gray-50 border border-gray-200 rounded-full active:scale-95 transition-transform">
-                    <span class="nav-font text-[10px]">MENU</span>
-                    <svg id="menu-icon-svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8h16M4 16h16" />
-                    </svg>
+    <!-- Main Content -->
+    <main class="content-area">
+        
+        <!-- Toolbar -->
+        <header class="controls-bar">
+            <div class="max-w-[760px] mx-auto w-full px-6 py-3 flex justify-between items-center">
+                <button onclick="toggleSidebar()" class="lg:hidden p-2 hover:bg-gray-100 rounded-md transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
+
+                <div class="flex gap-3">
+                    <button onclick="setTheme('light')" class="w-6 h-6 rounded-full border border-gray-300 bg-white ring-offset-2 hover:ring-2 ring-gray-200" title="Light"></button>
+                    <button onclick="setTheme('sepia')" class="w-6 h-6 rounded-full border border-gray-300 bg-[#fbf0d9] ring-offset-2 hover:ring-2 ring-amber-200" title="Sepia"></button>
+                    <button onclick="setTheme('dark')" class="w-6 h-6 rounded-full border border-gray-300 bg-[#121212] ring-offset-2 hover:ring-2 ring-blue-500" title="Dark"></button>
+                </div>
+
+                <div class="flex items-center bg-gray-100 dark:bg-slate-800 rounded-lg p-1">
+                    <button onclick="changeFontSize(-1)" class="px-3 py-1 hover:bg-white dark:hover:bg-slate-700 rounded transition font-bold">A-</button>
+                    <div class="h-4 w-[1px] bg-gray-300 mx-1"></div>
+                    <button onclick="changeFontSize(1)" class="px-3 py-1 hover:bg-white dark:hover:bg-slate-700 rounded transition font-bold">A+</button>
+                </div>
             </div>
-        </div>
+        </header>
 
-        <div class="brush-stroke-line"></div>
+        <!-- Book Text Container -->
+        <div class="reading-container pt-8">
+            <article id="book-content" class="prose lg:prose-xl dark:prose-invert mx-auto transition-all text-lg leading-relaxed">
+                
+                <!-- Book Cover Section -->
+                <section id="cover" class="mb-32">
+                    <div class="book-cover-img">
+                        <div class="mb-4 text-center">
+                            <span class="text-xs tracking-[0.5em] text-gray-400 uppercase">A Novel By</span>
+                        </div>
+                        <h1 class="text-6xl md:text-8xl font-bold mb-4 z-10 text-center px-4 gold-text">Silent Peoples</h1>
+                        <p class="text-xl md:text-2xl font-light tracking-[0.4em] uppercase z-10 text-white">Hassan Jatoi</p>
+                        
+                        <div class="w-32 h-[1px] bg-gradient-to-r from-transparent via-[#d4af37] to-transparent my-10"></div>
+                        
+                        <div class="absolute bottom-12 z-10 text-center">
+                            <p class="text-sm tracking-[0.5em] gold-text font-bold uppercase">A Journey Into The Unspoken</p>
+                        </div>
+                    </div>
+                </section>
 
-        <div id="mobile-menu" class="md:hidden flex flex-col items-center nav-font">
-            <a href="#" class="p-4 w-full text-center border-b border-gray-50">The Abyss</a>
-            <a href="#" class="p-4 w-full text-center border-b border-gray-50">Chronicles</a>
-            <a href="#" class="p-4 w-full text-center border-b border-gray-50">The Gallery</a>
-            <a href="#" class="p-4 w-full text-center border-b border-gray-50 pb-6">Summon</a>
-            <div class="pb-10">
-                <button class="btn-brush text-xs">ENTER VOID</button>
-            </div>
-        </div>
-    </header>
+                <section id="prologue" class="mb-32">
+                    <div class="text-center mb-16">
+                        <span class="gold-text font-bold uppercase tracking-widest text-sm">Introduction</span>
+                        <h2 class="text-4xl font-bold mt-2">Prologue</h2>
+                    </div>
+                    <p class="drop-cap">There is a world that exists in the pauses between breaths, in the glances exchanged across crowded rooms, and in the profound stillness of the midnight hour. These are the stories of those who observe, those who feel, and those who remain unheard in a world that never stops talking.</p>
+                    <p>In "Silent Peoples," we explore the depth of human experience that lies beneath the surface of speech. It is a journey through the landscapes of the mind where the most powerful truths are often the ones left unsaid.</p>
+                </section>
 
-    <main class="flex flex-col items-center justify-center mt-12 md:mt-24 px-6 pb-32">
-        <div class="max-w-3xl w-full text-center">
-            <h2 class="text-3xl md:text-6xl font-bold mb-4 md:mb-12 font-serif">A Legacy in Ink</h2>
+                <section id="ch1" class="mb-32">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="flex-grow h-[1px] bg-gradient-to-r from-transparent to-[#d4af37]"></div>
+                        <span class="gold-text font-bold uppercase tracking-widest text-sm shrink-0">Chapter One</span>
+                        <div class="flex-grow h-[1px] bg-gradient-to-l from-transparent to-[#d4af37]"></div>
+                    </div>
+                    
+                    <h2 class="text-4xl font-bold mt-2 mb-12 text-center">Voices in Shadow</h2>
+                    
+                    <p class="drop-cap">Separation enters a human life quietly. It does not announce itself; it does not warn the heart. It simply arrives. And once it arrives, nothing ever feels the same again.</p>
+                    
+                    <p>Separation slowly teaches a person how to breathe with pain; how to smile while breaking inside; how to live while feeling unfinished. A separated heart does not stop loving; it only stops resting. Every morning begins with tired hope. Every night ends with unanswered thoughts. The soul remembers even when the mind begs to forget.</p>
+
+                    <blockquote class="border-l-4 border-[#d4af37] pl-6 italic my-12 text-2xl text-gray-500 dark:text-gray-400 bg-yellow-500/5 py-8 pr-4">
+                        "The worst pain is being alive enough to feel everything."
+                    </blockquote>
+
+                    <p>Separation makes time cruel. Seconds feel heavier than years. Years feel empty without meaning. You replay memories not because they are beautiful, but because they are all you have left. A separated person is not weak; they are just carrying too much quietly. They learn to keep emotions inside because the world does not understand silent pain.</p>
+
+                    <p>Separation does not kill instantly. It kills slowly, it kills gently, it kills daily. Memories linger in corners where love once used to live. Loneliness whispers softly in the shadows of quiet nights. Every heartbeat remembers the warmth that absence stole away. The mind replays every moment; words left unspoken echo. Tears fall quietly while laughter hides the aching heart.</p>
+
+                    <p>Each song reminds the heart of what will never return. Separation turns ordinary days into endless nights of sorrow. The air smells of memories too heavy to carry alone. Every message reread becomes a dagger wrapped in nostalgia. You smile for the world while quietly bleeding inside yourself.</p>
+
+                    <p>Time does not heal; it only teaches patience in grief. Absence speaks louder than presence in the chambers of memory. Even shadows feel like companions in moments of deep loneliness. The heart remembers everything even when the mind forgets gently. Solitude teaches silence where words used to create comfort.</p>
+
+                    <p>It sits beside you quietly watching your spirit slowly bend. Memories arrive uninvited, painting joy then leaving deep emptiness. Every step forward feels weighted by echoes of yesterday’s love. The nights stretch endlessly carrying whispers that should not exist. Pain becomes a friend, a companion too familiar to leave. Even joy is tainted by the shadow of past sorrow.</p>
+
+                    <p>Love remains hidden inside every sigh, every quiet unspoken word. Separation slips into life turning joy into silent despair. Memories of laughter return as shadows haunting every room. Even the sunlight feels heavy touching a heart broken. Smiles are worn like masks hiding endless unseen pain.</p>
+
+                    <p>Loneliness is not the absence of people; loneliness is the absence of understanding. Solitude sits next to you even in crowds; it listens when no one else does. Loneliness speaks in the language of nights—when lights are off, when voices are gone, when memories grow louder.</p>
+
+                    <p>A lonely heart does not cry loudly; it sinks silently. You sit with your phone, scrolling through moments that once felt real, wondering how life moved on without asking you. Memories return like uninvited guests; they knock on your chest, not your door. They remind you of warmth, then leave you colder than before.</p>
+
+                    <p>Loneliness does not destroy a person; it transforms them. It turns innocence into awareness, trust into caution, love into depth. But the cost is heavy... You lose the ability to feel simple happiness because everything now carries a memory.</p>
+
+                    <p>And yet, despite separation, loneliness, and memories, the human heart continues. Because living becomes a habit, even when joy becomes rare. And this is the tragedy: not dying from pain, but living with it, every single day.</p>
+                </section>
+
+                <div class="chapter-divider"></div>
+
+                <section id="ch2" class="mb-32">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="flex-grow h-[1px] bg-gradient-to-r from-transparent to-[#d4af37]"></div>
+                        <span class="gold-text font-bold uppercase tracking-widest text-sm shrink-0">Chapter Two</span>
+                        <div class="flex-grow h-[1px] bg-gradient-to-l from-transparent to-[#d4af37]"></div>
+                    </div>
+                    
+                    <h2 class="text-4xl font-bold mt-2 mb-12 text-center">The Unspoken Word</h2>
+                    
+                    <p class="drop-cap">Loneliness walks beside love like a shadow that learned my name. It does not shout or hurry; it only stays, breathing where promises once lived. Betrayal arrives quietly, wearing the face of trust. It knows the language of the heart and speaks it fluently until meaning collapses.</p>
+                    
+                    <p>I loved with open hands, never counting the cost, never locking the door of my soul. I believed love was shelter, not a battlefield of intentions. But loneliness grows inside love when truth is replaced by excuses, when eyes stop meeting eyes, and silence learns to lie.</p>
+
+                    <blockquote class="border-l-4 border-[#d4af37] pl-6 italic my-12 text-2xl text-gray-500 dark:text-gray-400 bg-yellow-500/5 py-8 pr-4">
+                        "Betrayal is not a single moment; it is a slow forgetting."
+                    </blockquote>
+
+                    <p>I died many times without a grave—each time you chose yourself over us, each time my name lost its importance in your changing priorities. Loneliness is not being alone; it is being unseen, being unheard, being loved only in words, never in presence.</p>
+
+                    <p>Love begins to suffocate when loyalty becomes optional, when promises become flexible, and hearts become temporary homes. I carried your absence even when you were near; your body stayed, but your soul had already left, taking my peace with it.</p>
+
+                    <p>Betrayal teaches love how to bleed without leaving visible wounds. It teaches the heart to smile while breaking, to live while dying. Loneliness whispers at night, asking questions without answers: Was I not enough? Was my love too real for a world that loves convenience?</p>
+
+                    <p>Death in love is not dramatic. It happens in ordinary days, between unread messages and postponed meetings, between almost and never. I stopped expecting because hope became painful. Every expectation felt like another invitation to collapse.</p>
+
+                    <p>Loneliness became my companion, sitting beside me in crowded rooms, reminding me that abandonment can exist even in arms that hold you. Betrayal rewrites memories, turning sacred moments into evidence of foolish trust. It makes the past hurt more than the present.</p>
+
+                    <p>Love dies slowly when honesty disappears, when effort becomes one-sided, when care feels like a favor. I did not stop loving you; I stopped surviving it. My heart grew tired of proving its worth to someone who already knew it.</p>
+
+                    <p>Loneliness did not kill me; betrayal did. Loneliness only stayed to watch it happen, silently. Now I breathe differently, with guarded hopes and quieter dreams. I love carefully, as if love itself can be lethal.</p>
+
+                    <p>If I ever love again, it will be without begging, without shrinking, without losing myself to someone else’s comfort. Because loneliness taught me pain, but betrayal taught me death—and love should never feel like a slow funeral of the soul.</p>
+                </section>
+
+                <section id="epilogue" class="mb-32 text-center">
+                    <div class="w-16 h-[1px] bg-[#d4af37] mx-auto mb-8"></div>
+                    <p class="italic text-gray-400">To be continued...</p>
+                </section>
+
+            </article>
+
+            <!-- Bottom Navigation -->
+            <footer class="flex flex-col sm:flex-row justify-between items-center mt-12 py-8 border-t border-[#d4af37]/30 gap-4">
+                <button onclick="document.getElementById('ch1').scrollIntoView();" class="w-full sm:w-auto px-8 py-3 bg-gray-100 dark:bg-slate-900 border border-transparent hover:border-[#d4af37]/50 rounded-full font-semibold transition">← Previous Chapter</button>
+                <button class="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-[#bf953f] to-[#aa771c] text-white rounded-full font-semibold hover:shadow-lg shadow-[#d4af37]/20 transition">Final Thoughts →</button>
+            </footer>
             
-            <div class="poetry-container text-lg md:text-xl leading-relaxed text-gray-800 font-serif">
-                
-                <!-- SECTION 1: SEPARATION -->
-                <div class="poetry-stanza">
-                    <span class="poetry-line">Separation enters a human life quietly</span>
-                    <span class="poetry-line">It does not announce itself</span>
-                    <span class="poetry-line">It does not warn the heart</span>
-                    <span class="poetry-line">It simply arrives</span>
-                    <span class="poetry-line">And once it arrives</span>
-                    <span class="poetry-line">Nothing ever feels the same again</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line">Separation slowly teaches a person how to breathe with pain</span>
-                    <span class="poetry-line">How to smile while breaking inside</span>
-                    <span class="poetry-line">How to live while feeling unfinished</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line">A separated heart does not stop loving</span>
-                    <span class="poetry-line">It only stops resting</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line">Every morning begins with tired hope</span>
-                    <span class="poetry-line">Every night ends with unanswered thoughts</span>
-                    <span class="poetry-line">The soul remembers even when the mind begs to forget</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line">Separation does not steal a person from you</span>
-                    <span class="poetry-line">It steals peace from your existence</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line">You walk, You talk, You survive</span>
-                    <span class="poetry-line">But something inside you remains seated at the moment they left</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line">Separation makes time cruel</span>
-                    <span class="poetry-line">Seconds feel heavier than years</span>
-                    <span class="poetry-line">Years feel empty without meaning</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line">You replay memories not because they are beautiful</span>
-                    <span class="poetry-line">But because they are all you have left</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line">A separated person is not weak</span>
-                    <span class="poetry-line">They are just carrying too much quietly</span>
-                    <span class="poetry-line">They learn to keep emotions inside</span>
-                    <span class="poetry-line">Because the world does not understand silent pain</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line">Separation does not kill instantly</span>
-                    <span class="poetry-line">It kills slowly, It kills gently, It kills daily</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line font-bold text-red-900">And the worst pain is</span>
-                    <span class="poetry-line font-bold text-red-900">You are alive enough to feel everything</span>
-                </div>
-<!-- COPY FROM HERE --><div class="separator-line"></div><div class="poetry-stanza"><span class="poetry-line">Separation arrives silently, no one sees the soul breaking</span><span class="poetry-line">Memories linger in corners where love once used to live</span><span class="poetry-line">Loneliness whispers softly in the shadows of quiet nights</span><span class="poetry-line">Every heartbeat remembers the warmth that absence stole away</span></div><div class="poetry-stanza"><span class="poetry-line">The mind replays every moment, words left unspoken echo</span><span class="poetry-line">Tears fall quietly while laughter hides the aching heart</span><span class="poetry-line">Even surrounded by people the soul feels painfully empty</span><span class="poetry-line">Each song reminds the heart of what will never return</span></div><div class="separator-line"></div><div class="poetry-stanza"><span class="poetry-line">Separation turns ordinary days into endless nights of sorrow</span><span class="poetry-line">The air smells of memories too heavy to carry alone</span><span class="poetry-line">Every message reread becomes a dagger wrapped in nostalgia</span><span class="poetry-line">You smile for the world while quietly bleeding inside yourself</span></div><div class="poetry-stanza"><span class="poetry-line">Time does not heal, it only teaches patience in grief</span><span class="poetry-line">Absence speaks louder than presence in the chambers of memory</span><span class="poetry-line">Even shadows feel like companions in moments of deep loneliness</span><span class="poetry-line">The heart remembers everything even when the mind forgets gently</span></div><div class="separator-line"></div><div class="poetry-stanza"><span class="poetry-line">Solitude teaches silence where words used to create comfort</span><span class="poetry-line">It sits beside you quietly watching your spirit slowly bend</span><span class="poetry-line">Memories arrive uninvited painting joy then leaving deep emptiness</span><span class="poetry-line">Every step forward feels weighted by echoes of yesterday’s love</span></div><div class="poetry-stanza"><span class="poetry-line">The nights stretch endlessly carrying whispers that should not exist</span><span class="poetry-line">Pain becomes a friend, a companion too familiar to leave</span><span class="poetry-line">Even joy is tainted by the shadow of past sorrow</span><span class="poetry-line italic">Love lives in memory stronger than life itself ever dared</span></div><div class="separator-line"></div><div class="poetry-stanza"><span class="poetry-line">Every photograph holds laughter that time will never return</span><span class="poetry-line">Eyes see the present but hearts drift endlessly in memories</span><span class="poetry-line">Hope flickers faintly in the heart while shadows grow louder</span><span class="poetry-line">Even breathing feels heavy when absence sits on the chest</span></div><div class="poetry-stanza"><span class="poetry-line">Loneliness transforms strength into patience, grief into quiet understanding</span><span class="poetry-line">The soul grows deeper learning to live with missing pieces</span><span class="poetry-line">Separation does not break the body but it bends the spirit</span><span class="poetry-line">Love remains hidden inside every sigh, every quiet unspoken word</span></div><!-- END COPY -->
-                <!-- COLOURFUL BRUSH SEPARATOR -->
-                <div class="separator-line"></div>
-<!-- COPY FROM HERE --><div class="separator-line"></div><div class="poetry-stanza"><span class="poetry-line">Separation arrives quietly when the heart least expects it</span><span class="poetry-line">It slips into life turning joy into silent despair</span><span class="poetry-line">Memories of laughter return as shadows haunting every room</span><span class="poetry-line">Even the sunlight feels heavy touching a heart broken</span></div><div class="poetry-stanza"><span class="poetry-line">Smiles are worn like masks hiding endless unseen pain</span><span class="poetry-line">Conversations echo emptily as absence sits silently beside</span><span class="poetry-line">The soul learns quickly that love can hurt deeply</span><span class="poetry-line">Every ordinary day suddenly feels like an eternity lived</span></div><div class="separator-line"></div><div class="poetry-stanza"><span class="poetry-line">Separation does not announce itself; it quietly resides within</span><span class="poetry-line">It teaches the heart patience in ways that scar</span><span class="poetry-line">You remember touches no one else can ever give</span><span class="poetry-line">Songs bring tears that were hidden under forced laughter</span></div><div class="poetry-stanza"><span class="poetry-line">Even shadows seem closer than the people passing by</span><span class="poetry-line">The mind wanders to moments that no longer exist</span><span class="poetry-line">Every heartbeat recalls warmth that absence cruelly stole</span><span class="poetry-line">The world moves on while your heart lingers behind</span></div><!-- END COPY -->
-<!-- COPY FROM HERE --><div class="separator-line"></div><div class="poetry-stanza"><span class="poetry-line">Loneliness settles in corners where love used to bloom</span><span class="poetry-line">It whispers doubts softly while holding the soul captive</span><span class="poetry-line">Memories float gently then strike like storms without mercy</span><span class="poetry-line">Every night stretches endlessly filling spaces once full of light</span></div><div class="poetry-stanza"><span class="poetry-line">Eyes see the present yet hearts live trapped in past</span><span class="poetry-line">Every photograph becomes a dagger wrapped in tender nostalgia</span><span class="poetry-line">Messages reread remind the heart of words never spoken</span><span class="poetry-line">Silence grows heavy and shadows speak louder than people nearby</span></div><div class="separator-line"></div><div class="poetry-stanza"><span class="poetry-line">Solitude teaches that absence can feel stronger than presence</span><span class="poetry-line">Even in crowded rooms the soul remains painfully isolated</span><span class="poetry-line">Every breath carries weight as if the air remembers loss</span><span class="poetry-line">Pain becomes a friend silently shaping every thought inside</span></div><div class="poetry-stanza"><span class="poetry-line">Even joy feels hollow when touched by yesterday’s memories</span><span class="poetry-line">Love lives inside memories stronger than presence ever dared</span><span class="poetry-line">The nights linger longer as if time respects sadness</span><span class="poetry-line">Every heartbeat beats not for life but for remembrance</span></div><!-- END COPY -->
-  <!-- COPY FROM HERE --><div class="separator-line"></div><div class="poetry-stanza"><span class="poetry-line">The nights stretch endlessly carrying whispers that haunt the soul</span><span class="poetry-line">Every sound reminds the heart of moments forever lost</span><span class="poetry-line">The darkness feels alive touching wounds invisible to the world</span><span class="poetry-line">Even breathing becomes heavy burdened by memories unshared</span></div><div class="poetry-stanza"><span class="poetry-line">Every heartbeat echoes laughter that now belongs to shadows</span><span class="poetry-line">Eyes search faces but recognize only the absence of love</span><span class="poetry-line">The moon observes quietly as tears fall without permission</span><span class="poetry-line">Every corner holds silence louder than conversations once spoken</span></div><div class="separator-line"></div><div class="poetry-stanza"><span class="poetry-line">Memories arrive uninvited twisting joy into quiet agony</span><span class="poetry-line">They replay voices and laughter like ghosts in the room</span><span class="poetry-line">Even familiar scents turn cruel carrying traces of yesterday</span><span class="poetry-line">The heart learns to ache without showing its raw pain</span></div><div class="poetry-stanza"><span class="poetry-line">Loneliness grows roots inside the chambers of fragile souls</span><span class="poetry-line">Hope flickers faintly as the mind clings to yesterday’s light</span><span class="poetry-line">Every step forward feels weighted by echoes of what’s gone</span><span class="poetry-line">Even the sun cannot warm a heart shrouded in absence</span></div><!-- END COPY -->              
-        <!-- COPY FROM HERE --><div class="separator-line"></div><div class="poetry-stanza"><span class="poetry-line">Memories are both beautiful and cruel refusing to release</span><span class="poetry-line">They hold warmth while reminding the heart of what vanished</span><span class="poetry-line">Every smile remembered becomes a knife hidden under soft silk</span><span class="poetry-line">Every touch imagined pierces deeper than reality ever could</span></div><div class="poetry-stanza"><span class="poetry-line">Songs bring tears neither too soft nor too loud</span><span class="poetry-line">Every photograph becomes a portal to moments never returning</span><span class="poetry-line">Even laughter seems hollow haunted by echoes of absence</span><span class="poetry-line">The soul converses silently with shadows of once-loved souls</span></div><div class="separator-line"></div><div class="poetry-stanza"><span class="poetry-line">Loneliness turns love into a delicate ache in chest</span><span class="poetry-line">Even happiness feels foreign carrying invisible weights of memory</span><span class="poetry-line">Every thought drifts to faces no longer existing in life</span><span class="poetry-line">Every corner holds reminders that joy once resided here</span></div><div class="poetry-stanza"><span class="poetry-line">Absence paints life with colors too heavy to bear alone</span><span class="poetry-line">Even silence speaks loudly when memories refuse to rest</span><span class="poetry-line">The heart learns patience not by healing but by enduring</span><span class="poetry-line">Every night becomes a teacher of longing and quiet grief</span></div><!-- END COPY -->
-                <!-- SECTION 2: LONELINESS -->
-                <div class="poetry-stanza">
-                    <span class="poetry-line">Loneliness is not the absence of people</span>
-                    <span class="poetry-line">Loneliness is the absence of understanding</span>
-                    <span class="poetry-line">Solitude sits next to you even in crowds</span>
-                    <span class="poetry-line">It listens when no one else does</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line">Loneliness speaks in the language of nights</span>
-                    <span class="poetry-line">When lights are off, When voices are gone</span>
-                    <span class="poetry-line">When memories grow louder</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line">A lonely heart does not cry loudly</span>
-                    <span class="poetry-line">It sinks silently</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line">You sit with your phone</span>
-                    <span class="poetry-line">Scrolling through moments that once felt real</span>
-                    <span class="poetry-line">Wondering how life moved on without asking you</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line">Memories return like uninvited guests</span>
-                    <span class="poetry-line">They knock on your chest, Not your door</span>
-                    <span class="poetry-line">They remind you of warmth, Then leave you colder than before</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line">Memories do not let a person live fully</span>
-                    <span class="poetry-line">They keep pulling the soul backward</span>
-                    <span class="poetry-line">You try to be present but your heart lives somewhere else</span>
-                    <span class="poetry-line">In a moment that no longer exists</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line">Loneliness teaches you patience in pain</span>
-                    <span class="poetry-line">It teaches you strength through exhaustion</span>
-                    <span class="poetry-line">You become strong not because you want to</span>
-                    <span class="poetry-line">But because no one notices your weakness</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line">Solitude changes the way you love</span>
-                    <span class="poetry-line">You love deeply but silently</span>
-                    <span class="poetry-line">Because you are afraid of losing again</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line">Memories do not fade, They wait</span>
-                    <span class="poetry-line">They wait for quiet nights, tired hearts</span>
-                    <span class="poetry-line">They wait for moments when you pretend to be okay</span>
-                    <span class="poetry-line">And then they strike</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line">Loneliness does not destroy a person</span>
-                    <span class="poetry-line">It transforms them</span>
-                    <span class="poetry-line">It turns innocence into awareness</span>
-                    <span class="poetry-line">Trust into caution, Love into depth</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line italic text-gray-500">But the cost is heavy...</span>
-                    <span class="poetry-line">You lose the ability to feel simple happiness</span>
-                    <span class="poetry-line">Because everything now carries a memory</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line">And yet, Despite separation, loneliness, and memories</span>
-                    <span class="poetry-line">The human heart continues</span>
-                    <span class="poetry-line">Because living becomes a habit, Even when joy becomes rare</span>
-                </div>
-
-                <div class="poetry-stanza">
-                    <span class="poetry-line font-bold text-red-900 text-2xl mt-4">And this is the tragedy</span>
-                    <span class="poetry-line">Not dying from pain</span>
-                    <span class="poetry-line">But living with it</span>
-                    <span class="poetry-line font-bold italic">Every single day</span>
-                </div>
-                
-            </div>
+            <p class="text-center text-sm text-gray-400 mt-10 pb-10">© 2026 Hassan Jatoi • Gold Master Edition</p>
         </div>
     </main>
 
     <script>
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIconPath = document.getElementById('menu-icon-path');
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
 
-        menuBtn.addEventListener('click', () => {
-            const isActive = mobileMenu.classList.toggle('active');
-            if (isActive) {
-                menuIconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-            } else {
-                menuIconPath.setAttribute('d', 'M4 8h16M4 16h16');
-            }
-        });
+        function setTheme(mode) {
+            document.body.classList.remove('dark-mode', 'sepia-mode');
+            if (mode === 'dark') document.body.classList.add('dark-mode');
+            if (mode === 'sepia') document.body.classList.add('sepia-mode');
+        }
 
-        window.addEventListener('resize', () => {
-            if (window.innerWidth >= 768) {
-                mobileMenu.classList.remove('active');
-                menuIconPath.setAttribute('d', 'M4 8h16M4 16h16');
-            }
+        let currentFontSize = 1.15;
+        function changeFontSize(delta) {
+            currentFontSize += delta * 0.1;
+            if (currentFontSize < 0.9) currentFontSize = 0.9;
+            if (currentFontSize > 1.8) currentFontSize = 1.8;
+            document.getElementById('book-content').style.fontSize = currentFontSize + 'rem';
+        }
+
+        const links = document.querySelectorAll('.chapter-link');
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                links.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                if (window.innerWidth < 1024) {
+                    setTimeout(toggleSidebar, 150);
+                }
+            });
         });
     </script>
 </body>
