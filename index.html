@@ -1,748 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,600&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            background-color: #fdfbf7;
+            background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+            font-family: 'Libre Baskerville', serif;
+            min-height: 100vh;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
 
-<title>SILENT PEOPLES | Oceanic Luxury Portfolio</title>
+        .brush-title {
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: linear-gradient(
+                to bottom, 
+                #8b0000, 
+                #ce1212, 
+                #4a0e0e, 
+                #1a1a1a
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+            font-weight: 900;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+            line-height: 1.1;
+        }
 
-<!-- ASSETS -->
-<script src="https://cdn.tailwindcss.com"></script>
-<!-- Switched to cleaner, more friendly font weights; removed Playfair Display (Serif/Italic) -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        .author-text {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #4a0e0e; 
+            letter-spacing: 0.08em;
+            font-size: 1.25rem;
+            margin-top: 0.25rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
 
-<style>
-:root {
-  --primary-deep: #075985; 
-  --secondary-sea: #0e7490; 
-  --accent-sky: #7dd3fc; 
-  --accent-gold: #fde047; 
-  --gold-gradient: linear-gradient(135deg, #eab308, #fef08a, #ca8a04);
-  --soft-white: #f0f9ff;
-}
+        @media (min-width: 768px) {
+            .author-text {
+                font-size: 1.8rem;
+                margin-top: -0.5rem;
+            }
+        }
 
-/* Global Reset & Friendly Cursor */
-* { 
-    box-sizing: border-box; 
-    -webkit-tap-highlight-color: transparent; 
-    cursor: none !important; 
-    font-style: normal !important; /* STRICT: No italics anywhere */
-}
+        .main-visual {
+            max-width: 260px;
+            width: 85%;
+            height: auto;
+            margin: 20px 0;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+            border-radius: 8px;
+            transition: transform 0.4s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .main-visual {
+                max-width: 320px;
+                margin: 25px 0;
+            }
+        }
 
-#custom-cursor {
-    width: 24px; height: 24px; border: 2.5px solid var(--accent-gold);
-    border-radius: 50%; position: fixed; pointer-events: none;
-    z-index: 9999; transition: transform 0.1s ease; transform: translate(-50%, -50%);
-    box-shadow: 0 0 20px rgba(253, 224, 71, 0.5);
-}
+        .brush-stroke-line {
+            height: 12px; 
+            width: 100%;
+            background: linear-gradient(90deg, #4a0e0e, #ce1212, #1a1a1a);
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg preserveAspectRatio="none" viewBox="0 0 100 10" xmlns="http://www.w3.org/2000/svg"><path d="M0 2 C 10 8, 20 0, 30 5 C 40 10, 50 2, 60 7 C 70 2, 80 8, 95 4 L 100 10 L 0 10 Z" fill="black"/></svg>');
+            mask-size: 100% 100%;
+            -webkit-mask-size: 100% 100%;
+            margin-top: 20px;
+        }
 
-body {
-  background-color: var(--primary-deep);
-  background-image: linear-gradient(180deg, #0c4a6e 0%, #075985 50%, #0891b2 100%);
-  color: var(--soft-white);
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  margin: 0; overflow-x: hidden;
-  min-height: 100vh;
-}
+        /* Small Separator Line */
+        .separator-line {
+            height: 8px;
+            width: 60%;
+            max-width: 200px;
+            margin: 3rem auto;
+            background: linear-gradient(90deg, transparent, #8b0000, #ce1212, #4a0e0e, transparent);
+            border-radius: 50%;
+            opacity: 0.6;
+            filter: blur(1px);
+        }
 
-/* Background Atmosphere */
-.bg-glow {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at 20% 30%, rgba(125, 211, 252, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(14, 116, 144, 0.2) 0%, transparent 50%);
-    pointer-events: none; z-index: -1;
-}
+        .nav-font {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800; 
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
 
-/* Hero Section */
-.hero-canvas {
-    height: 100vh; display: flex; flex-direction: column;
-    justify-content: center; align-items: center; position: relative;
-    padding: 20px; text-align: center;
-}
+        .btn-brush {
+            font-family: 'Montserrat', sans-serif;
+            background: #000;
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 50px; 
+            font-weight: 800;
+            display: inline-block;
+        }
 
-.cinematic-img {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    object-fit: cover; opacity: 0.45; filter: saturate(1.1) brightness(0.85);
-    z-index: -1; transition: opacity 1.5s ease;
-}
+        #mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #fff;
+        }
 
-.hero-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to bottom, rgba(7, 89, 133, 0.1) 0%, var(--primary-deep) 100%);
-    z-index: -1;
-}
+        #mobile-menu.active {
+            max-height: 500px;
+            border-bottom: 4px solid #000;
+        }
 
-.luxury-text {
-    font-family: 'Outfit', sans-serif; font-size: clamp(3rem, 10vw, 8rem);
-    font-weight: 800; letter-spacing: 10px; margin: 0;
-    background: var(--gold-gradient); -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 25px rgba(253, 224, 71, 0.4));
-    text-transform: uppercase;
-}
+        .poetry-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
 
-.sub-luxury {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 11px; letter-spacing: 8px; text-transform: uppercase;
-    color: var(--accent-sky); margin-top: 5px; font-weight: 700;
-}
+        .poetry-line {
+            margin-bottom: 0.5rem;
+            display: block;
+        }
 
-/* Archive Grid */
-.grid-container { max-width: 1400px; margin: -60px auto 100px; padding: 0 40px; }
-
-.archive-card {
-    position: relative; height: 500px; border-radius: 40px; overflow: hidden;
-    background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(125, 211, 252, 0.15);
-    backdrop-filter: blur(12px);
-    transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.archive-card:hover {
-    transform: translateY(-20px) scale(1.02);
-    border-color: var(--accent-gold);
-    box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.5);
-}
-
-.card-img {
-    width: 100%; height: 100%; object-fit: cover; opacity: 0.55;
-    transition: transform 1.5s ease;
-}
-
-.archive-card:hover .card-img { transform: scale(1.1); opacity: 0.75; }
-
-.card-content {
-    position: absolute; inset: 0; padding: 50px;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    background: linear-gradient(to top, var(--primary-deep) 20%, transparent 100%);
-}
-
-.card-title {
-    font-family: 'Outfit', sans-serif; font-size: 2.2rem; font-weight: 800; color: white;
-    margin-bottom: 8px;
-}
-
-.card-count {
-    font-size: 11px; letter-spacing: 5px; color: var(--accent-gold); 
-    text-transform: uppercase; font-weight: 800;
-}
-
-/* Reader Mode - Clean & Friendly */
-.reader-mode {
-    display: none; position: fixed; inset: 0; z-index: 2000;
-    background: radial-gradient(circle at center, #0c4a6e 0%, #075985 100%);
-    color: white; padding: 40px; flex-direction: column; align-items: center; justify-content: center;
-}
-
-.quote-display {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 700;
-    font-size: clamp(1.6rem, 5vw, 3.8rem); line-height: 1.4;
-    max-width: 1100px; text-align: center; margin-bottom: 60px;
-    color: white;
-}
-
-.nav-btn {
-    width: 75px; height: 75px; border: 2.5px solid rgba(253, 224, 71, 0.25);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    transition: all 0.4s; color: var(--accent-gold); font-size: 1.4rem;
-}
-
-.nav-btn:hover { background: var(--accent-gold); color: var(--primary-deep); transform: scale(1.1); border-color: var(--accent-gold); }
-
-@media (max-width: 768px) {
-    * { cursor: auto !important; }
-    #custom-cursor { display: none; }
-    .luxury-text { letter-spacing: 4px; }
-    .grid-container { padding: 0 24px; }
-    .archive-card { height: 420px; border-radius: 30px; }
-}
-</style>
+        .poetry-stanza {
+            margin-bottom: 2.5rem;
+        }
+    </style>
 </head>
 <body>
 
-<div id="custom-cursor"></div>
-<div class="bg-glow"></div>
-
-<!-- TOP NAV -->
-<nav class="fixed top-0 w-full z-[100] px-12 py-10 flex justify-between items-center bg-transparent">
-    <div class="font-outfit font-extrabold text-sm tracking-[0.5em] text-accent-gold">H. JATOI</div>
-    <div id="live-time" class="text-[10px] tracking-[0.4em] text-sky-200 font-bold uppercase"></div>
-</nav>
-
-<div id="main-view">
-    <!-- HERO -->
-    <section class="hero-canvas">
-        <img id="hero-img" class="cinematic-img" src="https://i.ibb.co/hF6Zg26R/image.png" alt="Hassan Jatoi">
-        <div class="hero-overlay"></div>
-        
-        <h1 class="luxury-text">SILENT PEOPLES</h1>
-        <p class="sub-luxury">Official Digital Archive • 2026</p>
-        
-        <button onclick="scrollToGrid()" class="mt-20 group flex flex-col items-center gap-4">
-            <span class="text-[11px] tracking-[0.8em] uppercase text-sky-200 font-bold">Explore Fragments</span>
-            <div class="w-[1px] h-12 bg-accent-gold animate-pulse mt-2"></div>
-        </button>
-    </section>
-
-    <!-- MAIN GRID -->
-    <section id="archive-section" class="grid-container">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12" id="main-grid">
-            <!-- Populated by JS -->
-        </div>
-    </section>
-
-    <footer class="py-24 text-center">
-        <p class="text-[11px] tracking-[0.8em] text-sky-300 uppercase font-bold opacity-70">Mehar • Sindh • Pakistan</p>
-    </footer>
-</div>
-
-<!-- READER MODE -->
-<div id="reader" class="reader-mode">
-    <div class="quote-display" id="quote-text"></div>
-    <div class="flex gap-14 items-center mt-10">
-        <button onclick="changeQuote(-1)" class="nav-btn"><i class="fa-solid fa-arrow-left"></i></button>
-        <div id="counter" class="font-outfit text-accent-gold tracking-[0.5em] text-xl font-extrabold"></div>
-        <button onclick="changeQuote(1)" class="nav-btn"><i class="fa-solid fa-arrow-right"></i></button>
-    </div>
-    <button onclick="closeReader()" class="mt-24 text-[12px] tracking-[0.8em] uppercase text-sky-200 hover:text-accent-gold transition-all font-bold">Return to Library</button>
-</div>
-
-<script>
-  const cursor = document.getElementById('custom-cursor');
-  document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-  });
-
-  const archiveData = {
-      hopes: { 
-    title: "Silent Hopes", 
-    img: "https://i.ibb.co/hF6Zg26R/image.png",
-    quotes: [
-        "Silent hopes speak louder than words.",
-        "Even in silence, hope shines.",
-        "Hearts whisper what the world cannot hear.",
-        "Silence is the most powerful scream.",
-        "Hopes don't die, they just wait.",
-        "In the desert of life, hope is the only spring.",
-        "Hope is the quiet companion of the soul.",
-        "Even the smallest hope can light the darkest night.",
-        "Hope is patient, even when the heart is weary.",
-        "Silent dreams often become the strongest reality.",
-        "Hope does not shout, it endures.",
-        "In the stillness, hope gathers strength.",
-        "Hopes grow in the soil of perseverance.",
-        "Even broken hearts carry seeds of hope.",
-        "Hope is the heartbeat of the soul.",
-        "Silent hopes are the whispers of tomorrow.",
-        "The quietest hope can create the loudest change.",
-        "Hope is a flame that never truly goes out.",
-        "Even when all seems lost, hope waits.",
-        "Hope is the compass that guides the wandering heart.",
-        "A hopeful heart never truly surrenders.",
-        "Silent hopes are the architects of destiny.",
-        "Hope is the courage to dream in the dark.",
-        "Even in pain, hope paints a brighter horizon.",
-        "Hopes unspoken are often the most powerful.",
-        "Hope turns despair into a gentle lesson.",
-        "Silent hope is stronger than the loudest fear.",
-        "Hope listens when the world turns its back.",
-        "In silence, hope quietly conquers doubt.",
-        "Hope is the anchor in life’s turbulent sea.",
-        "Silent hopes are the seeds of resilience.",
-        "Hope is not seen, but always felt.",
-        "Even in sorrow, hope quietly blooms.",
-        "Hope is the soul’s invisible wings.",
-        "Silent dreams are the blueprint of tomorrow.",
-        "Hope whispers, 'Try again.'",
-        "Even in darkness, hope is the unseen light.",
-        "Hope is the quiet rebellion against despair.",
-        "Silent hope carries the weight of eternity.",
-        "Hope is the melody that plays in the stillness.",
-        "Even when silent, hope moves mountains.",
-        "Hope is the courage to wait without losing faith.",
-        "Silent hopes are the foundation of miracles.",
-        "Hope is patience wrapped in a gentle heart.",
-        "Even a flicker of hope can ignite a thousand dreams.",
-        "Hope sees beyond the horizon of doubt.",
-        "Silent hope is the guardian of dreams.",
-        "Hope is the promise the soul makes to itself.",
-        "Even when unheard, hope changes everything.",
-        "Hope is the quiet bridge to possibility.",
-        "Silent hopes turn wishes into reality.",
-        "Hope is the spark that survives the storm.",
-        "Even the faintest hope can guide the lost.",
-        "Hope is the song that never ends.",
-        "Silent hope teaches the power of persistence.",
-        "Hope is the light that shadows cannot touch.",
-        "Even in silence, hope keeps the heart alive.",
-        "Hope is the courage to believe in unseen paths.",
-        "Silent hopes are the whispers of strength.",
-        "Hope is the invisible hand that leads us forward.",
-        "Even in doubt, hope remains unbroken.",
-        "Hope is the quiet hero in every struggle.",
-        "Silent hope is the seed of transformation.",
-        "Hope never demands; it quietly awaits.",
-        "Even the softest hope can awaken a dream.",
-        "Hope is the soul’s unseen lifeline.",
-        "Silent hopes outlast despair.",
-        "Hope is the gentle force that shapes destiny.",
-        "Even when muted, hope carries its song.",
-        "Hope is the unseen hand holding yours in darkness.",
-        "Silent hopes remind us that tomorrow is possible.",
-        "Hope is the courage to keep moving forward.",
-        "Even in waiting, hope remains active.",
-        "Hope is the whisper that says, 'Not yet.'",
-        "Silent hopes transform patience into power.",
-        "Hope is the invisible light that guides weary hearts.",
-        "Even in silence, hope leaves footprints.",
-        "Hope is the gentle wind beneath quiet wings.",
-        "Silent hopes are the unseen architects of life.",
-        "Hope is the quiet force that conquers fear.",
-        "Even the tiniest hope can start a revolution.",
-        "Hope is the heartbeat of persistence.",
-        "Silent hopes survive storms that words cannot endure.",
-        "Hope is the anchor in the unseen currents of life.",
-        "Even when unseen, hope shapes destiny.",
-        "Hope is the quiet miracle that changes everything.",
-        "Silent hopes are stronger than spoken doubts.",
-        "Hope is the soul’s promise to continue.",
-        "Even in darkness, hope leaves a trail of light.",
-        "Hope is the gentle persistence that outlasts despair.",
-        "Silent hopes are the whispers of triumph.",
-        "Hope is the invisible courage that moves us forward.",
-        "Even in silence, hope prepares the next step.",
-        "Hope is the quiet fire that refuses to die.",
-        "Silent hopes are the blueprint of dreams.",
-        "Hope is the unseen bridge to tomorrow.",
-        "Even when unheard, hope fuels the heart.",
-        "Hope is the quiet revolution inside every soul."
-          ]
-      },
-     silence: { 
-    title: "The Silence", 
-    img: "https://i.ibb.co/gZBLPfsj/image.png",
-    quotes: [
-        "Silence speaks when words fail.",
-        "In silence, souls find their voice.",
-        "Truths are found in silence.",
-        "Silence peoples are the ones who observe the most.",
-        "A profound silence is more meaningful than a thousand empty words.",
-        "Silence is the language of the heart.",
-        "In the quiet, we hear the soul's whispers.",
-        "Silence is the bridge to understanding.",
-        "Even in silence, love and hope remain.",
-        "The mind learns more in silence than in chatter.",
-        "Silence is not emptiness; it is full of meaning.",
-        "Listen to silence; it often speaks the truth.",
-        "Peace lives where silence reigns.",
-        "In stillness, the soul finds clarity.",
-        "Silence is the friend of the wise.",
-        "Even the loudest heart needs moments of silence.",
-        "A silent mind is a powerful mind.",
-        "Silence heals what words cannot.",
-        "The deepest thoughts are often kept in silence.",
-        "In silence, life reveals its secrets.",
-        "Silence is patience waiting to be heard.",
-        "The soul grows stronger in silence.",
-        "Silence is a mirror of the heart.",
-        "Even in noise, find a moment of silence.",
-        "Silence is wisdom’s gentle whisper.",
-        "Quiet moments hold the loudest truths.",
-        "In the absence of words, silence speaks volumes.",
-        "Silence is the cradle of thought.",
-        "Stillness is the home of inner peace.",
-        "The beauty of silence lies in its simplicity.",
-        "A quiet mind listens to the universe.",
-        "Silence is strength unspoken.",
-        "In silence, the heart speaks clearly.",
-        "Even shadows need silence to rest.",
-        "Silence is a companion to reflection.",
-        "Through silence, we find ourselves.",
-        "Silence is a sacred space for the soul.",
-        "The art of listening begins in silence.",
-        "Even the earth sleeps in silence.",
-        "Silence is the garden where wisdom blooms.",
-        "Quiet minds create loud impacts.",
-        "Silence carries the weight of understanding.",
-        "In stillness, the mind is free.",
-        "Silence allows the soul to breathe.",
-        "A peaceful heart thrives in silence.",
-        "The mind answers its questions in silence.",
-        "Silence can be louder than a scream.",
-        "A quiet soul shines brightest.",
-        "Silence is a pause for the spirit.",
-        "Stillness speaks to the seeker.",
-        "Silence is the music of the heart.",
-        "A moment of silence can change a lifetime.",
-        "In the quiet, thoughts take flight.",
-        "Silence teaches the value of words.",
-        "The soul whispers truths in silence.",
-        "Silence is the ultimate meditation.",
-        "In silence, love finds its way.",
-        "Quiet minds understand more.",
-        "Silence is the language of the brave.",
-        "Even the stars rest in silence.",
-        "A silent heart is full of wisdom.",
-        "Silence is the space where dreams begin.",
-        "The strongest ideas are born in silence.",
-        "Silence holds the answers we seek.",
-        "Even amidst chaos, find your silence.",
-        "Silence is a friend who never betrays.",
-        "In stillness, clarity emerges.",
-        "Silence is patience wrapped in calm.",
-        "The mind shines brightest in silence.",
-        "A soul in silence is never lonely.",
-        "Silence is the companion of creativity.",
-        "Through quiet, we see deeply.",
-        "Silence nurtures the spirit.",
-        "A quiet mind is a sharp mind.",
-        "Silence is the voice of the soul.",
-        "The most profound thoughts are unspoken.",
-        "Even mountains sleep in silence.",
-        "Silence strengthens what words cannot.",
-        "In silence, we touch eternity.",
-        "Quiet hearts hold the loudest love.",
-        "Silence is the key to inner peace.",
-        "Even rivers know the beauty of silence.",
-        "The soul dances in silent joy.",
-        "Silence is the cradle of the wise.",
-        "Quiet moments reveal hidden truths.",
-        "Silence is the path to understanding.",
-        "Even storms respect silence.",
-        "In silence, we hear our true selves.",
-        "Silence is a gentle teacher.",
-        "A quiet life is a peaceful life.",
-        "Silence heals the unseen wounds.",
-        "In stillness, hope grows.",
-        "Silence carries the echoes of eternity.",
-        "Quiet moments are the soul’s treasures.",
-        "Silence is a river flowing within.",
-        "Even the wind knows when to be silent.",
-        "Silence is a canvas for the mind.",
-        "A still mind is a powerful mind.",
-        "Silence is the whisper of wisdom.",
-        "In quiet, the world speaks.",
-        "Silence is strength wrapped in calm.",
-        "Even time rests in silence.",
-        "The soul listens when silence speaks.",
-        "Silence is the home of patience.",
-        "Quiet hearts know true peace.",
-        "Silence is the root of understanding.",
-        "In the absence of noise, truth appears.",
-        "Silence is the soul’s best companion.",
-        "Even the night thrives in silence.",
-        "Quiet is the seed of reflection.",
-        "Silence nourishes the mind and heart.",
-        "In silence, clarity is born.",
-        "Silence is the gateway to wisdom.",
-        "Even the earth breathes in silence.",
-        "A silent mind sees the unseen.",
-        "Silence is the whisper of the universe.",
-        "In quiet, the heart awakens.",
-        "Silence speaks to those who listen.",
-        "Even the stars shine in silent harmony.",
-        "Silence is a treasure of the wise.",
-        "A quiet soul hears more than the ears.",
-        "In stillness, the mind is at peace.",
-        "Silence is a refuge for the weary.",
-        "Even oceans rest in silence.",
-        "Silence teaches the value of presence.",
-        "In quiet moments, love blossoms.",
-        "Silence is a friend who understands.",
-        "A quiet heart feels deeply.",
-        "Silence is the voice of patience.",
-        "Even deserts breathe in silence.",
-        "In stillness, power is found.",
-        "Silence carries the wisdom of ages.",
-        "A quiet mind creates extraordinary things.",
-        "Silence is the mirror of the soul.",
-        "In silence, we meet ourselves.",
-        "Even fleeting moments of silence leave a mark.",
-        "Silence is the echo of eternity.",
-        "A quiet mind sees the world clearly.",
-        "Silence is the soul’s gentle embrace.",
-        "In stillness, courage is born.",
-        "Silence is the wisdom of patience.",
-        "Even the smallest silence can speak loudly.",
-        "Quiet minds shape profound futures.",
-        "Silence brings the soul closer to truth.",
-        "In silence, love grows stronger.",
-        "Silence is the rhythm of the universe.",
-        "Even in absence, silence remains a friend.",
-        "A quiet heart whispers the loudest truths.",
-        "Silence holds the universe’s secrets.",
-        "In stillness, dreams take shape.",
-        "Silence is the voice of self-discovery.",
-        "Even in noise, silence preserves peace.",
-        "Quiet moments create lasting memories.",
-        "Silence is the soul’s gentle guide.",
-        "In silence, wisdom is revealed.",
-        "Silence is patience with understanding.",
-        "Even time listens to silence.",
-        "A quiet mind nurtures creativity.",
-        "Silence is the home of inner strength.",
-        "In stillness, clarity becomes visible.",
-        "Silence is a sanctuary for the spirit.",
-        "Even storms find rest in silence.",
-        "Quiet hearts hold infinite depth.",
-        "Silence is the path to self-awareness.",
-        "In silence, the soul finds its true home.",
-        "Silence is a gentle friend to those who listen.",
-        "Even fleeting silences can heal deeply.",
-        "Quiet moments are windows to the soul.",
-        "Silence teaches the art of understanding.",
-        "In stillness, every truth is seen.",
-        "Silence is patience speaking without words.",
-        "Even the loudest chaos cannot disturb true silence.",
-        "Quiet minds see what the world misses.",
-        "Silence is the canvas of eternal thought.",
-        "In silence, hearts converse beyond words.",
-        "Silence is the teacher of hidden wisdom.",
-        "Even in darkness, silence shines bright.",
-        "Quiet souls carry the deepest strength.",
-        "Silence is the music of timeless hearts.",
-        "In stillness, love and hope blossom silently.",
-        "Silence speaks to those willing to hear.",
-        "Even whispers in silence carry meaning.",
-        "Quiet moments are the soul’s treasures forever."
-      ]
-      },
-      wisdom: { 
-          title: "Life Wisdom", img: "https://i.ibb.co/v4np474r/image.png",
-          quotes: [
-              "Experience is a cruel teacher.",
-              "Truth doesn't need a crowd.",
-              "Character is what you do in the dark.",
-              "People change, but memories stay.",
-              "The depth of a spirit is measured by its pain.",
-              "Patience is the companion of wisdom.",
-            "Silence often speaks louder than words.",
-            "The strongest hearts carry invisible scars.",
-            "Happiness is found in small moments.",
-        "Adversity reveals the true self.",
-        "Wisdom begins with listening.",
-        "Time heals, but memories remain.",
-        "Courage is fear that has said its prayers.",
-        "The mind that questions everything learns the most.",
-        "Success is a journey, not a destination.",
-        "Kindness is strength, not weakness.",
-        "The greatest battles are fought within.",
-        "Love wisely, but never lose yourself.",
-        "Sorrow teaches lessons joy cannot.",
-        "A humble heart sees far.",
-        "Freedom begins in the mind.",
-        "Regret is wasted energy; learn and move forward.",
-        "The path of truth is often lonely.",
-        "Those who forgive are the truly strong.",
-        "Actions speak louder than intentions.",
-        "The soul grows in silence and reflection.",
-        "Dreams without discipline are illusions.",
-        "What we give returns to us in unknown ways.",
-        "Wisdom is knowing what to overlook.",
-        "The darkest nights produce the brightest stars.",
-        "Life's value is measured in moments, not possessions.",
-        "Gratitude turns little into enough.",
-        "Strength is gentleness practiced consistently.",
-        "Your thoughts shape your reality.",
-        "Experience without reflection is wasted.",
-        "Learn to rest, not to quit.",
-        "Every end is a new beginning.",
-        "The truth always surfaces, eventually.",
-        "Seek respect, not attention.",
-        "Patience is bitter, but its fruit is sweet.",
-        "Time reveals what words cannot.",
-        "Mistakes are the tuition of growth.",
-        "A quiet mind sees opportunities clearly.",
-        "Do not fear change; embrace it.",
-        "True wisdom lies in simplicity.",
-        "People often reveal themselves through their actions, not words.",
-        "Happiness is a choice, not a circumstance.",
-        "Wisdom is forged in the fire of mistakes.",
-        "Listen more than you speak; learn more than you teach.",
-        "Life is fragile; cherish it daily.",
-        "The strongest trees grow in the harshest climates.",
-        "Knowledge is knowing facts; wisdom is knowing what matters.",
-        "Forgiveness frees the soul, not the other person.",
-        "The journey is more important than the destination.",
-        "Expect nothing and appreciate everything.",
-        "Life's challenges are opportunities in disguise.",
-        "What you tolerate today shapes tomorrow.",
-        "Peace begins when judgment ends.",
-        "Wisdom is the art of knowing what to do next.",
-        "Happiness grows when shared.",
-        "A kind word is never wasted.",
-        "The more you give, the more you have.",
-        "Every failure carries the seed of success.",
-        "Patience is the companion of perspective.",
-        "Your choices define you more than your circumstances.",
-        "Learn to let go of what you cannot control.",
-        "The simplest truths are often the hardest to accept.",
-        "Fear is temporary; regret lasts longer.",
-        "The heart never forgets true kindness.",
-        "Time is the wisest teacher; regret is its student.",
-        "Silence allows the soul to speak.",
-        "Grief is a journey, not a destination.",
-        "Adversity is the greatest teacher of resilience.",
-        "Wisdom is understanding the difference between knowledge and action.",
-        "Happiness is created, not found.",
-        "The smallest steps often lead to the greatest journeys.",
-        "Life rewards courage, not comfort.",
-        "Those who seek wisdom must be prepared to be uncomfortable.",
-        "Success without humility is failure in disguise.",
-        "The mind is a garden; your thoughts are the seeds.",
-        "Life is a mirror; what you reflect returns to you.",
-        "The strongest people are often the quietest.",
-        "Love deeply, but never lose your self-respect.",
-        "Your struggles today are your strength tomorrow.",
-        "Wisdom is knowing the limits of your knowledge.",
-        "Patience is learning to dance in the rain.",
-        "Life is a collection of fleeting moments; treasure each one.",
-        "True wealth is measured by memories, not money.",
-        "The soul cannot thrive where greed resides.",
-        "Learn to embrace solitude; it teaches more than company.",
-        "Happiness is not avoiding pain, but learning from it.",
-        "Time spent wisely multiplies endlessly.",
-        "Gratitude transforms the ordinary into extraordinary.",
-        "True strength is gentleness controlled.",
-        "Life tests those who matter most with the hardest trials.",
-        "Hurt people hurt others; heal yourself first.",
-        "Wisdom is the reward for patience and reflection.",
-        "Fear is a liar; courage is a choice.",
-        "Your actions echo longer than your words.",
-        "In every ending, a lesson begins.",
-        "Life whispers in moments of stillness.",
-        "Kindness creates ripples that never end.",
-        "Learn to see the invisible threads connecting all things.",
-        "Experience is the sculptor of character.",
-        "Humility precedes greatness.",
-        "Those who value time, value life.",
-        "Life is a balance between holding on and letting go.",
-        "The greatest treasures are invisible to the eye.",
-        "Reflection turns mistakes into wisdom.",
-        "Life’s storms reveal the sturdiness of your roots.",
-        "True insight comes from living, not reading.",
-        "Be slow to judge, quick to understand.",
-        "The mind that overthinks often misses the moment.",
-        "Patience is the bridge between ambition and achievement.",
-        "Learn to listen to your heart over the crowd.",
-        "Every scar tells a story of survival.",
-        "Knowledge without empathy is meaningless.",
-        "Life is fragile; handle it with care.",
-        "Joy is found in acceptance, not control.",
-        "Even small acts of courage have great impact.",
-        "Life rewards those who persist in kindness.",
-        "The wise see opportunities where others see obstacles.",
-        "Success is fleeting; character lasts forever.",
-        "A calm mind conquers the fiercest battles.",
-        "Time spent reflecting is never wasted.",
-        "The soul grows when tested by adversity.",
-        "Happiness is a skill, not a chance.",
-        "The strongest hearts forgive, even when betrayed.",
-        "True freedom comes from inner peace.",
-        "Life is the teacher; suffering is the lesson.",
-        "Every sunrise brings a chance to grow wiser.",
-        "The mind remembers lessons more than rules.",
-        "Patience and perseverance are twins of wisdom.",
-        "Happiness is the art of finding balance.",
-        "Life is not perfect, but perspective can be.",
-        "The quietest people often have the loudest thoughts.",
-        "Kindness costs nothing but enriches everything.",
-        "Wisdom is not in knowing everything, but in understanding enough.",
-        "The hardest lessons often lead to the greatest insights.",
-        "Time and experience reveal all truths.",
-        "A gentle heart is a sign of strength.",
-        "The wisest souls are often the most humble."
-          ]
-      },
-      betrayal: { 
-          title: "Faith & Pain", img: "https://images.unsplash.com/photo-1516339901600-2e1a6298ed34?auto=format&fit=crop&q=80&w=800",
-          quotes: [
-              "Faith is light betrayal cannot extinguish.",
-              "True faith remains unbroken.",
-              "Betrayal tests faith.",
-              "In the walk of life, betrayal is just a hurdle for the strong heart."
-          ]
-      },
-      love: { 
-          title: "Soul Love", img: "https://images.unsplash.com/photo-1494905998402-395d579af36f?auto=format&fit=crop&q=80&w=800",
-          quotes: [
-              "True love never fades.",
-              "Love remains when hearts are apart.",
-              "Souls remember love.",
-              "Love is a silent language of souls.",
-              "To love is to find yourself in another.",
-              "Soul connections never end."
-          ]
-      }
-  };
-
-  let currentCat = '';
-  let currentIdx = 0;
-
-  function renderGrid() {
-      const grid = document.getElementById('main-grid');
-      grid.innerHTML = '';
-      Object.keys(archiveData).forEach(id => {
-          const item = archiveData[id];
-          grid.innerHTML += `
-            <div class="archive-card" onclick="openReader('${id}')">
-                <img src="${item.img}" class="card-img" alt="${item.title}">
-                <div class="card-content">
-                    <h3 class="card-title">${item.title}</h3>
-                    <p class="card-count">${item.quotes.length} Fragments</p>
-                </div>
+    <header class="bg-white/95 backdrop-blur-md relative z-50 pt-6 md:pt-10 border-b border-gray-100 md:border-none">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center">
+            
+            <div class="text-center flex flex-col items-center">
+                <h1 class="brush-title text-3xl sm:text-5xl md:text-7xl">
+                    THE FACE OF DEATH
+                </h1>
+                <p class="author-text">
+                    By Hassan Jatoi
+                </p>
             </div>
-          `;
-      });
-  }
 
-  function openReader(id) {
-      currentCat = id;
-      currentIdx = 0;
-      document.getElementById('reader').style.display = 'flex';
-      updateQuote();
-  }
+            <img src="https://i.ibb.co/BKGKSCJJ/unnamed.png" alt="Visual Art" class="main-visual">
 
-  function closeReader() { document.getElementById('reader').style.display = 'none'; }
+            <nav class="hidden md:flex items-center space-x-8 lg:space-x-12 nav-font text-[11px] mb-10">
+                <a href="#" class="hover:text-red-700 transition-colors">The Abyss</a>
+                <a href="#" class="hover:text-red-700 transition-colors">Chronicles</a>
+                <a href="#" class="btn-brush mx-4">ENTER VOID</a>
+                <a href="#" class="hover:text-red-700 transition-colors">The Gallery</a>
+                <a href="#" class="hover:text-red-700 transition-colors">Summon</a>
+            </nav>
 
-  function updateQuote() {
-      const text = archiveData[currentCat].quotes[currentIdx];
-      const el = document.getElementById('quote-text');
-      el.style.opacity = 0;
-      el.style.transform = 'translateY(15px)';
-      setTimeout(() => {
-          el.textContent = `${text}`;
-          el.style.opacity = 1;
-          el.style.transform = 'translateY(0)';
-          document.getElementById('counter').textContent = `${currentIdx + 1} / ${archiveData[currentCat].quotes.length}`;
-      }, 300);
-  }
+            <div class="md:hidden pb-6">
+                <button id="menu-btn" class="flex items-center space-x-2 text-black px-4 py-2 bg-gray-50 border border-gray-200 rounded-full active:scale-95 transition-transform">
+                    <span class="nav-font text-[10px]">MENU</span>
+                    <svg id="menu-icon-svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 8h16M4 16h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
 
-  function changeQuote(dir) {
-      const len = archiveData[currentCat].quotes.length;
-      currentIdx = (currentIdx + dir + len) % len;
-      updateQuote();
-  }
+        <div class="brush-stroke-line"></div>
 
-  function scrollToGrid() {
-      document.getElementById('archive-section').scrollIntoView({ behavior: 'smooth' });
-  }
+        <div id="mobile-menu" class="md:hidden flex flex-col items-center nav-font">
+            <a href="#" class="p-4 w-full text-center border-b border-gray-50">The Abyss</a>
+            <a href="#" class="p-4 w-full text-center border-b border-gray-50">Chronicles</a>
+            <a href="#" class="p-4 w-full text-center border-b border-gray-50">The Gallery</a>
+            <a href="#" class="p-4 w-full text-center border-b border-gray-50 pb-6">Summon</a>
+            <div class="pb-10">
+                <button class="btn-brush text-xs">ENTER VOID</button>
+            </div>
+        </div>
+    </header>
 
-  setInterval(() => {
-      document.getElementById('live-time').textContent = `ACTIVE_SESSION // ${new Date().toLocaleTimeString()}`;
-  }, 1000);
+    <main class="flex flex-col items-center justify-center mt-12 md:mt-24 px-6 pb-32">
+        <div class="max-w-3xl w-full text-center">
+            <h2 class="text-3xl md:text-6xl font-bold mb-4 md:mb-12 font-serif">A Legacy in Ink</h2>
+            
+            <div class="poetry-container text-lg md:text-xl leading-relaxed text-gray-800 font-serif">
+                
+                <!-- SECTION 1: SEPARATION -->
+                <div class="poetry-stanza">
+                    <span class="poetry-line">Separation enters a human life quietly</span>
+                    <span class="poetry-line">It does not announce itself</span>
+                    <span class="poetry-line">It does not warn the heart</span>
+                    <span class="poetry-line">It simply arrives</span>
+                    <span class="poetry-line">And once it arrives</span>
+                    <span class="poetry-line">Nothing ever feels the same again</span>
+                </div>
 
-  const album = ["https://i.ibb.co/hF6Zg26R/image.png", "https://i.ibb.co/gZBLPfsj/image.png", "https://i.ibb.co/v4np474r/image.png"];
-  let hIdx = 0;
-  setInterval(() => {
-      hIdx = (hIdx + 1) % album.length;
-      const img = document.getElementById('hero-img');
-      img.style.opacity = '0';
-      setTimeout(() => { img.src = album[hIdx]; img.style.opacity = '0.45'; }, 1000);
-  }, 8000);
+                <div class="poetry-stanza">
+                    <span class="poetry-line">Judai slowly teaches a person how to breathe with pain</span>
+                    <span class="poetry-line">How to smile while breaking inside</span>
+                    <span class="poetry-line">How to live while feeling unfinished</span>
+                </div>
 
-  window.onload = renderGrid;
-</script>
+                <div class="poetry-stanza">
+                    <span class="poetry-line">A separated heart does not stop loving</span>
+                    <span class="poetry-line">It only stops resting</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line">Every morning begins with tired hope</span>
+                    <span class="poetry-line">Every night ends with unanswered thoughts</span>
+                    <span class="poetry-line">The soul remembers even when the mind begs to forget</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line">Separation does not steal a person from you</span>
+                    <span class="poetry-line">It steals peace from your existence</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line">You walk, You talk, You survive</span>
+                    <span class="poetry-line">But something inside you remains seated at the moment they left</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line">Judai makes time cruel</span>
+                    <span class="poetry-line">Seconds feel heavier than years</span>
+                    <span class="poetry-line">Years feel empty without meaning</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line">You replay memories not because they are beautiful</span>
+                    <span class="poetry-line">But because they are all you have left</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line">A separated person is not weak</span>
+                    <span class="poetry-line">They are just carrying too much quietly</span>
+                    <span class="poetry-line">They learn to keep emotions inside</span>
+                    <span class="poetry-line">Because the world does not understand silent pain</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line">Judai does not kill instantly</span>
+                    <span class="poetry-line">It kills slowly, It kills gently, It kills daily</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line font-bold text-red-900">And the worst pain is</span>
+                    <span class="poetry-line font-bold text-red-900">You are alive enough to feel everything</span>
+                </div>
+
+                <!-- COLOURFUL BRUSH SEPARATOR -->
+                <div class="separator-line"></div>
+
+                <!-- SECTION 2: LONELINESS -->
+                <div class="poetry-stanza">
+                    <span class="poetry-line">Loneliness is not the absence of people</span>
+                    <span class="poetry-line">Loneliness is the absence of understanding</span>
+                    <span class="poetry-line">Tanhai sits next to you even in crowds</span>
+                    <span class="poetry-line">It listens when no one else does</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line">Loneliness speaks in the language of nights</span>
+                    <span class="poetry-line">When lights are off, When voices are gone</span>
+                    <span class="poetry-line">When memories grow louder</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line">A lonely heart does not cry loudly</span>
+                    <span class="poetry-line">It sinks silently</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line">You sit with your phone</span>
+                    <span class="poetry-line">Scrolling through moments that once felt real</span>
+                    <span class="poetry-line">Wondering how life moved on without asking you</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line">Memories return like uninvited guests</span>
+                    <span class="poetry-line">They knock on your chest, Not your door</span>
+                    <span class="poetry-line">They remind you of warmth, Then leave you colder than before</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line">Yaadein do not let a person live fully</span>
+                    <span class="poetry-line">They keep pulling the soul backward</span>
+                    <span class="poetry-line">You try to be present but your heart lives somewhere else</span>
+                    <span class="poetry-line">In a moment that no longer exists</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line">Loneliness teaches you patience in pain</span>
+                    <span class="poetry-line">It teaches you strength through exhaustion</span>
+                    <span class="poetry-line">You become strong not because you want to</span>
+                    <span class="poetry-line">But because no one notices your weakness</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line">Tanhai changes the way you love</span>
+                    <span class="poetry-line">You love deeply but silently</span>
+                    <span class="poetry-line">Because you are afraid of losing again</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line">Memories do not fade, They wait</span>
+                    <span class="poetry-line">They wait for quiet nights, tired hearts</span>
+                    <span class="poetry-line">They wait for moments when you pretend to be okay</span>
+                    <span class="poetry-line">And then they strike</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line">Loneliness does not destroy a person</span>
+                    <span class="poetry-line">It transforms them</span>
+                    <span class="poetry-line">It turns innocence into awareness</span>
+                    <span class="poetry-line">Trust into caution, Love into depth</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line italic text-gray-500">But the cost is heavy...</span>
+                    <span class="poetry-line">You lose the ability to feel simple happiness</span>
+                    <span class="poetry-line">Because everything now carries a memory</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line">And yet, Despite separation, loneliness, and memories</span>
+                    <span class="poetry-line">The human heart continues</span>
+                    <span class="poetry-line">Because living becomes a habit, Even when joy becomes rare</span>
+                </div>
+
+                <div class="poetry-stanza">
+                    <span class="poetry-line font-bold text-red-900 text-2xl mt-4">And this is the tragedy</span>
+                    <span class="poetry-line">Not dying from pain</span>
+                    <span class="poetry-line">But living with it</span>
+                    <span class="poetry-line font-bold italic">Every single day</span>
+                </div>
+                
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIconPath = document.getElementById('menu-icon-path');
+
+        menuBtn.addEventListener('click', () => {
+            const isActive = mobileMenu.classList.toggle('active');
+            if (isActive) {
+                menuIconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+            } else {
+                menuIconPath.setAttribute('d', 'M4 8h16M4 16h16');
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                mobileMenu.classList.remove('active');
+                menuIconPath.setAttribute('d', 'M4 8h16M4 16h16');
+            }
+        });
+    </script>
 </body>
 </html>
