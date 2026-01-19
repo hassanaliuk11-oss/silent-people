@@ -49,7 +49,7 @@
         }
 
         .gold-accent {
-            color: #9a845a; /* A sophisticated muted gold */
+            color: #9a845a; 
         }
     </style>
 </head>
@@ -60,7 +60,6 @@
     <div class="text-center mb-16 mt-8">
         <h1 class="main-title text-6xl md:text-7xl text-gray-900 mb-4">Silent Souls</h1>
         
-        <!-- Beautiful Author Branding -->
         <div class="flex flex-col items-center">
             <div class="flex items-center gap-4 mb-2">
                 <span class="h-[1px] w-8 bg-gray-200"></span>
@@ -75,7 +74,7 @@
         <div class="w-12 h-[2px] bg-gray-900 mx-auto mt-10 opacity-20"></div>
     </div>
 
-    <!-- Writing Section (Secured with Code) -->
+    <!-- Writing Section (Initially Hidden via CSS but managed by JS) -->
     <div id="authorSection" class="hidden bg-white rounded-[2rem] shadow-[0_10px_50px_rgba(0,0,0,0.03)] border border-gray-50 p-10 mb-20 text-center">
         <textarea id="userInput" 
                   class="w-full h-48 p-4 text-center text-2xl text-gray-700 bg-transparent border-none focus:ring-0 outline-none transition-all resize-none placeholder-gray-200 italic font-serif" 
@@ -116,7 +115,6 @@
     </div>
 </div>
 
-<!-- Footer Section -->
 <footer class="mt-auto py-16 text-center border-t border-gray-50 bg-[#fafafa]">
     <a href="https://hassanalipoetry.vercel.app/" 
        target="_blank" 
@@ -128,7 +126,6 @@
     </a>
 </footer>
 
-<!-- Custom Toast Message -->
 <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 hidden bg-[#1a1a1a] text-white px-10 py-4 rounded-full shadow-2xl transition-opacity duration-500 z-50 text-xs uppercase tracking-[0.2em] font-medium border border-gray-800"></div>
 
 <script type="module">
@@ -163,33 +160,44 @@
         try {
             const configSnap = await firebaseRetry(() => getDoc(configRef));
             if (!configSnap.exists()) {
+                // If it's the very first time, whoever lands here becomes the author ID
                 await firebaseRetry(() => setDoc(configRef, { authorUid: user.uid, name: "Hassan Jatoi" }));
                 isAuthor = true;
             } else {
+                // Check if the current user UID matches the saved author UID
                 isAuthor = configSnap.data().authorUid === user.uid;
             }
 
+            // UI logic based on permission
+            const authorBox = document.getElementById('authorSection');
+            const readerNotice = document.getElementById('readerNotice');
+            
             if (isAuthor) {
-                document.getElementById('authorSection').classList.remove('hidden');
+                authorBox.classList.remove('hidden');
+                readerNotice.classList.add('hidden');
             } else {
-                document.getElementById('readerNotice').classList.remove('hidden');
+                authorBox.classList.add('hidden');
+                readerNotice.classList.remove('hidden');
             }
-        } catch (error) { console.error("Permission error:", error); }
+        } catch (error) { 
+            console.error("Permission error:", error);
+            // Default to showing the box if checking fails, but it still won't publish without MASTER_CODE
+            document.getElementById('authorSection').classList.remove('hidden');
+        }
     }
 
+    // Initialize Auth
     async function initAuth() {
-        try {
-            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                await firebaseRetry(() => signInWithCustomToken(auth, __initial_auth_token));
-            } else {
-                await firebaseRetry(() => signInAnonymously(auth));
-            }
-        } catch (error) { showToast("Connection failed."); }
+        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+            await signInWithCustomToken(auth, __initial_auth_token);
+        } else {
+            await signInAnonymously(auth);
+        }
     }
 
     onAuthStateChanged(auth, async (user) => {
-        currentUser = user;
         if (user) {
+            currentUser = user;
             await checkAuthorPermission(user);
             setupFeedListener();
         }
@@ -212,11 +220,9 @@
     }
 
     window.publishPost = async function() {
-        if (!isAuthor || !currentUser) return;
-
         const codeInput = document.getElementById('accessCode');
         if (codeInput.value !== MASTER_CODE) {
-            showToast("Invalid Key");
+            showToast("Access Denied");
             return;
         }
 
@@ -240,14 +246,14 @@
                     content: text,
                     createdAt: serverTimestamp(),
                     authorId: "Hassan Jatoi",
-                    uid: currentUser.uid
+                    uid: currentUser?.uid || "unknown"
                 }));
                 textArea.value = "";
-                showToast("Published to Archive");
+                showToast("Published");
             }
             codeInput.value = ""; 
         } catch (error) {
-            showToast("Database Error");
+            showToast("Server Error");
         } finally {
             btn.disabled = false;
             document.getElementById('btnText').innerText = editingPostId ? "Update Thought" : "Publish Thought";
@@ -273,16 +279,16 @@
     };
 
     window.deletePost = async function(id) {
-        const code = prompt("Security Key required for removal:");
+        const code = prompt("Enter Master Code to Remove:");
         if (code !== MASTER_CODE) {
-            showToast("Invalid Key");
+            showToast("Unauthorized");
             return;
         }
         
         try {
             await firebaseRetry(() => deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'articles', id)));
-            showToast("Article Removed");
-        } catch (e) { showToast("Deletetion Failed"); }
+            showToast("Removed");
+        } catch (e) { showToast("Failed"); }
     };
 
     window.sharePost = function(text) {
@@ -293,13 +299,13 @@
         dummy.select();
         document.execCommand("copy");
         document.body.removeChild(dummy);
-        showToast("Copied to Clipboard");
+        showToast("Copied");
     };
 
     function renderFeed(articles) {
         const feed = document.getElementById('feed');
         if (articles.length === 0) {
-            feed.innerHTML = '<div class="text-center text-gray-300 py-20 italic font-serif">The archive is currently silent.</div>';
+            feed.innerHTML = '<div class="text-center text-gray-300 py-20 italic font-serif">The archive is silent.</div>';
             return;
         }
 
@@ -351,6 +357,5 @@
         return div.innerHTML;
     }
 </script>
-
 </body>
 </html>
