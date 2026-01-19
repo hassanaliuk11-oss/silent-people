@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manual CNIC Copy Maker - Professional</title>
+    <title>Manual CNIC Copy Maker - By Hassan Jatoi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .cnic-card-ui {
@@ -45,7 +45,7 @@
         <div class="bg-blue-800 p-4 text-white flex justify-between items-center">
             <div>
                 <h1 class="font-bold text-lg leading-tight">Manual CNIC Copy Tool</h1>
-                <p class="text-[10px] opacity-80">Har card apni marzi se add aur select karein</p>
+                <p class="text-[10px] text-yellow-300 font-semibold tracking-wider">SOFTWARE DEVELOPED BY HASSAN JATOI</p>
             </div>
             <div class="flex gap-3">
                 <button onclick="addCard()" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-sm font-bold shadow-md transition-all active:scale-95">
@@ -64,6 +64,11 @@
     <!-- Paper Container -->
     <div id="printArea" class="page-preview">
         <!-- Cards added here -->
+    </div>
+
+    <!-- Footer Credit in UI -->
+    <div class="text-gray-400 text-xs mt-4 no-print">
+        Designed & Developed by <span class="text-white font-bold">Hassan Jatoi</span>
     </div>
 
     <script>
@@ -115,7 +120,6 @@
                 return;
             }
 
-            // Get all images
             let imagesHtml = '';
             cards.forEach(card => {
                 const imgSrc = card.querySelector('img').src;
@@ -126,14 +130,13 @@
                 }
             });
 
-            // Open new window for clean print
             const printWin = window.open('', '_blank');
             printWin.document.write(`
                 <html>
                 <head>
-                    <title>CNIC Print</title>
+                    <title>CNIC Print - Hassan Jatoi</title>
                     <style>
-                        body { margin: 0; padding: 0; background: white; }
+                        body { margin: 0; padding: 0; background: white; font-family: Arial, sans-serif; }
                         .print-page {
                             width: 210mm;
                             height: 297mm;
@@ -143,6 +146,7 @@
                             grid-template-columns: 1fr 1fr;
                             grid-auto-rows: 53.98mm;
                             gap: 5mm;
+                            position: relative;
                         }
                         .print-card {
                             width: 85.6mm;
@@ -155,12 +159,20 @@
                             height: 100%;
                             object-fit: cover;
                         }
+                        .footer-credit {
+                            position: absolute;
+                            bottom: 5mm;
+                            right: 10mm;
+                            font-size: 8pt;
+                            color: #666;
+                        }
                         @page { size: A4; margin: 0; }
                     </style>
                 </head>
                 <body>
                     <div class="print-page">
                         ${imagesHtml}
+                        <div class="footer-credit text-right">Software Developed By Hassan Jatoi</div>
                     </div>
                     <script>
                         window.onload = function() {
@@ -174,7 +186,6 @@
             printWin.document.close();
         }
 
-        // Add first card automatically
         window.onload = addCard;
     </script>
 </body>
