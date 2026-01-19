@@ -3,360 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Silent Peoples - Hassan Jatoi</title>
+    <title>Silent Souls - Writing Pad</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for a premium literary look -->
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@300;400;500&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Lora:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap');
-
-        :root {
-            --bg-color: #ffffff;
-            --text-color: #1a1a1a;
-            --sidebar-bg: #0f172a;
-            --gold-primary: #d4af37;
-            --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+        body { 
+            background: #fdfdfd; 
+            font-family: 'Poppins', sans-serif;
+            color: #1a1a1a;
         }
-
-        body {
-            transition: background-color 0.3s, color 0.3s;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        body.dark-mode {
-            --bg-color: #0a0a0a;
-            --text-color: #e2e8f0;
-        }
-
-        body.sepia-mode {
-            --bg-color: #fbf0d9;
-            --text-color: #433422;
-        }
-
-        article {
-            font-family: 'Lora', serif;
-        }
-
-        /* Gold Text Utility */
-        .gold-text {
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
-
-        /* Drop Cap Styling */
-        .drop-cap::first-letter {
-            float: left;
-            font-size: 4.5rem;
-            line-height: 0.8;
-            padding-top: 4px;
-            padding-right: 12px;
-            font-weight: 700;
-            font-family: 'Playfair Display', serif;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .sidebar {
-            height: 100vh;
-            width: 280px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: var(--sidebar-bg);
-            transition: transform 0.3s ease-in-out;
-            z-index: 50;
-            border-right: 1px solid rgba(212, 175, 55, 0.3);
-        }
-
-        .content-area {
-            margin-left: 280px;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .reading-container {
-            width: 100%;
-            max-width: 760px;
-            padding: 0 1.5rem;
-        }
-
-        /* Premium Book Cover Styling */
-        .book-cover-img {
-            width: 100%;
-            height: 550px;
-            background: radial-gradient(circle at center, #1e293b 0%, #020617 100%);
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            margin-bottom: 3rem;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid #d4af37;
-        }
-
-        .book-cover-img::before {
-            content: "";
-            position: absolute;
-            inset: 20px;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            pointer-events: none;
-        }
-
-        .book-cover-img h1 {
-            font-family: 'Playfair Display', serif;
+        .main-title { 
+            font-family: 'Playfair Display', serif; 
             letter-spacing: -0.02em;
         }
-
-        @media (max-width: 1024px) {
-            .sidebar { transform: translateX(-100%); }
-            .sidebar.active { transform: translateX(0); }
-            .content-area { margin-left: 0; }
-            .book-cover-img { height: 450px; }
+        .author-brand {
+            font-family: 'Bodoni Moda', serif;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+        .post-card { 
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        .post-card:hover { 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+            transform: translateY(-2px);
+            border-color: #e5e5e5;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 10px; }
+        
+        .action-btn {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .post-card:hover .action-btn {
+            opacity: 1;
+        }
+        
+        .input-elegant:focus {
+            border-bottom: 1.5px solid #9a845a !important;
         }
 
-        .chapter-link {
-            padding: 12px 16px;
-            display: block;
-            color: #94a3b8;
-            border-radius: 8px;
-            margin-bottom: 4px;
-            transition: all 0.2s;
-        }
-
-        .chapter-link:hover, .chapter-link.active {
-            background-color: rgba(212, 175, 55, 0.1);
-            color: #d4af37;
-        }
-
-        .controls-bar {
-            position: sticky;
-            top: 0;
-            background: var(--bg-color);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            width: 100%;
-            z-index: 40;
-        }
-
-        .chapter-divider {
-            height: 1px;
-            background: var(--gold-gradient);
-            width: 60%;
-            margin: 4rem auto;
-            opacity: 0.3;
+        .gold-accent {
+            color: #9a845a; /* A sophisticated muted gold */
         }
     </style>
 </head>
-<body>
+<body class="p-4 md:p-12 min-h-screen flex flex-col">
 
-    <!-- Sidebar -->
-    <nav class="sidebar p-6 text-white overflow-y-auto" id="sidebar">
-        <div class="flex flex-col mb-8">
-            <h2 class="text-2xl font-bold tracking-tight gold-text">Silent Peoples</h2>
-            <p class="text-gray-400 text-sm font-medium mt-1">by Hassan Jatoi</p>
-            <button onclick="toggleSidebar()" class="lg:hidden absolute top-6 right-6 text-gray-400">✕</button>
-        </div>
-
-        <div class="space-y-1">
-            <p class="text-xs uppercase text-gray-500 font-bold mb-4 tracking-widest">Master Edition</p>
-            <a href="#cover" class="chapter-link active">Gold Edition Cover</a>
-            <a href="#prologue" class="chapter-link">Prologue</a>
-            <a href="#ch1" class="chapter-link">Chapter 1: Voices in Shadow</a>
-            <a href="#ch2" class="chapter-link">Chapter 2: The Unspoken Word</a>
-            <a href="#epilogue" class="chapter-link">Epilogue</a>
+<div class="max-w-3xl mx-auto flex-grow w-full">
+    <!-- Header Section -->
+    <div class="text-center mb-16 mt-8">
+        <h1 class="main-title text-6xl md:text-7xl text-gray-900 mb-4">Silent Souls</h1>
+        
+        <!-- Beautiful Author Branding -->
+        <div class="flex flex-col items-center">
+            <div class="flex items-center gap-4 mb-2">
+                <span class="h-[1px] w-8 bg-gray-200"></span>
+                <p class="author-brand text-sm md:text-base font-light tracking-[0.3em] text-gray-500">
+                    Author <span class="gold-accent font-normal mx-1">•</span> <span class="text-gray-800 font-medium">Hassan Jatoi</span>
+                </p>
+                <span class="h-[1px] w-8 bg-gray-200"></span>
+            </div>
+            <p class="text-[10px] uppercase tracking-[0.5em] text-gray-400 mt-1">Official Literary Archive</p>
         </div>
         
-        <div class="mt-20 pt-6 border-t border-slate-700">
-            <p class="text-xs text-slate-400 italic font-medium">Published 2026</p>
-        </div>
-    </nav>
-    <div class="mobile-overlay" onclick="toggleSidebar()"></div>
+        <div class="w-12 h-[2px] bg-gray-900 mx-auto mt-10 opacity-20"></div>
+    </div>
 
-    <!-- Main Content -->
-    <main class="content-area">
+    <!-- Writing Section (Secured with Code) -->
+    <div id="authorSection" class="hidden bg-white rounded-[2rem] shadow-[0_10px_50px_rgba(0,0,0,0.03)] border border-gray-50 p-10 mb-20 text-center">
+        <textarea id="userInput" 
+                  class="w-full h-48 p-4 text-center text-2xl text-gray-700 bg-transparent border-none focus:ring-0 outline-none transition-all resize-none placeholder-gray-200 italic font-serif" 
+                  placeholder="Capture the silence..."></textarea>
         
-        <!-- Toolbar -->
-        <header class="controls-bar">
-            <div class="max-w-[760px] mx-auto w-full px-6 py-3 flex justify-between items-center">
-                <button onclick="toggleSidebar()" class="lg:hidden p-2 hover:bg-gray-100 rounded-md transition">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                </button>
+        <div class="flex flex-col items-center mt-8 gap-6">
+            <div class="w-full max-w-[180px]">
+                <input type="password" id="accessCode" 
+                       class="input-elegant w-full text-center border-b border-gray-100 py-2 outline-none transition-all placeholder-gray-300 text-sm tracking-[0.2em] uppercase" 
+                       placeholder="Security Code">
+            </div>
 
-                <div class="flex gap-3">
-                    <button onclick="setTheme('light')" class="w-6 h-6 rounded-full border border-gray-300 bg-white ring-offset-2 hover:ring-2 ring-gray-200" title="Light"></button>
-                    <button onclick="setTheme('sepia')" class="w-6 h-6 rounded-full border border-gray-300 bg-[#fbf0d9] ring-offset-2 hover:ring-2 ring-amber-200" title="Sepia"></button>
-                    <button onclick="setTheme('dark')" class="w-6 h-6 rounded-full border border-gray-300 bg-[#121212] ring-offset-2 hover:ring-2 ring-blue-500" title="Dark"></button>
+            <button onclick="publishPost()" 
+                    id="publishBtn"
+                    class="bg-[#1a1a1a] hover:bg-black text-white text-sm uppercase tracking-widest font-medium py-4 px-12 rounded-full transition-all flex items-center gap-3 shadow-xl active:scale-95">
+                <span id="btnText">Publish Thought</span>
+            </button>
+            <button id="cancelEdit" onclick="cancelEditing()" class="hidden mt-2 text-[10px] uppercase tracking-widest text-red-400 hover:text-red-600">Cancel Editing</button>
+        </div>
+    </div>
+
+    <!-- Reader Section Message -->
+    <div id="readerNotice" class="text-center mb-16 hidden">
+        <p class="text-gray-400 text-sm italic font-light tracking-wide">Exploring the depths of silence through the words of Hassan Jatoi.</p>
+    </div>
+
+    <!-- Feed Section -->
+    <div class="mb-24">
+        <div class="flex items-center gap-4 mb-12 justify-center">
+            <span class="h-[1px] flex-grow max-w-[50px] bg-gray-100"></span>
+            <h3 class="author-brand text-xs text-gray-400 tracking-[0.4em]">The Collection</h3>
+            <span class="h-[1px] flex-grow max-w-[50px] bg-gray-100"></span>
+        </div>
+        
+        <div id="feed" class="space-y-12">
+            <div class="text-center text-gray-300 py-10 italic animate-pulse font-serif">Summoning the ink...</div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<footer class="mt-auto py-16 text-center border-t border-gray-50 bg-[#fafafa]">
+    <a href="https://hassanalipoetry.vercel.app/" 
+       target="_blank" 
+       class="inline-block group">
+        <span class="text-[10px] text-gray-400 tracking-[0.4em] uppercase block mb-4">Discover More Works</span>
+        <span class="text-2xl font-serif italic text-gray-800 border-b border-transparent group-hover:border-gray-800 transition-all duration-500 pb-1">
+            Poetry Portfolio <span class="gold-accent">→</span>
+        </span>
+    </a>
+</footer>
+
+<!-- Custom Toast Message -->
+<div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 hidden bg-[#1a1a1a] text-white px-10 py-4 rounded-full shadow-2xl transition-opacity duration-500 z-50 text-xs uppercase tracking-[0.2em] font-medium border border-gray-800"></div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getFirestore, collection, addDoc, query, onSnapshot, serverTimestamp, doc, getDoc, setDoc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+    const firebaseConfig = JSON.parse(__firebase_config);
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'silent-souls-v2';
+    
+    const MASTER_CODE = "0786";
+
+    let currentUser = null;
+    let isAuthor = false;
+    let editingPostId = null;
+
+    async function firebaseRetry(fn, retries = 5, delay = 1000) {
+        for (let i = 0; i < retries; i++) {
+            try { return await fn(); } catch (err) {
+                if (i === retries - 1) throw err;
+                await new Promise(r => setTimeout(r, delay));
+                delay *= 2;
+            }
+        }
+    }
+
+    async function checkAuthorPermission(user) {
+        const configRef = doc(db, 'artifacts', appId, 'public', 'data', 'config', 'authorSettings');
+        try {
+            const configSnap = await firebaseRetry(() => getDoc(configRef));
+            if (!configSnap.exists()) {
+                await firebaseRetry(() => setDoc(configRef, { authorUid: user.uid, name: "Hassan Jatoi" }));
+                isAuthor = true;
+            } else {
+                isAuthor = configSnap.data().authorUid === user.uid;
+            }
+
+            if (isAuthor) {
+                document.getElementById('authorSection').classList.remove('hidden');
+            } else {
+                document.getElementById('readerNotice').classList.remove('hidden');
+            }
+        } catch (error) { console.error("Permission error:", error); }
+    }
+
+    async function initAuth() {
+        try {
+            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                await firebaseRetry(() => signInWithCustomToken(auth, __initial_auth_token));
+            } else {
+                await firebaseRetry(() => signInAnonymously(auth));
+            }
+        } catch (error) { showToast("Connection failed."); }
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+        currentUser = user;
+        if (user) {
+            await checkAuthorPermission(user);
+            setupFeedListener();
+        }
+    });
+
+    initAuth();
+
+    function setupFeedListener() {
+        const postsRef = collection(db, 'artifacts', appId, 'public', 'data', 'articles');
+        onSnapshot(postsRef, (snapshot) => {
+            const articles = [];
+            snapshot.forEach((doc) => {
+                articles.push({ id: doc.id, ...doc.data() });
+            });
+            articles.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+            renderFeed(articles);
+        }, (error) => {
+            console.error("Snapshot error:", error);
+        });
+    }
+
+    window.publishPost = async function() {
+        if (!isAuthor || !currentUser) return;
+
+        const codeInput = document.getElementById('accessCode');
+        if (codeInput.value !== MASTER_CODE) {
+            showToast("Invalid Key");
+            return;
+        }
+
+        const textArea = document.getElementById('userInput');
+        const text = textArea.value.trim();
+        const btn = document.getElementById('publishBtn');
+
+        if (text === "") { showToast("Empty Inkwell"); return; }
+
+        btn.disabled = true;
+        document.getElementById('btnText').innerText = "Processing...";
+
+        try {
+            if (editingPostId) {
+                const postRef = doc(db, 'artifacts', appId, 'public', 'data', 'articles', editingPostId);
+                await firebaseRetry(() => updateDoc(postRef, { content: text, lastEdited: serverTimestamp() }));
+                showToast("Archive Updated");
+                cancelEditing();
+            } else {
+                await firebaseRetry(() => addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'articles'), {
+                    content: text,
+                    createdAt: serverTimestamp(),
+                    authorId: "Hassan Jatoi",
+                    uid: currentUser.uid
+                }));
+                textArea.value = "";
+                showToast("Published to Archive");
+            }
+            codeInput.value = ""; 
+        } catch (error) {
+            showToast("Database Error");
+        } finally {
+            btn.disabled = false;
+            document.getElementById('btnText').innerText = editingPostId ? "Update Thought" : "Publish Thought";
+        }
+    };
+
+    window.editPost = function(id, content) {
+        editingPostId = id;
+        const textArea = document.getElementById('userInput');
+        textArea.value = content;
+        document.getElementById('btnText').innerText = "Update Thought";
+        document.getElementById('cancelEdit').classList.remove('hidden');
+        window.scrollTo({ top: document.getElementById('authorSection').offsetTop - 20, behavior: 'smooth' });
+        textArea.focus();
+    };
+
+    window.cancelEditing = function() {
+        editingPostId = null;
+        document.getElementById('userInput').value = "";
+        document.getElementById('accessCode').value = "";
+        document.getElementById('btnText').innerText = "Publish Thought";
+        document.getElementById('cancelEdit').classList.add('hidden');
+    };
+
+    window.deletePost = async function(id) {
+        const code = prompt("Security Key required for removal:");
+        if (code !== MASTER_CODE) {
+            showToast("Invalid Key");
+            return;
+        }
+        
+        try {
+            await firebaseRetry(() => deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'articles', id)));
+            showToast("Article Removed");
+        } catch (e) { showToast("Deletetion Failed"); }
+    };
+
+    window.sharePost = function(text) {
+        const shareLink = `"${text}"\n\n— Hassan Jatoi\n\nRead more at Silent Souls:\n${window.location.href}`;
+        const dummy = document.createElement("textarea");
+        document.body.appendChild(dummy);
+        dummy.value = shareLink;
+        dummy.select();
+        document.execCommand("copy");
+        document.body.removeChild(dummy);
+        showToast("Copied to Clipboard");
+    };
+
+    function renderFeed(articles) {
+        const feed = document.getElementById('feed');
+        if (articles.length === 0) {
+            feed.innerHTML = '<div class="text-center text-gray-300 py-20 italic font-serif">The archive is currently silent.</div>';
+            return;
+        }
+
+        feed.innerHTML = articles.map(post => {
+            const cleanContent = post.content.replace(/`/g, '\\`').replace(/\$/g, '\\$');
+            return `
+            <div class="post-card p-12 rounded-[2rem] border border-gray-50 text-center relative group">
+                ${isAuthor ? `
+                <div class="absolute top-8 right-8 flex gap-3 action-btn">
+                    <button onclick="editPost('${post.id}', \`${cleanContent}\`)" class="p-2 text-gray-300 hover:text-gray-900 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                    </button>
+                    <button onclick="deletePost('${post.id}')" class="p-2 text-gray-300 hover:text-red-400 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                    </button>
                 </div>
-
-                <div class="flex items-center bg-gray-100 dark:bg-slate-800 rounded-lg p-1">
-                    <button onclick="changeFontSize(-1)" class="px-3 py-1 hover:bg-white dark:hover:bg-slate-700 rounded transition font-bold">A-</button>
-                    <div class="h-4 w-[1px] bg-gray-300 mx-1"></div>
-                    <button onclick="changeFontSize(1)" class="px-3 py-1 hover:bg-white dark:hover:bg-slate-700 rounded transition font-bold">A+</button>
+                ` : ''}
+                
+                <p class="text-3xl text-gray-800 leading-[1.6] font-serif font-light whitespace-pre-wrap italic">"${escapeHtml(post.content)}"</p>
+                
+                <div class="mt-12 pt-8 border-t border-gray-50 flex flex-col items-center gap-6">
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-[9px] font-medium text-gray-400 uppercase tracking-[0.3em]">
+                            ${post.createdAt ? new Date(post.createdAt.seconds * 1000).toLocaleDateString('en-GB', {day: 'numeric', month: 'long', year: 'numeric'}) : 'Recently'}
+                        </span>
+                        <span class="author-brand text-[10px] text-gray-800 font-bold italic tracking-[0.2em]">— Hassan Jatoi</span>
+                    </div>
+                    
+                    <button onclick="sharePost(\`${cleanContent}\`)" class="flex items-center gap-3 text-[10px] uppercase tracking-widest text-gray-400 hover:text-gray-900 transition-all border border-gray-100 rounded-full px-8 py-3 hover:bg-white hover:shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                        Share Thought
+                    </button>
                 </div>
             </div>
-        </header>
+            `;
+        }).join('');
+    }
 
-        <!-- Book Text Container -->
-        <div class="reading-container pt-8">
-            <article id="book-content" class="prose lg:prose-xl dark:prose-invert mx-auto transition-all text-lg leading-relaxed">
-                
-                <!-- Book Cover Section -->
-                <section id="cover" class="mb-32">
-                    <div class="book-cover-img">
-                        <div class="mb-4 text-center">
-                            <span class="text-xs tracking-[0.5em] text-gray-400 uppercase">A Novel By</span>
-                        </div>
-                        <h1 class="text-6xl md:text-8xl font-bold mb-4 z-10 text-center px-4 gold-text">Silent Peoples</h1>
-                        <p class="text-xl md:text-2xl font-light tracking-[0.4em] uppercase z-10 text-white">Hassan Jatoi</p>
-                        
-                        <div class="w-32 h-[1px] bg-gradient-to-r from-transparent via-[#d4af37] to-transparent my-10"></div>
-                        
-                        <div class="absolute bottom-12 z-10 text-center">
-                            <p class="text-sm tracking-[0.5em] gold-text font-bold uppercase">A Journey Into The Unspoken</p>
-                        </div>
-                    </div>
-                </section>
+    function showToast(msg) {
+        const toast = document.getElementById('toast');
+        toast.innerText = msg;
+        toast.classList.remove('hidden');
+        setTimeout(() => toast.classList.add('hidden'), 3000);
+    }
 
-                <section id="prologue" class="mb-32">
-                    <div class="text-center mb-16">
-                        <span class="gold-text font-bold uppercase tracking-widest text-sm">Introduction</span>
-                        <h2 class="text-4xl font-bold mt-2">Prologue</h2>
-                    </div>
-                    <p class="drop-cap">There is a world that exists in the pauses between breaths, in the glances exchanged across crowded rooms, and in the profound stillness of the midnight hour. These are the stories of those who observe, those who feel, and those who remain unheard in a world that never stops talking.</p>
-                    <p>In "Silent Peoples," we explore the depth of human experience that lies beneath the surface of speech. It is a journey through the landscapes of the mind where the most powerful truths are often the ones left unsaid.</p>
-                </section>
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+</script>
 
-                <section id="ch1" class="mb-32">
-                    <div class="flex items-center gap-4 mb-8">
-                        <div class="flex-grow h-[1px] bg-gradient-to-r from-transparent to-[#d4af37]"></div>
-                        <span class="gold-text font-bold uppercase tracking-widest text-sm shrink-0">Chapter One</span>
-                        <div class="flex-grow h-[1px] bg-gradient-to-l from-transparent to-[#d4af37]"></div>
-                    </div>
-                    
-                    <h2 class="text-4xl font-bold mt-2 mb-12 text-center">Voices in Shadow</h2>
-                    
-                    <p class="drop-cap">Separation enters a human life quietly. It does not announce itself; it does not warn the heart. It simply arrives. And once it arrives, nothing ever feels the same again.</p>
-                    
-                    <p>Separation slowly teaches a person how to breathe with pain; how to smile while breaking inside; how to live while feeling unfinished. A separated heart does not stop loving; it only stops resting. Every morning begins with tired hope. Every night ends with unanswered thoughts. The soul remembers even when the mind begs to forget.</p>
-
-                    <blockquote class="border-l-4 border-[#d4af37] pl-6 italic my-12 text-2xl text-gray-500 dark:text-gray-400 bg-yellow-500/5 py-8 pr-4">
-                        "The worst pain is being alive enough to feel everything."
-                    </blockquote>
-
-                    <p>Separation makes time cruel. Seconds feel heavier than years. Years feel empty without meaning. You replay memories not because they are beautiful, but because they are all you have left. A separated person is not weak; they are just carrying too much quietly. They learn to keep emotions inside because the world does not understand silent pain.</p>
-
-                    <p>Separation does not kill instantly. It kills slowly, it kills gently, it kills daily. Memories linger in corners where love once used to live. Loneliness whispers softly in the shadows of quiet nights. Every heartbeat remembers the warmth that absence stole away. The mind replays every moment; words left unspoken echo. Tears fall quietly while laughter hides the aching heart.</p>
-
-                    <p>Each song reminds the heart of what will never return. Separation turns ordinary days into endless nights of sorrow. The air smells of memories too heavy to carry alone. Every message reread becomes a dagger wrapped in nostalgia. You smile for the world while quietly bleeding inside yourself.</p>
-
-                    <p>Time does not heal; it only teaches patience in grief. Absence speaks louder than presence in the chambers of memory. Even shadows feel like companions in moments of deep loneliness. The heart remembers everything even when the mind forgets gently. Solitude teaches silence where words used to create comfort.</p>
-
-                    <p>It sits beside you quietly watching your spirit slowly bend. Memories arrive uninvited, painting joy then leaving deep emptiness. Every step forward feels weighted by echoes of yesterday’s love. The nights stretch endlessly carrying whispers that should not exist. Pain becomes a friend, a companion too familiar to leave. Even joy is tainted by the shadow of past sorrow.</p>
-
-                    <p>Love remains hidden inside every sigh, every quiet unspoken word. Separation slips into life turning joy into silent despair. Memories of laughter return as shadows haunting every room. Even the sunlight feels heavy touching a heart broken. Smiles are worn like masks hiding endless unseen pain.</p>
-
-                    <p>Loneliness is not the absence of people; loneliness is the absence of understanding. Solitude sits next to you even in crowds; it listens when no one else does. Loneliness speaks in the language of nights—when lights are off, when voices are gone, when memories grow louder.</p>
-
-                    <p>A lonely heart does not cry loudly; it sinks silently. You sit with your phone, scrolling through moments that once felt real, wondering how life moved on without asking you. Memories return like uninvited guests; they knock on your chest, not your door. They remind you of warmth, then leave you colder than before.</p>
-
-                    <p>Loneliness does not destroy a person; it transforms them. It turns innocence into awareness, trust into caution, love into depth. But the cost is heavy... You lose the ability to feel simple happiness because everything now carries a memory.</p>
-
-                    <p>And yet, despite separation, loneliness, and memories, the human heart continues. Because living becomes a habit, even when joy becomes rare. And this is the tragedy: not dying from pain, but living with it, every single day.</p>
-                </section>
-
-                <div class="chapter-divider"></div>
-
-                <section id="ch2" class="mb-32">
-                    <div class="flex items-center gap-4 mb-8">
-                        <div class="flex-grow h-[1px] bg-gradient-to-r from-transparent to-[#d4af37]"></div>
-                        <span class="gold-text font-bold uppercase tracking-widest text-sm shrink-0">Chapter Two</span>
-                        <div class="flex-grow h-[1px] bg-gradient-to-l from-transparent to-[#d4af37]"></div>
-                    </div>
-                    
-                    <h2 class="text-4xl font-bold mt-2 mb-12 text-center">The Unspoken Word</h2>
-                    
-                    <p class="drop-cap">Loneliness walks beside love like a shadow that learned my name. It does not shout or hurry; it only stays, breathing where promises once lived. Betrayal arrives quietly, wearing the face of trust. It knows the language of the heart and speaks it fluently until meaning collapses.</p>
-                    
-                    <p>I loved with open hands, never counting the cost, never locking the door of my soul. I believed love was shelter, not a battlefield of intentions. But loneliness grows inside love when truth is replaced by excuses, when eyes stop meeting eyes, and silence learns to lie.</p>
-
-                    <blockquote class="border-l-4 border-[#d4af37] pl-6 italic my-12 text-2xl text-gray-500 dark:text-gray-400 bg-yellow-500/5 py-8 pr-4">
-                        "Betrayal is not a single moment; it is a slow forgetting."
-                    </blockquote>
-
-                    <p>I died many times without a grave—each time you chose yourself over us, each time my name lost its importance in your changing priorities. Loneliness is not being alone; it is being unseen, being unheard, being loved only in words, never in presence.</p>
-
-                    <p>Love begins to suffocate when loyalty becomes optional, when promises become flexible, and hearts become temporary homes. I carried your absence even when you were near; your body stayed, but your soul had already left, taking my peace with it.</p>
-
-                    <p>Betrayal teaches love how to bleed without leaving visible wounds. It teaches the heart to smile while breaking, to live while dying. Loneliness whispers at night, asking questions without answers: Was I not enough? Was my love too real for a world that loves convenience?</p>
-
-                    <p>Death in love is not dramatic. It happens in ordinary days, between unread messages and postponed meetings, between almost and never. I stopped expecting because hope became painful. Every expectation felt like another invitation to collapse.</p>
-
-                    <p>Loneliness became my companion, sitting beside me in crowded rooms, reminding me that abandonment can exist even in arms that hold you. Betrayal rewrites memories, turning sacred moments into evidence of foolish trust. It makes the past hurt more than the present.</p>
-
-                    <p>Love dies slowly when honesty disappears, when effort becomes one-sided, when care feels like a favor. I did not stop loving you; I stopped surviving it. My heart grew tired of proving its worth to someone who already knew it.</p>
-
-                    <p>Loneliness did not kill me; betrayal did. Loneliness only stayed to watch it happen, silently. Now I breathe differently, with guarded hopes and quieter dreams. I love carefully, as if love itself can be lethal.</p>
-
-                    <p>If I ever love again, it will be without begging, without shrinking, without losing myself to someone else’s comfort. Because loneliness taught me pain, but betrayal taught me death—and love should never feel like a slow funeral of the soul.</p>
-                </section>
-
-                <section id="epilogue" class="mb-32 text-center">
-                    <div class="w-16 h-[1px] bg-[#d4af37] mx-auto mb-8"></div>
-                    <p class="italic text-gray-400">To be continued...</p>
-                </section>
-
-            </article>
-
-            <!-- Bottom Navigation -->
-            <footer class="flex flex-col sm:flex-row justify-between items-center mt-12 py-8 border-t border-[#d4af37]/30 gap-4">
-                <button onclick="document.getElementById('ch1').scrollIntoView();" class="w-full sm:w-auto px-8 py-3 bg-gray-100 dark:bg-slate-900 border border-transparent hover:border-[#d4af37]/50 rounded-full font-semibold transition">← Previous Chapter</button>
-                <button class="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-[#bf953f] to-[#aa771c] text-white rounded-full font-semibold hover:shadow-lg shadow-[#d4af37]/20 transition">Final Thoughts →</button>
-            </footer>
-            
-            <p class="text-center text-sm text-gray-400 mt-10 pb-10">© 2026 Hassan Jatoi • Gold Master Edition</p>
-        </div>
-    </main>
-
-    <script>
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
-        }
-
-        function setTheme(mode) {
-            document.body.classList.remove('dark-mode', 'sepia-mode');
-            if (mode === 'dark') document.body.classList.add('dark-mode');
-            if (mode === 'sepia') document.body.classList.add('sepia-mode');
-        }
-
-        let currentFontSize = 1.15;
-        function changeFontSize(delta) {
-            currentFontSize += delta * 0.1;
-            if (currentFontSize < 0.9) currentFontSize = 0.9;
-            if (currentFontSize > 1.8) currentFontSize = 1.8;
-            document.getElementById('book-content').style.fontSize = currentFontSize + 'rem';
-        }
-
-        const links = document.querySelectorAll('.chapter-link');
-        links.forEach(link => {
-            link.addEventListener('click', (e) => {
-                links.forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-                if (window.innerWidth < 1024) {
-                    setTimeout(toggleSidebar, 150);
-                }
-            });
-        });
-    </script>
 </body>
 </html>
