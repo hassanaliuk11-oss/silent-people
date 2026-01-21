@@ -16,6 +16,7 @@
             --panel-bg: rgba(255, 255, 255, 0.95);
         }
 
+        /* Responsive Body */
         body {
             font-family: var(--body-font);
             background-color: var(--bg-color);
@@ -28,13 +29,15 @@
             align-items: center;
             transition: background-color 0.4s, color 0.4s;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
         }
 
-        /* Settings Toggle Button */
+        /* Settings Toggle */
         #settings-toggle {
             position: fixed;
-            left: 20px;
-            top: 20px;
+            left: 15px;
+            top: 15px;
             z-index: 1001;
             background: var(--text-color);
             color: var(--bg-color);
@@ -50,17 +53,12 @@
             align-items: center;
             gap: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: transform 0.2s;
         }
 
-        #settings-toggle:hover {
-            transform: scale(1.05);
-        }
-
-        /* Side Settings Panel (Hidden by default) */
+        /* Side Settings Panel */
         #settings-bar {
             position: fixed;
-            left: -250px; /* Hidden state */
+            left: -100%; 
             top: 0;
             bottom: 0;
             z-index: 1000;
@@ -68,7 +66,8 @@
             backdrop-filter: blur(15px);
             border-right: 1px solid var(--border-color);
             padding: 80px 20px 20px;
-            width: 200px;
+            width: 85%;
+            max-width: 260px;
             display: flex;
             flex-direction: column;
             gap: 25px;
@@ -76,16 +75,9 @@
             box-shadow: 10px 0 30px rgba(0,0,0,0.05);
         }
 
-        #settings-bar.open {
-            left: 0;
-        }
+        #settings-bar.open { left: 0; }
 
-        .settings-section {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
+        .settings-section { display: flex; flex-direction: column; gap: 12px; }
         .settings-label {
             font-size: 0.65rem;
             text-transform: uppercase;
@@ -96,29 +88,8 @@
             padding-bottom: 8px;
         }
 
-        .swatch-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-        }
-
-        .swatch {
-            width: 28px;
-            height: 28px;
-            border-radius: 6px;
-            border: 1px solid rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .swatch:hover { transform: scale(1.1); }
-
-        .font-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
+        .swatch-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+        .swatch { width: 32px; height: 32px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.1); cursor: pointer; transition: all 0.2s; }
         .font-btn {
             background: transparent;
             border: 1px solid var(--border-color);
@@ -128,12 +99,6 @@
             color: var(--text-color);
             cursor: pointer;
             text-align: left;
-            transition: all 0.2s;
-        }
-
-        .font-btn:hover { 
-            background: var(--text-color); 
-            color: var(--bg-color);
         }
 
         /* Layout Sections */
@@ -142,13 +107,13 @@
             max-width: 800px;
             text-align: center;
             margin-top: 60px;
-            padding: 0 20px;
+            padding: 0 15px;
             box-sizing: border-box;
         }
 
         .portrait-img {
-            width: 140px;
-            height: 140px;
+            width: clamp(100px, 25vw, 140px);
+            height: clamp(100px, 25vw, 140px);
             object-fit: cover;
             border-radius: 50%;
             margin: 0 auto 20px;
@@ -156,20 +121,16 @@
             display: block;
         }
 
-        .logo-img {
-            width: 80px;
-            height: auto;
-            margin: 10px auto;
-            display: block;
-        }
+        .logo-img { width: 70px; height: auto; margin: 10px auto; display: block; }
 
         .cover-container {
             width: 100%;
-            height: 400px;
-            margin: 30px 0;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            margin: 25px 0;
             overflow: hidden;
             border-radius: 12px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             position: relative;
         }
 
@@ -178,140 +139,115 @@
             height: 100%;
             object-fit: cover;
             position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
+            top: 0; left: 0; opacity: 0;
             transition: opacity 1s ease-in-out;
         }
-
         .cover-img.active { opacity: 1; }
 
         header {
             text-align: center;
-            margin: 20px 0 80px 0;
+            margin: 10px 0 60px 0;
             max-width: 650px;
             width: 90%;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 40px;
+            padding-bottom: 30px;
         }
 
         header h1 {
             font-family: var(--heading-font);
-            font-size: 3rem;
+            font-size: clamp(2.2rem, 8vw, 3.5rem);
             margin: 0;
             font-weight: 400;
         }
 
         header p.author-name {
-            font-size: 0.9rem;
+            font-size: clamp(0.7rem, 3vw, 0.9rem);
             text-transform: uppercase;
-            letter-spacing: 0.5em;
+            letter-spacing: 0.4em;
             color: var(--meta-color);
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
         .container {
             width: 100%;
             max-width: 650px;
-            padding: 0 20px;
+            padding: 0 15px;
             box-sizing: border-box;
         }
 
-        article {
-            margin-bottom: 100px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 1s ease-out forwards;
-        }
+        article { margin-bottom: 80px; animation: fadeIn 1s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes fadeIn {
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .meta { display: flex; align-items: center; justify-content: center; margin-bottom: 25px; color: var(--meta-color); font-size: 0.75rem; letter-spacing: 0.2em; }
+        .line-divider { flex: 1; height: 1px; background: var(--border-color); margin: 0 15px; }
 
-        .meta {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 30px;
-            color: var(--meta-color);
-            font-size: 0.8rem;
-            letter-spacing: 0.2em;
-        }
-
-        .line-divider {
-            flex: 1;
-            height: 1px;
-            background: var(--border-color);
-            margin: 0 20px;
-        }
-
-        h2.poem-title {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2rem;
-            font-family: var(--heading-font);
-        }
+        h2.poem-title { text-align: center; margin-bottom: 25px; font-size: 1.8rem; font-family: var(--heading-font); }
 
         .content {
-            font-size: 1.3rem;
+            font-size: clamp(1.1rem, 4.5vw, 1.35rem);
             white-space: pre-line;
             text-align: center;
             max-width: 500px;
             margin: 0 auto;
+            line-height: 1.7;
         }
 
-        .share-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px dotted var(--border-color);
+        /* Share Container & Buttons */
+        .share-container { 
+            display: flex; 
+            flex-wrap: wrap;
+            justify-content: center; 
+            gap: 12px; 
+            margin-top: 35px; 
+            padding-top: 25px; 
+            border-top: 1px dotted var(--border-color); 
         }
 
-        .share-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--meta-color);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 0.75rem;
-            transition: color 0.3s;
+        .share-btn { 
+            background: none; 
+            border: 1px solid var(--border-color); 
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer; 
+            color: var(--meta-color); 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+            font-size: 0.7rem; 
+            transition: all 0.3s;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        .share-btn:hover { color: var(--text-color); }
-        .share-btn svg { width: 16px; height: 16px; fill: currentColor; }
-
-        footer {
-            padding: 40px 20px;
-            width: 100%;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
+        .share-btn:hover { 
+            color: var(--text-color); 
+            border-color: var(--text-color);
+            background: rgba(0,0,0,0.02);
         }
+        
+        .share-btn svg { width: 14px; height: 14px; fill: currentColor; }
 
-        .copyright { font-size: 0.8rem; color: var(--meta-color); }
+        footer { padding: 40px 20px; width: 100%; text-align: center; border-top: 1px solid var(--border-color); }
+        .copyright { font-size: 0.75rem; color: var(--meta-color); }
 
-        /* Mobile */
-        @media (max-width: 600px) {
-            header h1 { font-size: 2.2rem; }
-            .cover-container { height: 260px; }
-            #settings-bar { width: 80%; }
+        /* Mobile specific adjustments */
+        @media (max-width: 480px) {
+            .share-container { gap: 8px; }
+            .share-btn { padding: 6px 10px; font-size: 0.65rem; }
         }
     </style>
 </head>
 <body>
 
-<!-- Settings Toggle Button -->
 <button id="settings-toggle" onclick="toggleSettings()">
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
         <path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7-1.2c.1-.4.1-.7.1-1.1s0-.7-.1-1.1l2.1-1.6c.2-.1.2-.4.1-.6l-2-3.5c-.1-.2-.4-.3-.6-.2l-2.5 1c-.5-.4-1.1-.7-1.7-1l-.4-2.6c0-.2-.3-.4-.5-.4h-4c-.3 0-.5.2-.5.4l-.4 2.6c-.6.3-1.2.6-1.7 1l-2.5-1c-.2-.1-.5 0-.6.2l-2 3.5c-.1.2-.1.5.1.6l2.1 1.6c-.1.4-.1.7-.1 1.1s0 .7.1 1.1l-2.1 1.6c-.2.1-.2.4-.1.6l2 3.5c.1.2.4.3.6.2l2.5-1c.5.4 1.1.7 1.7 1l.4 2.6c0 .2.3.4.5.4h4c.3 0 .5-.2.5-.4l.4-2.6c.6-.3 1.2-.6 1.7-1l2.5 1c.2.1.5 0 .6-.2l2-3.5c.1-.2.1-.5-.1-.6l-2.1-1.6z"/>
     </svg>
-    Settings
+    Edit Look
 </button>
 
-<!-- Hidden Side Panel -->
 <aside id="settings-bar">
     <div class="settings-section">
         <div class="settings-label">Visual Themes</div>
@@ -321,10 +257,9 @@
     <div class="settings-section">
         <div class="settings-label">Typography</div>
         <div class="font-group">
-            <button class="font-btn" onclick="setFont('Playfair Display', 'Crimson Pro')">Classic</button>
-            <button class="font-btn" onclick="setFont('EB Garamond', 'EB Garamond')">Antique</button>
-            <button class="font-btn" onclick="setFont('Lora', 'Lora')">Literary</button>
-            <button class="font-btn" onclick="setFont('Montserrat', 'Inter')">Modern</button>
+            <button class="font-btn" onclick="setFont('Playfair Display', 'Crimson Pro')">Classic Serif</button>
+            <button class="font-btn" onclick="setFont('Lora', 'Lora')">Elegant Literary</button>
+            <button class="font-btn" onclick="setFont('Montserrat', 'Inter')">Modern Sans</button>
         </div>
     </div>
 </aside>
@@ -340,7 +275,7 @@
 </div>
 
 <header>
-    <div id="live-clock" style="font-size: 0.75rem; color: var(--meta-color); margin-bottom: 10px; font-family: 'Inter', sans-serif;">Loading...</div>
+    <div id="live-clock" style="font-size: 0.65rem; color: var(--meta-color); margin-bottom: 8px;">Loading...</div>
     <h1>Tears In Eyes</h1>
     <p class="author-name">Hassan Jatoi</p>
 </header>
@@ -358,13 +293,11 @@
         { bg: "#1a1a1a", text: "#f0f0f0", border: "#333333", meta: "#777777" },
         { bg: "#f4f1ea", text: "#2c3e50", border: "#dcd7ca", meta: "#7f8c8d" },
         { bg: "#1e272e", text: "#d2dae2", border: "#485460", meta: "#808e9b" },
-        { bg: "#fffaf0", text: "#5d4037", border: "#d7ccc8", meta: "#a1887f" },
-        { bg: "#3e2723", text: "#d7ccc8", border: "#5d4037", meta: "#8d6e63" },
-        { bg: "#f0f4f8", text: "#102a43", border: "#d9e2ec", meta: "#627d98" }
+        { bg: "#fffaf0", text: "#5d4037", border: "#d7ccc8", meta: "#a1887f" }
     ];
 
     const poems = [
-       { 
+        { 
             id: "LX", 
             title: "A Funeral of the Soul", 
             content: `Loneliness walks beside love
@@ -629,20 +562,62 @@ Perhaps separation will stop being death`
 },
     ];
 
-    function toggleSettings() {
-        document.getElementById('settings-bar').classList.toggle('open');
+function toggleSettings() { document.getElementById('settings-bar').classList.toggle('open'); }
+
+    function setTheme(index) {
+        const theme = themes[index];
+        document.documentElement.style.setProperty('--bg-color', theme.bg);
+        document.documentElement.style.setProperty('--text-color', theme.text);
+        document.documentElement.style.setProperty('--border-color', theme.border);
+        document.documentElement.style.setProperty('--meta-color', theme.meta);
     }
 
+    function setFont(heading, body) {
+        document.documentElement.style.setProperty('--heading-font', `'${heading}', serif`);
+        document.documentElement.style.setProperty('--body-font', `'${body}', serif`);
+    }
+
+    // Function to handle sharing
     function sharePoem(platform, title, content) {
-        const text = `*${title}*\nBy Hassan Jatoi\n\n${content}`;
-        let url = '';
-        if(platform === 'whatsapp') url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
-        if(platform === 'twitter') url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text.substring(0, 200))}`;
-        if(platform === 'facebook') url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`;
-        window.open(url, '_blank');
+        const fullText = `*${title}*\n\n${content}\n\n— Author Hassan Jatoi`;
+        const encodedText = encodeURIComponent(fullText);
+        const url = encodeURIComponent(window.location.href);
+        
+        let shareUrl = '';
+        
+        switch(platform) {
+            case 'whatsapp':
+                shareUrl = `https://api.whatsapp.com/send?text=${encodedText}`;
+                break;
+            case 'twitter':
+                shareUrl = `https://twitter.com/intent/tweet?text=${encodedText}`;
+                break;
+            case 'facebook':
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                break;
+            case 'copy':
+                navigator.clipboard.writeText(fullText).then(() => {
+                    const statusBox = document.createElement('div');
+                    statusBox.innerText = 'Poem Copied!';
+                    statusBox.style.position = 'fixed';
+                    statusBox.style.bottom = '20px';
+                    statusBox.style.background = 'var(--text-color)';
+                    statusBox.style.color = 'var(--bg-color)';
+                    statusBox.style.padding = '10px 20px';
+                    statusBox.style.borderRadius = '30px';
+                    statusBox.style.fontSize = '0.8rem';
+                    statusBox.style.zIndex = '2000';
+                    document.body.appendChild(statusBox);
+                    setTimeout(() => statusBox.remove(), 2000);
+                });
+                return;
+        }
+        
+        if (shareUrl) window.open(shareUrl, '_blank');
     }
 
     function init() {
+        // Themes
         const swatchContainer = document.getElementById('theme-swatches');
         themes.forEach((theme, index) => {
             const div = document.createElement('div');
@@ -652,74 +627,53 @@ Perhaps separation will stop being death`
             swatchContainer.appendChild(div);
         });
 
+        // Poems
         const container = document.getElementById('poetry-container');
-        poems.forEach((poem, index) => {
+        poems.forEach(poem => {
             const article = document.createElement('article');
-            article.style.animationDelay = `${index * 0.2}s`;
             article.innerHTML = `
-                <div class="meta">
-                    <div class="line-divider"></div>
-                    <span>${poem.id}</span>
-                    <div class="line-divider"></div>
-                </div>
+                <div class="meta"><div class="line-divider"></div><span>${poem.id}</span><div class="line-divider"></div></div>
                 <h2 class="poem-title">${poem.title}</h2>
                 <div class="content">${poem.content}</div>
                 <div class="share-container">
-                    <button class="share-btn" onclick="sharePoem('whatsapp', '${poem.title}', \`${poem.content}\`)"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.438 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></button>
-                    <button class="share-btn" onclick="sharePoem('twitter', '${poem.title}', \`${poem.content}\`)"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></button>
+                    <button class="share-btn" onclick="sharePoem('whatsapp', '${poem.title}', \`${poem.content}\`)">
+                        <svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.7 17.8 69.4 27.2 106.2 27.2h.1c122.4 0 222-99.6 222-222 0-59.3-23-115.1-65.1-157.1zM223.9 445.9c-33.1 0-65.7-8.9-94.1-25.7l-6.7-4-69.8 18.3L72 365.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-82.7 184.6-184.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.2-3.2-5.6-.3-8.6 2.5-11.3 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.6 5.6-9.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.7 23.5 9.2 31.6 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.3 4.6-13 4.6-24.1 3.2-26.3-1.3-2.2-5-3.5-10.5-6.3z"/></svg>
+                        WhatsApp
+                    </button>
+                    <button class="share-btn" onclick="sharePoem('twitter', '${poem.title}', \`${poem.content}\`)">
+                        <svg viewBox="0 0 512 512"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+                        X
+                    </button>
+                    <button class="share-btn" onclick="sharePoem('copy', '${poem.title}', \`${poem.content}\`)">
+                        <svg viewBox="0 0 448 512"><path d="M208 0L332.1 0c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9L448 336c0 26.5-21.5 48-48 48l-192 0c-26.5 0-48-21.5-48-48l0-288c0-26.5 21.5-48 48-48zM48 128l80 0 0 64-64 0 0 256 192 0 0-32 64 0 0 48c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 176c0-26.5 21.5-48 48-48z"/></svg>
+                        Copy
+                    </button>
                 </div>
             `;
             container.appendChild(article);
         });
 
-        startSlideshow();
-        setInterval(updateClock, 1000);
-    }
-
-    function startSlideshow() {
+        // Slideshow
         let currentSlide = 0;
         const slides = document.querySelectorAll('.cover-img');
         setInterval(() => {
+            if(slides.length < 2) return;
             slides[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
-        }, 2000);
-    }
+        }, 3000);
 
-    function setTheme(index) {
-        const theme = themes[index];
-        const root = document.documentElement;
-        root.style.setProperty('--bg-color', theme.bg);
-        root.style.setProperty('--text-color', theme.text);
-        root.style.setProperty('--border-color', theme.border);
-        root.style.setProperty('--meta-color', theme.meta);
-    }
-
-    function setFont(heading, body) {
-        document.documentElement.style.setProperty('--heading-font', `'${heading}', serif`);
-        document.documentElement.style.setProperty('--body-font', `'${body}', serif`);
-    }
-
-    function updateClock() {
-        const now = new Date();
-        const clockEl = document.getElementById('live-clock');
-        if (clockEl) {
-            clockEl.innerText = now.toLocaleDateString('en-US', { 
-                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' 
-            });
-        }
+        // Clock
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('live-clock').innerText = now.toLocaleString();
+        }, 1000);
     }
 
     window.onload = init;
 </script>
-
 </body>
 </html>
-
-
-
-
-
 
 
 
